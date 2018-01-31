@@ -38,7 +38,7 @@ INSERT INTO `Projects_PicturePaths`(`Id`, `projects_Id`, `uploadPath`) VALUES (N
 INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'1', NULL, NULL, 'http://www.garnopskrifter.dk/lyseblåtrøje.pdf');
 
 
-INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath` `bookPage`, `link`) VALUES (NULL,'1', NULL, 'Alt om Hækling - side 3', NULL);
+INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'1', NULL, 'Alt om Hækling - side 3', NULL);
 
 
-INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath` `bookPage`, `link`) VALUES (NULL,'2','Google Drive/path/darkgreensweater.docx', NULL, NULL);
+INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'2','Google Drive/path/darkgreensweater.docx', NULL, NULL);
