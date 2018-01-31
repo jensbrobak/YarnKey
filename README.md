@@ -1,2 +1,0 @@
-# YarnKey
-GarnNøglen
