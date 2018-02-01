@@ -90,22 +90,104 @@
 				}
 				
 			break; 
-			
+
+					
 			        // Hent operationen:
                     // Hvis API-kaldet er hentprodukt.
-			case 'getproject':
+			case 'getProjectsByPersonId':
+			if(isset($_GET['person_Id'])){
 				$db = new DbOperation();
-				$response['error'] = false; 
-				$response['message'] = 'Fuldført';
-				$response['project'] = $db->getProject();
-			break; 
+				if($db->getProjectsByPersonId($_GET['person_Id'])){
+					$response['error'] = false; 
+					$response['message'] = 'Projekt hentet';
+					$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
+				
+				}
+				else{
+					$response['error'] = true; 
+					$response['message'] = 'Fejl';
+				}
+			}else{
+				$response['error'] = true; 
+				$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
+			}
+		break; 
 
-			case 'getperson':
+		case 'getProjectsPicturePathsByProjectId':
+			if(isset($_GET['project_Id'])){
 				$db = new DbOperation();
+				if($db->getProjectsPicturePathsByProjectId($_GET['project_Id'])){
+					$response['error'] = false; 
+					$response['message'] = 'Projekt hentet';
+					$response['picture'] = $db->getProjectsPicturePathsByProjectId($_GET['project_Id']);
+				
+				}
+				else{
+					$response['error'] = true; 
+					$response['message'] = 'Fejl';
+				}
+			}else{
+				$response['error'] = true; 
+				$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
+			}
+		break; 
+
+		case 'getProjectsByPersonId':
+		if(isset($_GET['person_Id'])){
+			$db = new DbOperation();
+			if($db->getProjectsByPersonId($_GET['person_Id'])){
 				$response['error'] = false; 
-				$response['message'] = 'Fuldført';
-				$response['person'] = $db->getPerson();
-			break; 
+				$response['message'] = 'Projekt hentet';
+				$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
+			
+			}
+			else{
+				$response['error'] = true; 
+				$response['message'] = 'Fejl';
+			}
+		}else{
+			$response['error'] = true; 
+			$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
+		}
+	break; 
+
+	case 'getProjectsByPersonId':
+	if(isset($_GET['person_Id'])){
+		$db = new DbOperation();
+		if($db->getProjectsByPersonId($_GET['person_Id'])){
+			$response['error'] = false; 
+			$response['message'] = 'Projekt hentet';
+			$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
+		
+		}
+		else{
+			$response['error'] = true; 
+			$response['message'] = 'Fejl';
+		}
+	}else{
+		$response['error'] = true; 
+		$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
+	}
+break; 
+
+case 'getProjectsByPersonId':
+if(isset($_GET['person_Id'])){
+	$db = new DbOperation();
+	if($db->getProjectsByPersonId($_GET['person_Id'])){
+		$response['error'] = false; 
+		$response['message'] = 'Projekt hentet';
+		$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
+	
+	}
+	else{
+		$response['error'] = true; 
+		$response['message'] = 'Fejl';
+	}
+}else{
+	$response['error'] = true; 
+	$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
+}
+break; 
 			
 			
 			     // Opdater operationen:
