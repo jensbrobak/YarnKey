@@ -26,19 +26,19 @@ INSERT INTO `Projects`(`Id`, `person_Id`, `name`, `description`, `status_Id`, `y
 INSERT INTO `Projects`(`Id`, `person_Id`, `name`, `description`, `status_Id`, `yarnProductName`, `yarnColorCode`, `yarnColor`,`yarnLength`, `needleSize`, `batchNr`, `notes`, `counter`) VALUES (NULL,'3','hue','grøn','3','Tykke Bertha','102','darkgreen','50','6','505','Ikke så ringe endda','100');
 
 
-INSERT INTO `Projects_PicturePaths`(`Id`, `projects_Id`, `uploadPath`) VALUES (NULL,'1','Google Drive/path/10.png');
+INSERT INTO `Projects_PicturePaths`(`Id`, `project_Id`, `uploadPath`) VALUES (NULL,'1','Google Drive/path/10.png');
 
 
-INSERT INTO `Projects_PicturePaths`(`Id`, `projects_Id`, `uploadPath`) VALUES (NULL,'1','Google Drive/path/10.jpg');
+INSERT INTO `Projects_PicturePaths`(`Id`, `project_Id`, `uploadPath`) VALUES (NULL,'1','Google Drive/path/10.jpg');
 
 
-INSERT INTO `Projects_PicturePaths`(`Id`, `projects_Id`, `uploadPath`) VALUES (NULL,'2','Google Drive/path/10.bitmap');
+INSERT INTO `Projects_PicturePaths`(`Id`, `project_Id`, `uploadPath`) VALUES (NULL,'2','Google Drive/path/10.bitmap');
 
 
-INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'1', NULL, NULL, 'http://www.garnopskrifter.dk/lyseblåtrøje.pdf');
+INSERT INTO `Projects_RecipePaths`(`Id`, `project_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'1', NULL, NULL, 'http://www.garnopskrifter.dk/lyseblåtrøje.pdf');
 
 
-INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'1', NULL, 'Alt om Hækling - side 3', NULL);
+INSERT INTO `Projects_RecipePaths`(`Id`, `project_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'1', NULL, 'Alt om Hækling - side 3', NULL);
 
 
-INSERT INTO `Projects_RecipePaths`(`Id`, `projects_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'2','Google Drive/path/darkgreensweater.docx', NULL, NULL);
+INSERT INTO `Projects_RecipePaths`(`Id`, `project_Id`, `uploadPath`, `bookPage`, `link`) VALUES (NULL,'2','Google Drive/path/darkgreensweater.docx', NULL, NULL);
