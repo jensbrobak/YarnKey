@@ -97,6 +97,13 @@
 				$response['message'] = 'Fuldført';
 				$response['project'] = $db->getProject();
 			break; 
+
+			case 'getperson':
+				$db = new DbOperation();
+				$response['error'] = false; 
+				$response['message'] = 'Fuldført';
+				$response['project'] = $db->getPerson();
+			break; 
 			
 			
 			     // Opdater operationen:

@@ -63,6 +63,29 @@ class DbOperation
 		
 		return $Projects; 
 	}
+
+	function getPerson(){
+		$stmt = $this->con->prepare("SELECT Id, firstName, lastName, Phone, Email, birthDate FROM Persons");
+		$stmt->execute();
+		$stmt->bind_result($Id, $firstName, $lastName, $Phone, $Email, $birthDate);
+		
+		$Persons = array(); 
+		
+		while($stmt->fetch()){
+			$Person = array();
+			$Person['Id'] = $Id; 
+			$Person['firstName'] = $firstName; 
+			$Person['lastName'] = $lastName; 
+			$Person['Phone'] = $Phone; 
+			$Person['Email'] = $Email; 
+			$Person['birthDate'] = $birthDate; 
+						
+			array_push($Persons, $Person); 
+		}
+		
+		return $Persons; 
+
+	}
 	
 	/*
      * Opdater operationen:
