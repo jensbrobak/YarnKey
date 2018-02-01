@@ -38,10 +38,10 @@ class DbOperation
      * Når disse metoder bliver kaldt, bliver alle de eksisterende elementer i databasen hentet.
      */
 	function getProjectsByPersonId($person_Id){
-		$stmt = $this->con->prepare("SELECT Id, person_Id, name, description, status_Id, yarnProductName, yarnColorCode, yarnColor, yarnLength, needleSize, batchNr, notes, counter FROM Projects WHERE person_Id = ? ");
+		$stmt = $this->con->prepare("SELECT Id, person_Id, name, description, status, yarnProductName, yarnColorCode, yarnColor, yarnLength, needleSize, batchNr, notes, counter FROM Projects WHERE person_Id = ? ");
 		$stmt->bind_param("i", $person_Id);
 		$stmt->execute();
-		$stmt->bind_result($Id, $person_Id, $name, $description, $status_Id, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
+		$stmt->bind_result($Id, $person_Id, $name, $description, $status, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
 		
 		$Projects = array(); 
 		
@@ -51,7 +51,7 @@ class DbOperation
 			$Project['person_Id'] = $person_Id; 
 			$Project['name'] = $name; 
 			$Project['description'] = $description; 
-			$Project['status_Id'] = $status_Id; 
+			$Project['status'] = $status; 
 			$Project['yarnProductName'] = $yarnProductName; 
 			$Project['yarnColorCode'] = $yarnColorCode; 
 			$Project['yarnColor'] = $yarnColor; 
