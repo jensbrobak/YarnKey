@@ -36,7 +36,7 @@ class DbOperation
      * Når disse metoder bliver kaldt, bliver alle de eksisterende elementer i databasen hentet.
      */
 	function getProject(){
-		$stmt = $this->con->prepare("SELECT id, person_Id, name, description, status_Id, yarnProductName, yarnColorCode,yarnColor,yarnLength,needleSize, batchNr, notes, counter FROM Project");
+		$stmt = $this->con->prepare("SELECT id, person_Id, name, description, status_Id, yarnProductName, yarnColorCode, yarnColor, yarnLength, needleSize, batchNr, notes, counter FROM Projects");
 		$stmt->execute();
 		$stmt->bind_result($id, $person_Id, $name, $description, $status_Id, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
 		

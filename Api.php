@@ -91,11 +91,11 @@
 			
 			        // Hent operationen:
                     // Hvis API-kaldet er hentprodukt.
-			case 'hentprodukt':
+			case 'getproject':
 				$db = new DbOperation();
 				$response['error'] = false; 
 				$response['message'] = 'Fuldført';
-				$response['produkt'] = $db->hentProdukt();
+				$response['project'] = $db->getProject();
 			break; 
 			
 			
