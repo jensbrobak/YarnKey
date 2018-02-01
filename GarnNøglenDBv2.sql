@@ -14,7 +14,7 @@ CREATE TABLE Projects (
       person_Id int NOT NULL,
       name varchar(255) NOT NULL,
       description varchar(255),
-      status_Id int NOT NULL,
+      status varchar(255) NOT NULL,
       yarnProductName varchar(255),
       yarnColorCode varchar(255),
       yarnColor varchar(255),
