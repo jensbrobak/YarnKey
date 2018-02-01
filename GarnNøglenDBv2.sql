@@ -25,8 +25,7 @@ CREATE TABLE Projects (
       counter int,
       PRIMARY KEY (Id),
       UNIQUE (Id),
-      FOREIGN KEY (person_Id) REFERENCES Persons(Id),
-      FOREIGN KEY (status_Id) REFERENCES Projects_Status(Id)
+      FOREIGN KEY (person_Id) REFERENCES Persons(Id)
     );
 
 CREATE TABLE Projects_PicturePaths (
