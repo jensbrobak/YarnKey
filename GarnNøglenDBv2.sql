@@ -38,20 +38,20 @@ CREATE TABLE Projects (
 
 CREATE TABLE Projects_PicturePaths (
       Id int NOT NULL AUTO_INCREMENT,
-      projects_Id int NOT NULL,
+      project_Id int NOT NULL,
       uploadPath varchar(255),
       PRIMARY KEY (Id),
       UNIQUE (Id),
-      FOREIGN KEY (projects_Id) REFERENCES Projects(Id)
+      FOREIGN KEY (project_Id) REFERENCES Projects(Id)
   );
 
 CREATE TABLE Projects_RecipePaths (
       Id int NOT NULL AUTO_INCREMENT,
-      projects_Id int NOT NULL,
+      project_Id int NOT NULL,
       uploadPath varchar(255),
       bookPage varchar(255),
       link varchar(255),
       PRIMARY KEY (Id),
       UNIQUE (Id),
-      FOREIGN KEY (projects_Id) REFERENCES Projects(Id)
+      FOREIGN KEY (project_Id) REFERENCES Projects(Id)
   );
