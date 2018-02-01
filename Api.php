@@ -1,5 +1,7 @@
 <?php 
 
+
+
 	// Henter DbOperation klassen.
 	require_once 'DbOperation.php';
 
@@ -102,7 +104,7 @@
 				$db = new DbOperation();
 				$response['error'] = false; 
 				$response['message'] = 'Fuldført';
-				$response['project'] = $db->getPerson();
+				$response['person'] = $db->getPerson();
 			break; 
 			
 			

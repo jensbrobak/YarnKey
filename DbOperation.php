@@ -1,5 +1,7 @@
 <?php
  
+
+
 class DbOperation
 {
     // Sti til databaseforbindelsen.
