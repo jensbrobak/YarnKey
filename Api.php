@@ -41,23 +41,29 @@
 		
 		switch($_GET['apicall']){
 			
-			//opretProdukt operationen
-            // Hvis API-kald værdien er: "opretprodukt".
-            // Så vil vi oprette produktet i databasen.
-			case 'opretprodukt':
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
+			case 'createproject':
 				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
-				isTheseParametersAvailable(array('Navn', 'ProduktBeskrivelse', 'ProduktType', 'ProduktFormat', 'LagerBeholdning'));
+				isTheseParametersAvailable(array('person_Id', 'name', 'description', 'status_Id', 'yarnProductName', 'yarnColorCode','yarnColor','yarnLength','needleSize', 'batchNr', 'notes', 'counter'));
 				
 				// Opretter et nyt DbOperation objekt
 				$db = new DbOperation();
 				
 				// Opretter et nyt produkt i databasen.
-				$result = $db->opretProdukt(
-					$_POST['Navn'],
-					$_POST['ProduktBeskrivelse'],
-					$_POST['ProduktType'],
-					$_POST['ProduktFormat'],
-					$_POST['LagerBeholdning']
+				$result = $db->createProject(
+					$_POST['person_Id'],
+					$_POST['name'],
+					$_POST['description'],
+					$_POST['status_Id'],
+					$_POST['yarnColorCode'],
+					$_POST['yarnColor'],
+					$_POST['yarnLength'],
+					$_POST['needleSize'],
+					$_POST['batchNr'],
+					$_POST['notes'],
+					$_POST['counter']
 					
 				);
 				

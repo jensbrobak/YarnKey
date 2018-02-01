@@ -23,9 +23,9 @@ class DbOperation
      * Opret operationen:
      * Når disse metoder bliver kaldt, så bliver der oprettet nye elementer i databasen.
      */
-	function opretProdukt($Navn, $ProduktBeskrivelse, $ProduktType, $ProduktFormat, $LagerBeholdning){
-		$stmt = $this->con->prepare("INSERT INTO Produkt (Navn, ProduktBeskrivelse, ProduktType, ProduktFormat, LagerBeholdning) VALUES (?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssss", $Navn, $ProduktBeskrivelse, $ProduktType, $ProduktFormat, $LagerBeholdning);
+	function createProject($person_Id, $name, $description, $status_Id, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter){
+		$stmt = $this->con->prepare("INSERT INTO Project (person_Id, name, description, status_Id, yarnProductName, yarnColorCode,yarnColor,yarnLength,needleSize, batchNr, notes, counter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("ississsssssi", $person_Id, $name, $description, $status_Id, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
 		if($stmt->execute())
 			return true; 
 		return false; 
@@ -35,26 +35,33 @@ class DbOperation
      * Hent operationen:
      * Når disse metoder bliver kaldt, bliver alle de eksisterende elementer i databasen hentet.
      */
-	function hentProdukt(){
-		$stmt = $this->con->prepare("SELECT id, Navn, ProduktBeskrivelse, ProduktType, ProduktFormat, LagerBeholdning FROM Produkt");
+	function getProject(){
+		$stmt = $this->con->prepare("SELECT id, person_Id, name, description, status_Id, yarnProductName, yarnColorCode,yarnColor,yarnLength,needleSize, batchNr, notes, counter FROM Project");
 		$stmt->execute();
-		$stmt->bind_result($id, $Navn, $ProduktBeskrivelse, $ProduktType, $ProduktFormat, $LagerBeholdning);
+		$stmt->bind_result($id, $person_Id, $name, $description, $status_Id, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
 		
-		$Produkter = array(); 
+		$Projects = array(); 
 		
 		while($stmt->fetch()){
-			$Produkt = array();
-			$Produkt['id'] = $id; 
-			$Produkt['Navn'] = $Navn; 
-			$Produkt['ProduktBeskrivelse'] = $ProduktBeskrivelse; 
-			$Produkt['ProduktType'] = $ProduktType; 
-			$Produkt['ProduktFormat'] = $ProduktFormat; 
-			$Produkt['LagerBeholdning'] = $LagerBeholdning; 
+			$Project = array();
+			$Project['id'] = $id; 
+			$Project['person_Id'] = $person_Id; 
+			$Project['name'] = $name; 
+			$Project['description'] = $description; 
+			$Project['status_Id'] = $status_Id; 
+			$Project['yarnProductName'] = $yarnProductName; 
+			$Project['yarnColorCode'] = $yarnColorCode; 
+			$Project['yarnColor'] = $yarnColor; 
+			$Project['yarnLength'] = $yarnLength; 
+			$Project['needleSize'] = $needleSize; 
+			$Project['batchNr'] = $batchNr; 
+			$Project['notes'] = $notes; 
+			$Project['counter'] = $counter; 
 						
-			array_push($Produkter, $Produkt); 
+			array_push($Projects, $Project); 
 		}
 		
-		return $Produkter; 
+		return $Projects; 
 	}
 	
 	/*
