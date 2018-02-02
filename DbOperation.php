@@ -96,10 +96,11 @@ class DbOperation
 	
 
 	function getPicturePaths($project_Id){
-		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, description FROM Projects_RecipePaths WHERE project_Id = ? " ");
+		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, description FROM Projects_PicturePaths WHERE project_Id = ? ");
 		$stmt->bind_param("i", $project_Id);
 		$stmt->execute();
-		$stmt->bind_result($Id, $project_Id, $uploadPath, $bookPage, $link, $description);
+		$stmt->bind_result($Id, $project_Id, $uploadPath, $description);
+		
 		
 		$picturePaths = array(); 
 		
@@ -108,21 +109,19 @@ class DbOperation
 			$picturePath['Id'] = $Id; 
 			$picturePath['project_Id'] = $project_Id; 
 			$picturePath['uploadPath'] = $uploadPath; 
-			$picturePath['bookPage'] = $bookPage; 
-			$picturePath['link'] = $link;
 			$picturePath['description'] = $description;
 								
 			array_push($picturePaths, $picturePath); 
 		}
 		
-		return $recipePaths; 
+		return $picturePaths; 
 	}
 
 	function getRecipePaths($project_Id){
-		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, bookPage, link, description FROM Projects_PicturePaths WHERE project_Id = ? ");
+		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, bookPage, link, description FROM Projects_RecipePaths WHERE project_Id = ? ");
 		$stmt->bind_param("i", $project_Id);
 		$stmt->execute();
-		$stmt->bind_result($Id, $project_Id, $uploadPath, $description);
+		$stmt->bind_result($Id, $project_Id, $uploadPath, $bookPage, $link, $description);
 		
 		$recipePaths = array(); 
 		
@@ -131,6 +130,8 @@ class DbOperation
 			$recipePath['Id'] = $Id; 
 			$recipePath['project_Id'] = $project_Id; 
 			$recipePath['uploadPath'] = $uploadPath; 
+			$recipePath['bookPage'] = $bookPage; 
+			$recipePath['link'] = $link;
 			$recipePath['description'] = $description;
 								
 			array_push($recipePaths, $recipePath); 
