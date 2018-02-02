@@ -45,9 +45,9 @@
 			//createProject operationen
             // Hvis API-kald værdien er: "createProject".
             // Så vil vi oprette projektet i databasen.
-			case 'createproject':
+			case 'createProject':
 				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
-				isTheseParametersAvailable(array('person_Id', 'name', 'description', 'status_Id', 'yarnProductName', 'yarnColorCode','yarnColor','yarnLength','needleSize', 'batchNr', 'notes', 'counter'));
+				isTheseParametersAvailable(array('person_Id', 'name', 'description', 'status', 'yarnProductName', 'yarnColorCode','yarnColor','yarnLength','needleSize', 'batchNr', 'notes', 'counter'));
 				
 				// Opretter et nyt DbOperation objekt
 				$db = new DbOperation();
@@ -57,7 +57,7 @@
 					$_POST['person_Id'],
 					$_POST['name'],
 					$_POST['description'],
-					$_POST['status_Id'],
+					$_POST['status'],
 					$_POST['yarnColorCode'],
 					$_POST['yarnColor'],
 					$_POST['yarnLength'],
@@ -75,10 +75,10 @@
 					$response['error'] = false; 
 
 					// Her har vi en besked med indholdet: "Produkt tilføjet".
-					$response['message'] = 'Produkt tilføjet';
+					$response['message'] = 'Projekt tilføjet';
 
 					// Her bliver alle produkterne fra databasen hentet, som svar.
-					$response['produkt'] = $db->hentProdukt();
+					$response['project'] = $db->getProjects($_GET['person_Id']);
 				}else{
 
 					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
@@ -146,7 +146,7 @@
 				}
 			}else{
 				$response['error'] = true; 
-				$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
+				$response['message'] = 'Billede eksisterer ikke, venligst angiv et nyt ID';
 			}
 		break; 
 
@@ -165,15 +165,9 @@
 			}
 		}else{
 			$response['error'] = true; 
-			$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
+			$response['message'] = 'Opskrift eksisterer ikke, venligst angiv et nyt ID';
 		}
 	break; 
-
- 
-
-
-			
-			
 			     // Opdater operationen:
                  // Hvis API-kaldet er opdaterprodukt.
 			case 'opdaterprodukt':

@@ -25,9 +25,9 @@ class DbOperation
      * Opret operationen:
      * Når disse metoder bliver kaldt, så bliver der oprettet nye elementer i databasen.
      */
-	function createProject($person_Id, $name, $description, $status_Id, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter){
-		$stmt = $this->con->prepare("INSERT INTO Project (person_Id, name, description, status_Id, yarnProductName, yarnColorCode,yarnColor,yarnLength,needleSize, batchNr, notes, counter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("ississsssssi", $person_Id, $name, $description, $status_Id, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
+	function createProject($person_Id, $name, $description, $status, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter){
+		$stmt = $this->con->prepare("INSERT INTO Project (person_Id, name, description, status, yarnProductName, yarnColorCode,yarnColor,yarnLength,needleSize, batchNr, notes, counter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("issssssssssi", $person_Id, $name, $description, $status, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
 		if($stmt->execute())
 			return true; 
 		return false; 
