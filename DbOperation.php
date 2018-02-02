@@ -93,11 +93,36 @@ class DbOperation
 		return $Projects; 
 	}
 
+	
+
 	function getPicturePaths($project_Id){
-		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, bookPage, link, description FROM Projects_RecipePaths WHERE project_Id = ? ");
+		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, description FROM Projects_RecipePaths WHERE project_Id = ? " ");
 		$stmt->bind_param("i", $project_Id);
 		$stmt->execute();
 		$stmt->bind_result($Id, $project_Id, $uploadPath, $bookPage, $link, $description);
+		
+		$picturePaths = array(); 
+		
+		while($stmt->fetch()){
+			$picturePath = array();
+			$picturePath['Id'] = $Id; 
+			$picturePath['project_Id'] = $project_Id; 
+			$picturePath['uploadPath'] = $uploadPath; 
+			$picturePath['bookPage'] = $bookPage; 
+			$picturePath['link'] = $link;
+			$picturePath['description'] = $description;
+								
+			array_push($picturePaths, $picturePath); 
+		}
+		
+		return $recipePaths; 
+	}
+
+	function getRecipePaths($project_Id){
+		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, bookPage, link, description FROM Projects_PicturePaths WHERE project_Id = ? ");
+		$stmt->bind_param("i", $project_Id);
+		$stmt->execute();
+		$stmt->bind_result($Id, $project_Id, $uploadPath, $description);
 		
 		$recipePaths = array(); 
 		
@@ -106,35 +131,12 @@ class DbOperation
 			$recipePath['Id'] = $Id; 
 			$recipePath['project_Id'] = $project_Id; 
 			$recipePath['uploadPath'] = $uploadPath; 
-			$recipePath['bookPage'] = $bookPage; 
-			$recipePath['link'] = $link;
 			$recipePath['description'] = $description;
 								
 			array_push($recipePaths, $recipePath); 
 		}
 		
-		return $uploadPaths; 
-	}
-
-	function getRecipePaths($project_Id){
-		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, description FROM Projects_PicturePaths WHERE project_Id = ? ");
-		$stmt->bind_param("i", $project_Id);
-		$stmt->execute();
-		$stmt->bind_result($Id, $project_Id, $uploadPath, $description);
-		
-		$uploadPaths = array(); 
-		
-		while($stmt->fetch()){
-			$uploadPath = array();
-			$uploadPath['Id'] = $Id; 
-			$uploadPath['project_Id'] = $project_Id; 
-			$uploadPath['uploadPath'] = $uploadPath; 
-			$uploadPath['description'] = $description;
-								
-			array_push($uploadPaths, $uploadPath); 
-		}
-		
-		return $uploadPaths; 
+		return $recipePaths; 
 	}
 
 	
