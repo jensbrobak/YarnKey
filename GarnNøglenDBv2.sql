@@ -4,7 +4,7 @@ CREATE TABLE Persons (
     lastName varchar(255),
     Phone int(10),
     Email varchar(255) NOT NULL,
-    birthDate DATE,
+    birthDate varchar(255),
     PRIMARY KEY (Id),
     UNIQUE (Id)
   );
