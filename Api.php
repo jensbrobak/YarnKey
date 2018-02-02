@@ -1,7 +1,6 @@
 <?php 
 
 
-
 	// Henter DbOperation klassen.
 	require_once 'DbOperation.php';
 
@@ -91,16 +90,35 @@
 				
 			break; 
 
+
+			case 'getPerson':
+			if(isset($_GET['Id'])){
+				$db = new DbOperation();
+				if($db->getPerson($_GET['Id'])){
+					$response['error'] = false; 
+					$response['message'] = 'Person hentet';
+					$response['project'] = $db->getPerson($_GET['Id']);
+				
+				}
+				else{
+					$response['error'] = true; 
+					$response['message'] = 'Fejl';
+				}
+			}else{
+				$response['error'] = true; 
+				$response['message'] = 'Personen eksisterer ikke, venligst angiv et nyt ID';
+			}
+		break;
 					
 			        // Hent operationen:
                     // Hvis API-kaldet er hentprodukt.
-			case 'getProjectsByPersonId':
+			case 'getProjects':
 			if(isset($_GET['person_Id'])){
 				$db = new DbOperation();
-				if($db->getProjectsByPersonId($_GET['person_Id'])){
+				if($db->getProjects($_GET['person_Id'])){
 					$response['error'] = false; 
 					$response['message'] = 'Projekt hentet';
-					$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
+					$response['project'] = $db->getProjects($_GET['person_Id']);
 				
 				}
 				else{
@@ -113,13 +131,13 @@
 			}
 		break; 
 
-		case 'getProjectsPicturePathsByProjectId':
+		case 'getPicturePaths':
 			if(isset($_GET['project_Id'])){
 				$db = new DbOperation();
-				if($db->getProjectsPicturePathsByProjectId($_GET['project_Id'])){
+				if($db->getPicturePaths($_GET['project_Id'])){
 					$response['error'] = false; 
 					$response['message'] = 'Projekt hentet';
-					$response['picture'] = $db->getProjectsPicturePathsByProjectId($_GET['project_Id']);
+					$response['picture'] = $db->getPicturePaths($_GET['project_Id']);
 				
 				}
 				else{
@@ -132,13 +150,13 @@
 			}
 		break; 
 
-		case 'getProjectsByPersonId':
-		if(isset($_GET['person_Id'])){
+		case 'getRecipePaths':
+		if(isset($_GET['project_Id'])){
 			$db = new DbOperation();
-			if($db->getProjectsByPersonId($_GET['person_Id'])){
+			if($db->getRecipePaths($_GET['project_Id'])){
 				$response['error'] = false; 
 				$response['message'] = 'Projekt hentet';
-				$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
+				$response['recipe'] = $db->getRecipePaths($_GET['project_Id']);
 			
 			}
 			else{
@@ -151,43 +169,9 @@
 		}
 	break; 
 
-	case 'getProjectsByPersonId':
-	if(isset($_GET['person_Id'])){
-		$db = new DbOperation();
-		if($db->getProjectsByPersonId($_GET['person_Id'])){
-			$response['error'] = false; 
-			$response['message'] = 'Projekt hentet';
-			$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
-		
-		}
-		else{
-			$response['error'] = true; 
-			$response['message'] = 'Fejl';
-		}
-	}else{
-		$response['error'] = true; 
-		$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
-	}
-break; 
+ 
 
-case 'getProjectsByPersonId':
-if(isset($_GET['person_Id'])){
-	$db = new DbOperation();
-	if($db->getProjectsByPersonId($_GET['person_Id'])){
-		$response['error'] = false; 
-		$response['message'] = 'Projekt hentet';
-		$response['project'] = $db->getProjectsByPersonId($_GET['person_Id']);
-	
-	}
-	else{
-		$response['error'] = true; 
-		$response['message'] = 'Fejl';
-	}
-}else{
-	$response['error'] = true; 
-	$response['message'] = 'Projektet eksisterer ikke, venligst angiv et nyt ID';
-}
-break; 
+
 			
 			
 			     // Opdater operationen:

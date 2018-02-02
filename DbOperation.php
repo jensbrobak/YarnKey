@@ -33,11 +33,37 @@ class DbOperation
 		return false; 
 	}
 
+
+	function getPerson($Id){
+		$stmt = $this->con->prepare("SELECT Id, firstName, lastName, Phone, Email, birthDate FROM Persons WHERE Id = ? ");
+		$stmt->bind_param("i", $Id);
+		$stmt->execute();
+		$stmt->bind_result($Id, $firstName, $lastName, $Phone, $Email, $birthDate);
+		
+		$Persons = array(); 
+		
+		while($stmt->fetch()){
+			$Person = array();
+			$Person['Id'] = $Id; 
+			$Person['firstName'] = $firstName; 
+			$Person['lastName'] = $lastName; 
+			$Person['Phone'] = $Phone; 
+			$Person['Email'] = $Email; 
+			$Person['birthDate'] = $birthDate; 
+						
+			array_push($Persons, $Person); 
+		}
+		
+		return $Persons; 
+
+	}
+
+
 	/*
      * Hent operationen:
      * Når disse metoder bliver kaldt, bliver alle de eksisterende elementer i databasen hentet.
      */
-	function getProjectsByPersonId($person_Id){
+	function getProjects($person_Id){
 		$stmt = $this->con->prepare("SELECT Id, person_Id, name, description, status, yarnProductName, yarnColorCode, yarnColor, yarnLength, needleSize, batchNr, notes, counter FROM Projects WHERE person_Id = ? ");
 		$stmt->bind_param("i", $person_Id);
 		$stmt->execute();
@@ -67,19 +93,43 @@ class DbOperation
 		return $Projects; 
 	}
 
-	function getProjectsPicturePathsByProjectId($project_Id){
-		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath FROM Projects_PicturePaths WHERE project_Id = ? ");
+	function getPicturePaths($project_Id){
+		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, bookPage, link, description FROM Projects_RecipePaths WHERE project_Id = ? ");
 		$stmt->bind_param("i", $project_Id);
 		$stmt->execute();
-		$stmt->bind_result($Id, $project_Id, $uploadPath);
+		$stmt->bind_result($Id, $project_Id, $uploadPath, $bookPage, $link, $description);
 		
-		$Paths = array(); 
+		$recipePaths = array(); 
+		
+		while($stmt->fetch()){
+			$recipePath = array();
+			$recipePath['Id'] = $Id; 
+			$recipePath['project_Id'] = $project_Id; 
+			$recipePath['uploadPath'] = $uploadPath; 
+			$recipePath['bookPage'] = $bookPage; 
+			$recipePath['link'] = $link;
+			$recipePath['description'] = $description;
+								
+			array_push($recipePaths, $recipePath); 
+		}
+		
+		return $uploadPaths; 
+	}
+
+	function getRecipePaths($project_Id){
+		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, description FROM Projects_PicturePaths WHERE project_Id = ? ");
+		$stmt->bind_param("i", $project_Id);
+		$stmt->execute();
+		$stmt->bind_result($Id, $project_Id, $uploadPath, $description);
+		
+		$uploadPaths = array(); 
 		
 		while($stmt->fetch()){
 			$uploadPath = array();
 			$uploadPath['Id'] = $Id; 
 			$uploadPath['project_Id'] = $project_Id; 
 			$uploadPath['uploadPath'] = $uploadPath; 
+			$uploadPath['description'] = $description;
 								
 			array_push($uploadPaths, $uploadPath); 
 		}
@@ -87,28 +137,7 @@ class DbOperation
 		return $uploadPaths; 
 	}
 
-	function getPerson(){
-		$stmt = $this->con->prepare("SELECT Id, firstName, lastName, Phone, Email, birthDate FROM Persons");
-		$stmt->execute();
-		$stmt->bind_result($Id, $firstName, $lastName, $Phone, $Email, $birthDate);
-		
-		$Persons = array(); 
-		
-		while($stmt->fetch()){
-			$Person = array();
-			$Person['Id'] = $Id; 
-			$Person['firstName'] = $firstName; 
-			$Person['lastName'] = $lastName; 
-			$Person['Phone'] = $Phone; 
-			$Person['Email'] = $Email; 
-			$Person['birthDate'] = $birthDate; 
-						
-			array_push($Persons, $Person); 
-		}
-		
-		return $Persons; 
-
-	}
+	
 	
 	/*
      * Opdater operationen:
