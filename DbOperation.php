@@ -25,14 +25,37 @@ class DbOperation
      * Opret operationen:
      * Når disse metoder bliver kaldt, så bliver der oprettet nye elementer i databasen.
      */
+	function createPerson($firstName, $lastName, $Phone, $Email, $birthDate){
+		$stmt = $this->con->prepare("INSERT INTO Persons (firstName, lastName, Phone, Email, birthDate) VALUES (?, ?, ?, ?, ?)");
+		$stmt->bind_param("ssiss", $firstName, $lastName, $Phone, $Email, $birthDate);
+		if($stmt->execute())
+			return true; 
+		return false; 
+	}
+
 	function createProject($person_Id, $name, $description, $status, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter){
-		$stmt = $this->con->prepare("INSERT INTO Project (person_Id, name, description, status, yarnProductName, yarnColorCode,yarnColor,yarnLength,needleSize, batchNr, notes, counter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$stmt = $this->con->prepare("INSERT INTO Projects (person_Id, name, description, status, yarnProductName, yarnColorCode, yarnColor, yarnLength, needleSize, batchNr, notes, counter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		$stmt->bind_param("issssssssssi", $person_Id, $name, $description, $status, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter);
 		if($stmt->execute())
 			return true; 
 		return false; 
 	}
 
+	function createPicturePaths($project_Id, $uploadPath, $description){
+		$stmt = $this->con->prepare("INSERT INTO Projects_PicturePaths (project_Id, uploadPath, description) VALUES (?, ?, ?)");
+		$stmt->bind_param("iss", $project_Id, $uploadPath, $description);
+		if($stmt->execute())
+			return true; 
+		return false; 
+	}
+
+	function createRecipePaths($project_Id, $uploadPath, $bookPage, $link, $description){
+		$stmt = $this->con->prepare("INSERT INTO Projects_RecipePaths (project_Id, uploadPath, bookPage, link, description) VALUES (?, ?, ?, ?, ?)");
+		$stmt->bind_param("issss", $project_Id, $uploadPath, $bookPage, $link, $description);
+		if($stmt->execute())
+			return true; 
+		return false; 
+	}
 
 	function getPerson($Id){
 		$stmt = $this->con->prepare("SELECT Id, firstName, lastName, Phone, Email, birthDate FROM Persons WHERE Id = ? ");
@@ -57,7 +80,6 @@ class DbOperation
 		return $Persons; 
 
 	}
-
 
 	/*
      * Hent operationen:
@@ -92,8 +114,6 @@ class DbOperation
 		
 		return $Projects; 
 	}
-
-	
 
 	function getPicturePaths($project_Id){
 		$stmt = $this->con->prepare("SELECT Id, project_Id, uploadPath, description FROM Projects_PicturePaths WHERE project_Id = ? ");
@@ -140,31 +160,41 @@ class DbOperation
 		return $recipePaths; 
 	}
 
-	
-	
 	/*
      * Opdater operationen:
      * Når disse metoder bliver kaldt, bliver de elementer med det indtastede ID, opdateret til nye værdier.
      */
-	function opdaterProdukt($id, $Navn, $ProduktBeskrivelse, $ProduktType, $ProduktFormat, $LagerBeholdning){
-		$stmt = $this->con->prepare("UPDATE Produkt SET Navn = ?, ProduktBeskrivelse = ?, ProduktType = ?, ProduktFormat = ?, LagerBeholdning = ? WHERE id = ?");
-		$stmt->bind_param("sssssi", $Navn, $ProduktBeskrivelse, $ProduktType, $ProduktFormat, $LagerBeholdning, $id);
+	function updatePerson($Id, $firstName, $lastName, $Phone, $Email, $birthDate){
+		$stmt = $this->con->prepare("UPDATE Persons SET firstName = ?, lastName = ?, Phone = ?, Email = ?, birthDate = ? WHERE Id = ?");
+		$stmt->bind_param("ssissi", $firstName, $lastName, $Phone, $Email, $birthDate, $Id);
+		if($stmt->execute())
+			return true; 
+		return false; 
+	}
+
+	function updateProject($Id, $person_Id, $name, $description, $status, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter){
+		$stmt = $this->con->prepare("UPDATE Projects SET person_Id = ?, name = ?, description = ?, status = ?, yarnProductName = ?, yarnColorCode = ?, yarnColor = ?, yarnLength = ?, needleSize = ?, batchNr = ?, notes = ?, counter = ? WHERE Id = ?");
+		$stmt->bind_param("issssssssssii", $person_Id, $name, $description, $status, $yarnProductName, $yarnColorCode, $yarnColor, $yarnLength, $needleSize, $batchNr, $notes, $counter, $Id);
+		if($stmt->execute())
+			return true; 
+		return false; 
+	}
+
+	function updatePicturePaths($Id, $project_Id, $uploadPath, $description){
+		$stmt = $this->con->prepare("UPDATE Projects_PicturePaths SET project_Id = ?, uploadPath = ?, description = ? WHERE Id = ?");
+		$stmt->bind_param("issi", $project_Id, $uploadPath, $description, $Id);
+		if($stmt->execute())
+			return true; 
+		return false; 
+	}
+
+	function updateRecipePaths($Id, $project_Id, $uploadPath, $bookPage, $link, $description){
+		$stmt = $this->con->prepare("UPDATE Projects_RecipePaths SET project_Id = ?, uploadPath = ?, bookPage = ?, link = ?, description = ? WHERE Id = ?");
+		$stmt->bind_param("issssi", $project_Id, $uploadPath, $bookPage, $link, $description, $Id);
 		if($stmt->execute())
 			return true; 
 		return false; 
 	}
 	
-	
-	/*
-     * Slet operationerne:
-     * Når disse metoder bliver kaldt, vil elementerne med det indtastede ID, blive slettet i databasen. 
-     */
-	function sletProdukt($id){
-		$stmt = $this->con->prepare("DELETE FROM Produkt WHERE id = ? ");
-		$stmt->bind_param("i", $id);
-		if($stmt->execute())
-			return true; 
-		
-		return false; 
 	}
 }

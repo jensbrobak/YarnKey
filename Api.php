@@ -45,9 +45,50 @@
 			//createProject operationen
             // Hvis API-kald værdien er: "createProject".
             // Så vil vi oprette projektet i databasen.
+			case 'createPerson':
+				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
+				isTheseParametersAvailable(array('firstName', 'lastName', 'Phone', 'Email', 'birthDate'));
+				
+				// Opretter et nyt DbOperation objekt
+				$db = new DbOperation();
+				
+				// Opretter et nyt produkt i databasen.
+				$result = $db->createPerson(
+					$_POST['firstName'],
+					$_POST['lastName'],
+					$_POST['Phone'],
+					$_POST['Email'],
+					$_POST['birthDate']
+				);
+				
+
+				// Hvis produktet bliver oprettet, får vi følgende svar: Produkt tilføjet. Ellers får vi beskeden: Fejl.
+				if($result){
+					// Hvis produktet bliver tilføjet, er der ingen fejl.
+					$response['error'] = false; 
+
+					// Her har vi en besked med indholdet: "Produkt tilføjet".
+					$response['message'] = 'Person tilføjet';
+
+					// Her bliver alle produkterne fra databasen hentet, som svar.
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
+				}else{
+
+					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
+					$response['error'] = true; 
+
+					// Her har vi fejlbeskeden.
+					$response['message'] = 'Fejl';
+				}
+				
+			break; 
+
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
 			case 'createProject':
 				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
-				isTheseParametersAvailable(array('person_Id', 'name', 'description', 'status', 'yarnProductName', 'yarnColorCode','yarnColor','yarnLength','needleSize', 'batchNr', 'notes', 'counter'));
+				isTheseParametersAvailable(array('person_Id', 'name', 'description', 'status', 'yarnProductName', 'yarnColorCode', 'yarnColor', 'yarnLength', 'needleSize', 'batchNr', 'notes', 'counter'));
 				
 				// Opretter et nyt DbOperation objekt
 				$db = new DbOperation();
@@ -58,6 +99,7 @@
 					$_POST['name'],
 					$_POST['description'],
 					$_POST['status'],
+					$_POST['yarnProductName'],
 					$_POST['yarnColorCode'],
 					$_POST['yarnColor'],
 					$_POST['yarnLength'],
@@ -65,7 +107,6 @@
 					$_POST['batchNr'],
 					$_POST['notes'],
 					$_POST['counter']
-					
 				);
 				
 
@@ -78,7 +119,7 @@
 					$response['message'] = 'Projekt tilføjet';
 
 					// Her bliver alle produkterne fra databasen hentet, som svar.
-					$response['project'] = $db->getProjects($_GET['person_Id']);
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
 				}else{
 
 					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
@@ -90,6 +131,85 @@
 				
 			break; 
 
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
+			case 'createPicturePaths':
+				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
+				isTheseParametersAvailable(array('project_Id', 'uploadPath', 'description'));
+				
+				// Opretter et nyt DbOperation objekt
+				$db = new DbOperation();
+				
+				// Opretter et nyt produkt i databasen.
+				$result = $db->createPicturePaths(
+					$_POST['project_Id'],
+					$_POST['uploadPath'],
+					$_POST['description']
+				);
+				
+
+				// Hvis produktet bliver oprettet, får vi følgende svar: Produkt tilføjet. Ellers får vi beskeden: Fejl.
+				if($result){
+					// Hvis produktet bliver tilføjet, er der ingen fejl.
+					$response['error'] = false; 
+
+					// Her har vi en besked med indholdet: "Produkt tilføjet".
+					$response['message'] = 'Billede tilføjet';
+
+					// Her bliver alle produkterne fra databasen hentet, som svar.
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
+				}else{
+
+					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
+					$response['error'] = true; 
+
+					// Her har vi fejlbeskeden.
+					$response['message'] = 'Fejl';
+				}
+				
+			break; 
+
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
+			case 'createRecipePaths':
+				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
+				isTheseParametersAvailable(array('project_Id', 'uploadPath', 'bookPage', 'link', 'description'));
+				
+				// Opretter et nyt DbOperation objekt
+				$db = new DbOperation();
+				
+				// Opretter et nyt produkt i databasen.
+				$result = $db->createRecipePaths(
+					$_POST['project_Id'],
+					$_POST['uploadPath'],
+					$_POST['bookPage'],
+					$_POST['link'],
+					$_POST['description']
+				);
+				
+
+				// Hvis produktet bliver oprettet, får vi følgende svar: Produkt tilføjet. Ellers får vi beskeden: Fejl.
+				if($result){
+					// Hvis produktet bliver tilføjet, er der ingen fejl.
+					$response['error'] = false; 
+
+					// Her har vi en besked med indholdet: "Produkt tilføjet".
+					$response['message'] = 'Opskrift tilføjet';
+
+					// Her bliver alle produkterne fra databasen hentet, som svar.
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
+				}else{
+
+					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
+					$response['error'] = true; 
+
+					// Her har vi fejlbeskeden.
+					$response['message'] = 'Fejl';
+				}
+				
+			break; 
 
 			case 'getPerson':
 			if(isset($_GET['Id'])){
@@ -168,28 +288,188 @@
 			$response['message'] = 'Opskrift eksisterer ikke, venligst angiv et nyt ID';
 		}
 	break; 
-			     // Opdater operationen:
-                 // Hvis API-kaldet er opdaterprodukt.
-			case 'opdaterprodukt':
-				isTheseParametersAvailable(array('id','Navn','ProduktBeskrivelse', 'ProduktType', 'ProduktFormat', 'LagerBeholdning'));
+
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
+			case 'updatePerson':
+				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
+				isTheseParametersAvailable(array('Id', 'firstName', 'lastName', 'Phone', 'Email', 'birthDate'));
+				
+				// Opretter et nyt DbOperation objekt
 				$db = new DbOperation();
-				$result = $db->opdaterProdukt(
-					$_POST['id'],
-					$_POST['Navn'],
-					$_POST['ProduktBeskrivelse'],
-					$_POST['ProduktType'],
-					$_POST['ProduktFormat'],
-					$_POST['LagerBeholdning']
+				
+				// Opretter et nyt produkt i databasen.
+				$result = $db->updatePerson(
+					$_POST['Id'],
+					$_POST['firstName'],
+					$_POST['lastName'],
+					$_POST['Phone'],
+					$_POST['Email'],
+					$_POST['birthDate']
 				);
 				
+
+				// Hvis produktet bliver oprettet, får vi følgende svar: Produkt tilføjet. Ellers får vi beskeden: Fejl.
 				if($result){
+					// Hvis produktet bliver tilføjet, er der ingen fejl.
 					$response['error'] = false; 
-					$response['message'] = 'Produkt opdateret';
-					$response['produkt'] = $db->hentProdukt();
+
+					// Her har vi en besked med indholdet: "Produkt tilføjet".
+					$response['message'] = 'Person opdateret';
+
+					$response['person'] = $db->getPerson($_GET['Id']);
+
+					// Her bliver alle produkterne fra databasen hentet, som svar.
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
 				}else{
+
+					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
 					$response['error'] = true; 
+
+					// Her har vi fejlbeskeden.
 					$response['message'] = 'Fejl';
 				}
+				
+			break; 
+
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
+			case 'updateProject':
+				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
+				isTheseParametersAvailable(array('Id', 'person_Id', 'name', 'description', 'status', 'yarnProductName', 'yarnColorCode', 'yarnColor', 'yarnLength', 'needleSize', 'batchNr', 'notes', 'counter'));
+				
+				// Opretter et nyt DbOperation objekt
+				$db = new DbOperation();
+				
+				// Opretter et nyt produkt i databasen.
+				$result = $db->updateProject(
+					$_POST['Id'],
+					$_POST['person_Id'],
+					$_POST['name'],
+					$_POST['description'],
+					$_POST['status'],
+					$_POST['yarnProductName'],
+					$_POST['yarnColorCode'],
+					$_POST['yarnColor'],
+					$_POST['yarnLength'],
+					$_POST['needleSize'],
+					$_POST['batchNr'],
+					$_POST['notes'],
+					$_POST['counter']
+				);
+				
+
+				// Hvis produktet bliver oprettet, får vi følgende svar: Produkt tilføjet. Ellers får vi beskeden: Fejl.
+				if($result){
+					// Hvis produktet bliver tilføjet, er der ingen fejl.
+					$response['error'] = false; 
+
+					// Her har vi en besked med indholdet: "Produkt tilføjet".
+					$response['message'] = 'Projekt opdateret';
+
+					$response['project'] = $db->getProjects($_GET['person_Id']);
+
+					// Her bliver alle produkterne fra databasen hentet, som svar.
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
+				}else{
+
+					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
+					$response['error'] = true; 
+
+					// Her har vi fejlbeskeden.
+					$response['message'] = 'Fejl';
+				}
+				
+			break; 
+
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
+			case 'updatePicturePaths':
+				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
+				isTheseParametersAvailable(array('Id', 'project_Id', 'uploadPath', 'description'));
+				
+				// Opretter et nyt DbOperation objekt
+				$db = new DbOperation();
+				
+				// Opretter et nyt produkt i databasen.
+				$result = $db->updatePicturePaths(
+					$_POST['Id'],
+					$_POST['project_Id'],
+					$_POST['uploadPath'],
+					$_POST['description']
+				);
+				
+
+				// Hvis produktet bliver oprettet, får vi følgende svar: Produkt tilføjet. Ellers får vi beskeden: Fejl.
+				if($result){
+					// Hvis produktet bliver tilføjet, er der ingen fejl.
+					$response['error'] = false; 
+
+					// Her har vi en besked med indholdet: "Produkt tilføjet".
+					$response['message'] = 'Billede opdateret';
+
+					$response['picture'] = $db->getPicturePaths($_GET['project_Id']);
+
+					
+
+					// Her bliver alle produkterne fra databasen hentet, som svar.
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
+				}else{
+
+					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
+					$response['error'] = true; 
+
+					// Her har vi fejlbeskeden.
+					$response['message'] = 'Fejl';
+				}
+				
+			break; 
+
+			//createProject operationen
+            // Hvis API-kald værdien er: "createProject".
+            // Så vil vi oprette projektet i databasen.
+			case 'updateRecipePaths':
+				// Vi tjekker først om parametrene for forespørgslen er tilgængelige eller ej.
+				isTheseParametersAvailable(array('Id', 'project_Id', 'uploadPath', 'bookPage', 'link', 'description'));
+				
+				// Opretter et nyt DbOperation objekt
+				$db = new DbOperation();
+				
+				// Opretter et nyt produkt i databasen.
+				$result = $db->updateRecipePaths(
+					$_POST['Id'],
+					$_POST['project_Id'],
+					$_POST['uploadPath'],
+					$_POST['bookPage'],
+					$_POST['link'],
+					$_POST['description']
+				);
+				
+
+				// Hvis produktet bliver oprettet, får vi følgende svar: Produkt tilføjet. Ellers får vi beskeden: Fejl.
+				if($result){
+					// Hvis produktet bliver tilføjet, er der ingen fejl.
+					$response['error'] = false; 
+
+					// Her har vi en besked med indholdet: "Produkt tilføjet".
+					$response['message'] = 'Opskrift opdateret';
+
+					$response['recipe'] = $db->getRecipePaths($_GET['project_Id']);
+
+					// Her bliver alle produkterne fra databasen hentet, som svar.
+				//	$response['project'] = $db->getProjects($_GET['person_Id']);
+				}else{
+
+					 // Hvis produktet ikke bliver tilføjet, har vi en fejl.
+					$response['error'] = true; 
+
+					// Her har vi fejlbeskeden.
+					$response['message'] = 'Fejl';
+				}
+				
 			break; 
 			
 			     // Slet operationen:
