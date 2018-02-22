@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Opret Projekt</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h2>Opret Projekt</h2>
+  <form (ngSubmit)="saveProject()">
+    <ion-item>
+      <ion-label>Projekt Navn</ion-label>
+      <ion-input type="text" placeholder="Indtast Projekt Navn" [(ngModel)]="project.name" name="name" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Projekt Beskrivelse</ion-label>
+      <ion-input type="text" placeholder="Indtast Projekt Beskrivelse" [(ngModel)]="project.description" name="description" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Garn Produkt Navn</ion-label>
+      <ion-input type="text" placeholder="Indtast Garn Produkt Navn" [(ngModel)]="project.yarnProductName" name="yarnProductName" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Garn Farve Kode</ion-label>
+      <ion-input type="text" placeholder="Indtast Garn Farve Kode" [(ngModel)]="project.yarnColorCode" name="yarnColorCode" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Garn Farve</ion-label>
+      <ion-input type="text" placeholder="Indtast Garn Farve" [(ngModel)]="project.yarnColor" name="yarnColor" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Garn Løbelængde</ion-label>
+      <ion-input type="number" placeholder="Indtast Garn Løbelængde (kun tal)" [(ngModel)]="project.yarnLength" name="yarnLength" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nål/Pind størrelse</ion-label>
+      <ion-input type="text" placeholder="Indtast Nål/Pind størrelse" [(ngModel)]="project.needleSize" name="needleSize" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Partinummer</ion-label>
+      <ion-input type="text" placeholder="Indtast Partinummer" [(ngModel)]="project.batchNr" name="batchNr" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Noter</ion-label>
+      <ion-input type="text" placeholder="Indtast evt. Noter" [(ngModel)]="project.notes" name="notes" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+    <button ion-button type="submit" block>Gem Projekt</button>
+    </ion-item>
+  </form>
+</ion-content>
