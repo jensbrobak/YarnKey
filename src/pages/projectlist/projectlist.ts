@@ -44,7 +44,7 @@ balance = 0;
         db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT)',{})
         .then(res => console.log('Executed SQL'))
         .catch(e => console.log(e));
-        db.executeSql('SELECT * FROM projects ORDER BY rowid DESC WHERE status="Igangværende"', {})
+        db.executeSql('SELECT * FROM projects WHERE status="Igangværende"', {})
         .then(res => {
           this.projects = [];
           for(var i=0; i<res.rows.length; i++) {

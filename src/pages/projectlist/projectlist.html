@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
       <ion-title>
-        Projekter
+        Garn Projekter
       </ion-title>
       <ion-buttons end>
         <button ion-button icon-only (click)="addProject()">
@@ -20,7 +20,7 @@
             <h2>{{project.name}}</h2>
             <p>{{project.description}}</p>
             <h3 item-end>{{project.status}}</h3>
-            <button ion-button clear item-end>View</button>
+            <button ion-button clear item-end>Vis</button>
           </ion-item>
         <ion-item-options side="right">
             <button ion-button color="primary" (click)="editProject(project.rowid)">

@@ -28,8 +28,10 @@ import { ProjecteditPage } from '../pages/projectedit/projectedit';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
+    IonicModule.forRoot(MyApp, {
+    tabsPlacement: 'top',
+    backButtonText: 'Tilbage'})
+    ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,

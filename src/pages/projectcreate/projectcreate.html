@@ -1,13 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Opret Projekt</ion-title>
+    <ion-title>Opret Garn Projekt</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <h2>Opret Projekt</h2>
+  <h2>Opret Garn Projekt</h2>
   <form (ngSubmit)="saveProject()">
     <ion-item>
       <ion-label>Projekt Navn</ion-label>
@@ -42,7 +42,7 @@
       <ion-input type="text" placeholder="Indtast Partinummer" [(ngModel)]="project.batchNr" name="batchNr" required=""></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Noter</ion-label>
+      <ion-textarea>Noter</ion-textarea>
       <ion-input type="text" placeholder="Indtast evt. Noter" [(ngModel)]="project.notes" name="notes" required=""></ion-input>
     </ion-item>
     <ion-item>
