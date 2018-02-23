@@ -1,40 +1,51 @@
-<!--
-  Generated template for the ProjecteditPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Redigering</ion-title>
+    <ion-title>Redigering af {{project.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <h2>Edit Data</h2>
-  <form (ngSubmit)="updateData()">
+  <h2>Redigering af {{project.name}}</h2>
+  <form (ngSubmit)="updateProject()">
     <ion-item>
-      <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="data.date" name="date" required=""></ion-datetime>
+      <ion-label>Projekt Navn</ion-label>
+      <ion-input type="text" placeholder="Indtast Projekt Navn" required [(ngModel)]="project.name" name="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Type</ion-label>
-      <ion-select [(ngModel)]="data.type" name="type" required="">
-        <ion-option value="Income">Income</ion-option>
-        <ion-option value="Expense">Expense</ion-option>
-      </ion-select>
+      <ion-label>Projekt Beskrivelse</ion-label>
+      <ion-input type="text" placeholder="Indtast Projekt Beskrivelse" [(ngModel)]="project.description" name="description" required=""></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Description</ion-label>
-      <ion-input type="text" placeholder="Description" [(ngModel)]="data.description" name="description" required="" ></ion-input>
+      <ion-label>Garn Produkt Navn</ion-label>
+      <ion-input type="text" placeholder="Indtast Garn Produkt Navn" [(ngModel)]="project.yarnProductName" name="yarnProductName" required=""></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Amount</ion-label>
-      <ion-input type="number" placeholder="Amount" [(ngModel)]="data.amount" name="amount" required="" ></ion-input>
+      <ion-label>Garn Farve Kode</ion-label>
+      <ion-input type="text" placeholder="Indtast Garn Farve Kode" [(ngModel)]="project.yarnColorCode" name="yarnColorCode" required=""></ion-input>
     </ion-item>
-    <ion-input type="hidden" [(ngModel)]="data.rowid" name="rowid"></ion-input>
-    <button ion-button type="submit" block>Update Data</button>
+    <ion-item>
+      <ion-label>Garn Farve</ion-label>
+      <ion-input type="text" placeholder="Indtast Garn Farve" [(ngModel)]="project.yarnColor" name="yarnColor" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Garn Løbelængde</ion-label>
+      <ion-input type="number" placeholder="Indtast Garn Løbelængde (kun tal)" [(ngModel)]="project.yarnLength" name="yarnLength" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nål/Pind størrelse</ion-label>
+      <ion-input type="text" placeholder="Indtast Nål/Pind størrelse" [(ngModel)]="project.needleSize" name="needleSize" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Partinummer</ion-label>
+      <ion-input type="text" placeholder="Indtast Partinummer" [(ngModel)]="project.batchNr" name="batchNr" required=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Noter</ion-label>
+      <ion-textarea type="text" placeholder="Indtast evt. Noter" [(ngModel)]="project.notes" name="notes" required=""></ion-textarea>
+    </ion-item>
+    <ion-input type="hidden" [(ngModel)]="project.rowid" name="rowid"></ion-input>
+    <button ion-button type="submit" block>Opdatér Projekt</button>
   </form>
 </ion-content>
