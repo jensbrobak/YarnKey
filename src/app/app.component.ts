@@ -1,6 +1,3 @@
-import { SQLite } from '@ionic-native/sqlite';
-import { Toast } from '@ionic-native/toast';
-
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
