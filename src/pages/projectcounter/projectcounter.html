@@ -10,12 +10,14 @@
 
 <ion-content padding>
   <form (ngSubmit)="updateCounter()">
-    <div>
+            <div>
              <h1>{{project.counter}}</h1>
-             <button ion-button type="submit" (click)="onIncrement()">+</button>
-             <button ion-button type="submit" (click)="onDecrement()">-</button>
+             <button ion-fab color="secondary" type="submit" (click)="onIncrement()"><ion-icon name="add"></ion-icon></button>
+             <button ion-fab color="secondary" type="submit" (click)="onDecrement()"><ion-icon name="remove"></ion-icon></button>
            </div>
 
         <ion-input type="hidden" [(ngModel)]="project.rowid" name="rowid"></ion-input>
 </form>
 </ion-content>
+
+
