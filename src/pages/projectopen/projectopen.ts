@@ -25,6 +25,10 @@ export class ProjectopenPage {
       this.getCurrentProject(navParams.get("rowid"));
   }
 
+  IonViewDidEnter() {
+    this.getCurrentProject
+  }
+
   getCurrentProject(rowid) {
     this.sqlite.create({
       name: 'yarnkeydb.db',

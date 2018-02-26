@@ -20,11 +20,10 @@ export class ProjectcounterPage {
   project = { rowid:0, counter:0 };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite) {
-    
+    this.getCurrentCounter(navParams.get("rowid"));
   }
 
   ionViewDidLoad() {
-    this.getCurrentCounter;
     console.log('ionViewDidLoad ProjectcounterPage');
   }
 
@@ -43,7 +42,7 @@ export class ProjectcounterPage {
       }
     )}
 
-  updateCounter(rowid) {
+  updateCounter() {
     this.sqlite.create({
       name: 'yarnkeydb.db',
       location: 'default'
@@ -55,16 +54,18 @@ export class ProjectcounterPage {
           );
         }
       )}
-
+    
       onIncrement() {
 
         this.project.counter++
-        this.updateCounter(rowid)
+        this.updateCounter()
+        
          }
         
       onDecrement() {
           
         this.project.counter--
-        this.updateCounter
+        this.updateCounter()
+
          }
     }
