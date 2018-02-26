@@ -25,8 +25,12 @@ export class ProjectopenPage {
       this.getCurrentProject(navParams.get("rowid"));
   }
 
-  IonViewDidEnter() {
-    this.getCurrentProject
+  IonViewDidLoad() {
+    this.getCurrentProject(this.project.rowid);
+  }
+
+  ionViewWillEnter() {
+    this.getCurrentProject(this.project.rowid);
   }
 
   getCurrentProject(rowid) {

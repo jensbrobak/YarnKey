@@ -45,7 +45,17 @@
       <ion-label>Noter</ion-label>
       <ion-textarea type="text" placeholder="Indtast evt. Noter" [(ngModel)]="project.notes" name="notes" required=""></ion-textarea>
     </ion-item>
+    <ion-item>
+        <ion-label>Vælg Status</ion-label>
+        <ion-select placeholder="Vælg" okText="Ok" cancelText="Annullér"[(ngModel)]="project.status" name="status" required="">
+          <ion-option value="Igangværende">Igangværende</ion-option>
+         <ion-option value="Færdig">Færdig</ion-option>
+       </ion-select>
+    </ion-item>
     <ion-input type="hidden" [(ngModel)]="project.rowid" name="rowid"></ion-input>
     <button ion-button type="submit" block>Opdatér Projekt</button>
   </form>
 </ion-content>
+
+
+

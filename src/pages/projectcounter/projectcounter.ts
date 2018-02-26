@@ -26,6 +26,7 @@ export class ProjectcounterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectcounterPage');
   }
+  
 
   getCurrentCounter(rowid) {
     this.sqlite.create({

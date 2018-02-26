@@ -14,9 +14,15 @@
 
 <ion-content padding>
 
+
     <ion-list>
         <ion-item-sliding *ngFor="let project of projects; let i=index">
-          <ion-item (click)="openProject(project.rowid)">
+            <ion-label>Vælg Status</ion-label>
+            <ion-select placeholder="Vælg" okText="Ok" cancelText="Annullér"[(ngModel)]="project.status" name="status" required="">
+              <ion-option value="Igangværende">Igangværende</ion-option>
+              <ion-option value="Færdig">Færdig</ion-option>
+           </ion-select>
+          <ion-item (click)="openProject(project.rowid)">
             <h2>{{project.name}}</h2>
             <p>{{project.description}}</p>
             <h3 item-end>{{project.status}}</h3>
