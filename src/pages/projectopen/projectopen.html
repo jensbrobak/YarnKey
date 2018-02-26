@@ -1,18 +1,51 @@
-<!--
-  Generated template for the ProjectopenPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>projectopen</ion-title>
+    <ion-title>Visning af {{project.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+  <h2>Visning af {{project.name}}</h2>
+    <ion-item>
+      <ion-label><b>Projekt Navn: </b>{{project.name}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Projekt Beskrivelse: </b>{{project.description}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Garn Produkt Navn: </b>{{project.yarnProductName}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Garn Farve Kode: </b>{{project.yarnColorCode}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Garn Farve: </b>{{project.yarnColor}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Garn Løbelængde: </b>{{project.yarnLength}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Nål/Pind størrelse: </b>{{project.needleSize}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Partinummer: </b>{{project.batchNr}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Tæller: </b>{{project.counter}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Noter: </b>{{project.notes}}</ion-label>
+    </ion-item>
+    <ion-item>
+    <button ion-button color="primary" block large (click)="updateCounter(project.rowid,project.counter)">Tæller</button>
+    </ion-item>
+    <ion-item>
+    <button ion-button color="primary" block large (click)="editProject(project.rowid)">Redigér</button>
+    </ion-item>
+    <ion-item>
+    <button ion-button color="danger" block large (click)="deleteConfirm(project.rowid)">Slet</button>
+    </ion-item>
 
 </ion-content>

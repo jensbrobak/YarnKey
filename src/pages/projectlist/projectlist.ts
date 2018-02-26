@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { ProjectcreatePage } from '../projectcreate/projectcreate';
 import { ProjecteditPage } from '../projectedit/projectedit';
+import { ProjectopenPage } from '../projectopen/projectopen';
 
 /**
  * Generated class for the ProjectlistPage page.
@@ -75,6 +76,12 @@ balance = 0;
       this.navCtrl.push(ProjectcreatePage);
     }
     
+    openProject(rowid) {
+      this.navCtrl.push(ProjectopenPage, {
+        rowid:rowid
+      });
+    }
+
     editProject(rowid) {
       this.navCtrl.push(ProjecteditPage, {
         rowid:rowid

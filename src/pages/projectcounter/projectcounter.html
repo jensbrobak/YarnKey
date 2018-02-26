@@ -1,18 +1,21 @@
-<!--
-  Generated template for the ProjectcounterPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>projectcounter</ion-title>
+    <ion-title>Tæller</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+<form>
+    <div>
+             <h1>{{project.counter}}</h1>
+             <button ion-button type="submit" (click)="onIncrement()">Increment</button>
+             <button ion-button type="submit" (click)="onDecrement()">Decrement</button>
+           </div>
 
+        <ion-input type="hidden" [(ngModel)]="project.rowid" name="rowid"></ion-input>
+</form>
 </ion-content>

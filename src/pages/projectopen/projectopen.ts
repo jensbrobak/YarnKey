@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Toast } from '@ionic-native/toast';
+import { AlertController } from 'ionic-angular';
 
-/**
- * Generated class for the ProjectopenPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ProjecteditPage } from '../projectedit/projectedit';
+import { ProjectlistPage } from '../projectlist/projectlist';
+import { ProjectcounterPage } from '../projectcounter/projectcounter';
 
 @IonicPage()
 @Component({
@@ -15,11 +15,105 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProjectopenPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  project = { rowid:0, name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0 };
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    private sqlite: SQLite,
+    private toast: Toast) {
+      this.getCurrentProject(navParams.get("rowid"));
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProjectopenPage');
+  getCurrentProject(rowid) {
+    this.sqlite.create({
+      name: 'yarnkeydb.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      db.executeSql('SELECT * FROM projects WHERE rowid=?', [rowid])
+        .then(res => {
+          if(res.rows.length > 0) {
+            this.project.rowid = res.rows.item(0).rowid;
+            this.project.name = res.rows.item(0).name;
+            this.project.description = res.rows.item(0).description;
+            this.project.status = res.rows.item(0).status;
+            this.project.yarnProductName = res.rows.item(0).yarnProductName;
+            this.project.yarnColorCode = res.rows.item(0).yarnColorCode;
+            this.project.yarnColor = res.rows.item(0).yarnColor;
+            this.project.yarnLength = res.rows.item(0).yarnLength;
+            this.project.needleSize = res.rows.item(0).needleSize;
+            this.project.batchNr = res.rows.item(0).batchNr;
+            this.project.notes = res.rows.item(0).notes;
+            this.project.counter = res.rows.item(0).counter;
+          }
+        })
+        .catch(e => {
+          console.log(e);
+          this.toast.show(e, '5000', 'center').subscribe(
+            toast => {
+              console.log(toast);
+            }
+          );
+        });
+    }).catch(e => {
+      console.log(e);
+      this.toast.show(e, '5000', 'center').subscribe(
+        toast => {
+          console.log(toast);
+        }
+      );
+    });
+  }
+  editProject(rowid) {
+    this.navCtrl.push(ProjecteditPage, {
+      rowid:rowid
+    });
+  }
+  deleteConfirm(rowid) {
+    let confirm = this.alertCtrl.create({
+      title: 'Slet projekt?',
+      message: 'Er du sikker på, at du vil slette dette projekt? - dette kan ikke gøres om!',
+      buttons: [
+        {
+          text: 'Nej - bevar projektet',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Ja - slet!',
+          handler: () => {
+            this.deleteProject(rowid);
+          console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
+  deleteProject(rowid) {
+    this.sqlite.create({
+      name: 'yarnkeydb.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      db.executeSql('DELETE FROM projects WHERE rowid=?', [rowid])
+      .then(res => {
+        console.log(res);
+        this.getProjectList();
+      })
+      .catch(e => console.log(e));
+    }).catch(e => console.log(e));
+  }
+
+  getProjectList() {
+    this.navCtrl.push(ProjectlistPage);
+  }
+
+  updateCounter(rowid, counter) {
+    this.navCtrl.push(ProjectcounterPage, {
+      rowid:rowid,
+      counter:counter
+    });
+}
 }
