@@ -10,7 +10,7 @@ import { Toast } from '@ionic-native/toast';
 })
 export class ProjecteditPage {
 
-  project = { rowid:0, name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0 };
+  project = { rowid:0, name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"" };
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,6 +39,7 @@ export class ProjecteditPage {
             this.project.batchNr = res.rows.item(0).batchNr;
             this.project.notes = res.rows.item(0).notes;
             this.project.counter = res.rows.item(0).counter;
+            this.project.recipe = res.rows.item(0).recipe;
           }
         })
         .catch(e => {
@@ -64,7 +65,7 @@ export class ProjecteditPage {
       name: 'yarnkeydb.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
-      db.executeSql('UPDATE projects SET name=?, description=?, status=?, yarnProductName=?, yarnColorCode=?, yarnColor=?, yarnLength=?, needleSize=?, batchNr=?, notes=?, counter=? WHERE rowid=?',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.rowid])
+      db.executeSql('UPDATE projects SET name=?, description=?, status=?, yarnProductName=?, yarnColorCode=?, yarnColor=?, yarnLength=?, needleSize=?, batchNr=?, notes=?, counter=?, recipe=? WHERE rowid=?',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe,this.project.rowid])
       .then(res => {   
       console.log(res);
           this.toast.show('Projekt opdateret', '5000', 'center').subscribe(

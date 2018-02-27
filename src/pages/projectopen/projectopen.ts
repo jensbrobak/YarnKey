@@ -15,7 +15,7 @@ import { ProjectcounterPage } from '../projectcounter/projectcounter';
 })
 export class ProjectopenPage {
 
-  project = { rowid:0, name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0 };
+  project = { rowid:0, name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"" };
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,6 +53,7 @@ export class ProjectopenPage {
             this.project.batchNr = res.rows.item(0).batchNr;
             this.project.notes = res.rows.item(0).notes;
             this.project.counter = res.rows.item(0).counter;
+            this.project.recipe = res.rows.item(0).recipe;
           }
         })
         .catch(e => {
