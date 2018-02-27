@@ -16,15 +16,37 @@
     
       <ion-card-content>
          <ion-item>
-        <ion-label><b>Projekt Navn: </b>{{project.name}}</ion-label>
+        <ion-label><b>Projekt Navn: </b></ion-label>
       </ion-item>
+        <ion-item>
+          <ion-label>{{project.name}}</ion-label>
+        </ion-item>
+      
       <ion-item>
-        <ion-label><b>Projekt Beskrivelse: </b>{{project.description}}</ion-label>
+        <ion-label><b>Projekt Beskrivelse: </b></ion-label>
       </ion-item>
+       <ion-item>
+         <ion-label>{{project.description}}</ion-label>
+        </ion-item>
+      
+      <ion-item>
+          <ion-label><b>Opskrift: </b></ion-label>
+        </ion-item>
+          <ion-item>
+            <ion-label>{{project.recipe}}</ion-label>
+          </ion-item>
+        
+      <ion-item>
+          <ion-label><b>Nål/Pind størrelse: </b></ion-label>
+        </ion-item> 
+          <ion-item>
+            <ion-label>{{project.needleSize}}</ion-label>
+          </ion-item>
+        
+              
       </ion-card-content>
     
     </ion-card>
-
     <ion-card>
   
         <ion-card-header>
@@ -33,51 +55,56 @@
       
         <ion-card-content>
         <ion-item>
-          <ion-label><b>Garn Navn: </b>{{project.yarnProductName}}</ion-label>
+          <ion-label><b>Garn Navn: </b></ion-label>
+        </ion-item>
+        <ion-item>  
+            <ion-label>{{project.yarnProductName}}</ion-label>
+            </ion-item>
+        <ion-item>
+          <ion-label><b>Garn Farve: </b></ion-label>
         </ion-item>
         <ion-item>
-          <ion-label><b>Garn Farve: </b>{{project.yarnColor}}</ion-label>
+            <ion-label>{{project.yarnColor}}</ion-label>
+          </ion-item>
+        <ion-item>
+          <ion-label><b>Garn Farve Kode: </b></ion-label>
         </ion-item>
         <ion-item>
-          <ion-label><b>Garn Farve Kode: </b>{{project.yarnColorCode}}</ion-label>
+          <ion-label>{{project.yarnColorCode}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label><b>Garn Løbelængde: </b>{{project.yarnLength}}</ion-label>
-        </ion-item>
+            <ion-label><b>Partinummer: </b></ion-label>
+          </ion-item>
+            <ion-item>
+              <ion-label>{{project.batchNr}}</ion-label>
+            </ion-item>
+          
         <ion-item>
-          <ion-label><b>Partinummer: </b>{{project.batchNr}}</ion-label>
+          <ion-label><b>Garn Løbelængde: </b></ion-label>
         </ion-item>
+          <ion-item>
+            <ion-label>{{project.yarnLength}}</ion-label>
+          </ion-item>
+        
      
         </ion-card-content>
       
       </ion-card>
 
-
-   
-      <ion-card>
+    <ion-item>
+      <ion-label><b>Tæller: </b></ion-label>
+    </ion-item>
+      <ion-item>
+        <ion-label>{{project.counter}}</ion-label>
+      </ion-item>
     
-          <ion-card-header>
-            Diverse
-          </ion-card-header>
-        
-          <ion-card-content>
-            <ion-item>
-                <ion-label><b>Opskrift: </b>{{project.recipe}}</ion-label>
-              </ion-item>
-            <ion-item>
-                <ion-label><b>Nål/Pind størrelse: </b>{{project.needleSize}}</ion-label>
-              </ion-item>
-       
-          </ion-card-content>
-        
-        </ion-card>
-
     <ion-item>
-      <ion-label><b>Tæller: </b>{{project.counter}}</ion-label>
+      <ion-label><b>Noter: </b></ion-label>
     </ion-item>
-    <ion-item>
-      <ion-label><b>Noter: </b>{{project.notes}}</ion-label>
-    </ion-item>
+      <ion-item>
+        <ion-label>{{project.notes}}</ion-label>
+      </ion-item>
+    
     <ion-item>
     <button ion-button color="primary" block large (click)="updateCounter(project.rowid,project.counter)">Tæller</button>
     </ion-item>
