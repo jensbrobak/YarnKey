@@ -28,7 +28,7 @@ projects: any = [];
 
     getAllProjects() {
       this.sqlite.create({
-        name: 'yarnkeydb.db',
+        name: 'yarnkeydb1.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)',{})
@@ -46,7 +46,7 @@ projects: any = [];
     
     getProjectsByInProgress() {
       this.sqlite.create({
-        name: 'yarnkeydb.db',
+        name: 'yarnkeydb1.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)',{})
@@ -64,7 +64,7 @@ projects: any = [];
 
       getProjectsByComplete() {
         this.sqlite.create({
-          name: 'yarnkeydb.db',
+          name: 'yarnkeydb1.db',
           location: 'default'
         }).then((db: SQLiteObject) => {
           db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)',{})

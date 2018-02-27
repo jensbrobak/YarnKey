@@ -35,7 +35,7 @@ export class ProjectopenPage {
 
   getCurrentProject(rowid) {
     this.sqlite.create({
-      name: 'yarnkeydb.db',
+      name: 'yarnkeydb1.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('SELECT * FROM projects WHERE rowid=?', [rowid])

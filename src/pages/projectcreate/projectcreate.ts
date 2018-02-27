@@ -10,7 +10,7 @@ import { Toast } from '@ionic-native/toast';
 })
 export class ProjectcreatePage {
 
-  project = { name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"" };
+  project = { name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColor:"", yarnColorCode:"",  yarnLength:"", batchNr:"", recipe:"", needleSize:"", notes:"", counter:0 };
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -19,10 +19,10 @@ export class ProjectcreatePage {
 
   saveProject() {
     this.sqlite.create({
-      name: 'yarnkeydb.db',
+      name: 'yarnkeydb1.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
-      db.executeSql('INSERT INTO projects VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?)',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.counter,this.project.recipe])
+      db.executeSql('INSERT INTO projects VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?)',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColor, this.project.yarnColorCode,this.project.yarnLength,this.project.batchNr, this.project.recipe, this.project.needleSize, this.project.notes,this.project.counter])
         .then(res => {
           console.log(res);
           this.toast.show('Projekt gemt', '5000', 'center').subscribe(
