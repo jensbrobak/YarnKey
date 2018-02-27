@@ -17,6 +17,8 @@
     <ion-list>
           <ion-item>
             <ion-label><b>Filter:</b></ion-label>
+            </ion-item>
+            <ion-item>
             <ion-select placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
               <ion-option value="Alle" (ionSelect)="getAllProjects()">Alle</ion-option>
               <ion-option value="Igangværende" (ionSelect)="getProjectsByInProgress()">Igangværende</ion-option>

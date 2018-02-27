@@ -43,7 +43,7 @@ projects: any = [];
         name: 'yarnkeydb1.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
-        db.executeSql('SELECT * FROM projects', {})
+        db.executeSql('SELECT * FROM projects ORDER BY rowid DESC', {})
         .then(res => {
           this.projects = [];
           for(var i=0; i<res.rows.length; i++) {
