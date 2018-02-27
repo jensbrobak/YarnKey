@@ -19,28 +19,28 @@ projects: any = [];
     private sqlite: SQLite) {}
 
     ionViewDidLoad() {
-      this.createDbProjects();
       this.getAllProjects();
     }
     
     ionViewWillEnter() {
+      this.createDbProjects();
       this.getAllProjects();
     }
 
     createDbProjects() {
       this.sqlite.create({
-        name: 'yarnkeydb1.db',
+        name: 'yarnkey.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
-        db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)',{})
-        .then(res => console.log('Executed SQL'))
+        db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)', {})
+        .then(res => console.log('Db created'))
         .catch(e => console.log(e));
       }
       )}
 
     getAllProjects() {
       this.sqlite.create({
-        name: 'yarnkeydb1.db',
+        name: 'yarnkey.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         db.executeSql('SELECT * FROM projects ORDER BY rowid DESC', {})
@@ -55,7 +55,7 @@ projects: any = [];
     
     getProjectsByInProgress() {
       this.sqlite.create({
-        name: 'yarnkeydb1.db',
+        name: 'yarnkey.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         db.executeSql('SELECT * FROM projects WHERE status="Igangværende"', {})
@@ -70,7 +70,7 @@ projects: any = [];
 
       getProjectsByComplete() {
         this.sqlite.create({
-          name: 'yarnkeydb1.db',
+          name: 'yarnkey.db',
           location: 'default'
         }).then((db: SQLiteObject) => {
           db.executeSql('SELECT * FROM projects WHERE status="Færdig"', {})
@@ -101,7 +101,7 @@ projects: any = [];
     
     deleteProject(rowid) {
       this.sqlite.create({
-        name: 'yarnkeydb.db',
+        name: 'yarnkey.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         db.executeSql('DELETE FROM projects WHERE rowid=?', [rowid])

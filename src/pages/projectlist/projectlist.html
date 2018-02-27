@@ -22,7 +22,7 @@
             <ion-select placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
               <ion-option value="Alle" (ionSelect)="getAllProjects()">Alle</ion-option>
               <ion-option value="Igangværende" (ionSelect)="getProjectsByInProgress()">Igangværende</ion-option>
-              <ion-option value="Færdige" (ionSelect)="getProjectsByComplete()">Færdige</ion-option>
+              <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
            </ion-select>
           </ion-item>
         <ion-item-sliding *ngFor="let project of projects; let i=index">

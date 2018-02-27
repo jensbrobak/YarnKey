@@ -35,7 +35,7 @@ export class ProjectopenPage {
 
   getCurrentProject(rowid) {
     this.sqlite.create({
-      name: 'yarnkeydb1.db',
+      name: 'yarnkey.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('SELECT * FROM projects WHERE rowid=?', [rowid])
@@ -103,7 +103,7 @@ export class ProjectopenPage {
 
   deleteProject(rowid) {
     this.sqlite.create({
-      name: 'yarnkeydb.db',
+      name: 'yarnkey.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('DELETE FROM projects WHERE rowid=?', [rowid])

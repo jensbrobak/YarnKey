@@ -23,7 +23,7 @@ export class ProjectcounterPage {
 
   getCurrentCounter(rowid) {
     this.sqlite.create({
-      name: 'yarnkeydb.db',
+      name: 'yarnkey.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('SELECT * FROM projects WHERE rowid=?', [rowid])
@@ -38,7 +38,7 @@ export class ProjectcounterPage {
 
   updateCounter() {
     this.sqlite.create({
-      name: 'yarnkeydb.db',
+      name: 'yarnkey.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('UPDATE projects SET counter=? WHERE rowid=?',[this.project.counter,this.project.rowid])

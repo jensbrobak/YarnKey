@@ -21,7 +21,7 @@ export class ProjecteditPage {
 
   getCurrentProject(rowid) {
     this.sqlite.create({
-      name: 'yarnkeydb1.db',
+      name: 'yarnkey.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('SELECT * FROM projects WHERE rowid=?', [rowid])
@@ -62,7 +62,7 @@ export class ProjecteditPage {
 
   updateProject() {
     this.sqlite.create({
-      name: 'yarnkeydb.db',
+      name: 'yarnkey.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('UPDATE projects SET name=?, description=?, status=?, yarnProductName=?, yarnColorCode=?, yarnColor=?, yarnLength=?, needleSize=?, batchNr=?, notes=?, counter=?, recipe=? WHERE rowid=?',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe,this.project.rowid])
