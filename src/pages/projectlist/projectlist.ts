@@ -33,7 +33,7 @@ projects: any = [];
         location: 'default'
       }).then((db: SQLiteObject) => {
         db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)', {})
-        .then(res => console.log('Db created'))
+        .then(res => console.log('createDbProjects'))
         .catch(e => console.log(e));
       }
       )}
@@ -49,7 +49,8 @@ projects: any = [];
           for(var i=0; i<res.rows.length; i++) {
             this.projects.push({rowid:res.rows.item(i).rowid,name:res.rows.item(i).name,description:res.rows.item(i).description,status:res.rows.item(i).status,yarnProductName:res.rows.item(i).yarnProductName,yarnColorCode:res.rows.item(i).yarnColorCode,yarnColor:res.rows.item(i).yarnColor,yarnLength:res.rows.item(i).yarnLength,needleSize:res.rows.item(i).needleSize,batchNr:res.rows.item(i).batchNr,notes:res.rows.item(i).notes,counter:res.rows.item(i).counter,recipe:res.rows.item(i).recipe})
           }
-        })
+        })  .then(res => console.log('getAllProjects'))
+        .catch(e => console.log(e));
     }
       )}
     
@@ -58,13 +59,14 @@ projects: any = [];
         name: 'yarnkey.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
-        db.executeSql('SELECT * FROM projects WHERE status="Igangværende"', {})
+        db.executeSql('SELECT * FROM projects WHERE status="Igangværende" ORDER BY rowid DESC', {})
         .then(res => {
           this.projects = [];
           for(var i=0; i<res.rows.length; i++) {
             this.projects.push({rowid:res.rows.item(i).rowid,name:res.rows.item(i).name,description:res.rows.item(i).description,status:res.rows.item(i).status,yarnProductName:res.rows.item(i).yarnProductName,yarnColorCode:res.rows.item(i).yarnColorCode,yarnColor:res.rows.item(i).yarnColor,yarnLength:res.rows.item(i).yarnLength,needleSize:res.rows.item(i).needleSize,batchNr:res.rows.item(i).batchNr,notes:res.rows.item(i).notes,counter:res.rows.item(i).counter,recipe:res.rows.item(i).recipe})
           }
-        })
+        })  .then(res => console.log('getProjectsByInProgress'))
+        .catch(e => console.log(e));
     }
       )}
 
@@ -73,13 +75,14 @@ projects: any = [];
           name: 'yarnkey.db',
           location: 'default'
         }).then((db: SQLiteObject) => {
-          db.executeSql('SELECT * FROM projects WHERE status="Færdig"', {})
+          db.executeSql('SELECT * FROM projects WHERE status="Færdig" ORDER BY rowid DESC', {})
           .then(res => {
             this.projects = [];
             for(var i=0; i<res.rows.length; i++) {
               this.projects.push({rowid:res.rows.item(i).rowid,name:res.rows.item(i).name,description:res.rows.item(i).description,status:res.rows.item(i).status,yarnProductName:res.rows.item(i).yarnProductName,yarnColorCode:res.rows.item(i).yarnColorCode,yarnColor:res.rows.item(i).yarnColor,yarnLength:res.rows.item(i).yarnLength,needleSize:res.rows.item(i).needleSize,batchNr:res.rows.item(i).batchNr,notes:res.rows.item(i).notes,counter:res.rows.item(i).counter,recipe:res.rows.item(i).recipe})
             }
-          })
+          })  .then(res => console.log('getProjectsByComplete'))
+          .catch(e => console.log(e));
       }
         )}
     
@@ -110,6 +113,7 @@ projects: any = [];
           this.getAllProjects();
         })
         .catch(e => console.log(e));
-      }).catch(e => console.log(e));
+      })  .then(res => console.log('deleteProject'))
+      .catch(e => console.log(e));
     }
   }

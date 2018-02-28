@@ -51,15 +51,21 @@ export class ProjectcounterPage {
     
       onIncrement() {
 
-        this.project.counter++
-        this.updateCounter()
+        if(this.project.counter >= 0) {
+          this.project.counter++
+          this.updateCounter()
+        }  
+        
         
          }
         
       onDecrement() {
           
-        this.project.counter--
-        this.updateCounter()
+        if(this.project.counter > 0) {
+          this.project.counter--
+          this.updateCounter()
+        }  
 
+        
          }
     }

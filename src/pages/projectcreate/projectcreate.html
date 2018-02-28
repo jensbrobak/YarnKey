@@ -1,13 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Opret Garn Projekt</ion-title>
+    <ion-title>Opret Projekt</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-  <h2>Opret Garn Projekt</h2>
+<ion-content padding >
+  <h2>Opret Projekt</h2>
   <form (ngSubmit)="saveProject()">
     <ion-card>
 
@@ -17,13 +17,13 @@
       
         <ion-card-content>
           <ion-item>
-              <ion-label><b>Projekt Navn:</b></ion-label>
+              <ion-label><b>Navn:</b></ion-label>
               </ion-item>
               <ion-item>
-              <ion-input type="text" placeholder="Indtast et projekt navn" [(ngModel)]="project.name" name="name" required=""></ion-input>
+              <ion-input type="text" placeholder="Indtast et projekt navn" [(ngModel)]="project.name" name="name" required="project.name"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label><b>Projekt Beskrivelse:</b></ion-label>
+              <ion-label><b>Beskrivelse:</b></ion-label>
               </ion-item>
               <ion-item>
               <ion-input type="text" placeholder="Indtast projekt beskrivelse" [(ngModel)]="project.description" name="description" required=""></ion-input>
@@ -35,7 +35,7 @@
             <ion-input type="text" placeholder="Indtast opskrift reference(r)" [(ngModel)]="project.recipe" name="recipe" required=""></ion-input>
           </ion-item>
           <ion-item>
-              <ion-label><b>Nål/Pind Størrelse:</b></ion-label>
+              <ion-label><b>Nål/Pind størrelse:</b></ion-label>
              </ion-item>
              <ion-item>
               <ion-input type="text" placeholder="Indtast størrelse på nål/pind" [(ngModel)]="project.needleSize" name="needleSize" required=""></ion-input>
@@ -51,19 +51,19 @@
           
             <ion-card-content>
               <ion-item>
-                  <ion-label><b>Garn Navn:</b></ion-label>
+                  <ion-label><b>Navn:</b></ion-label>
                   </ion-item>
                   <ion-item>
                   <ion-input type="text" placeholder="Indtast garn navn" [(ngModel)]="project.yarnProductName" name="yarnProductName" required=""></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label><b>Garn Farve:</b></ion-label>
+                    <ion-label><b>Farve:</b></ion-label>
                     </ion-item>
                     <ion-item>
                     <ion-input type="text" placeholder="Indtast garn farve" [(ngModel)]="project.yarnColor" name="yarnColor" required=""></ion-input>
                   </ion-item>
                 <ion-item>
-                  <ion-label><b>Garn Farvekode:</b></ion-label>
+                  <ion-label><b>Farvekode:</b></ion-label>
                   </ion-item>
                   <ion-item>
                   <ion-input type="text" placeholder="Indtast garn farvekode" [(ngModel)]="project.yarnColorCode" name="yarnColorCode" required=""></ion-input>
@@ -75,7 +75,7 @@
                     <ion-input type="text" placeholder="Indtast parti/batch -nummer" [(ngModel)]="project.batchNr" name="batchNr" required=""></ion-input>
                   </ion-item>
                 <ion-item>
-                  <ion-label><b>Garn Løbelængde:</b></ion-label>
+                  <ion-label><b>Løbelængde:</b></ion-label>
                   </ion-item>
                   <ion-item>
                   <ion-input type="number" placeholder="Indtast garn løbelængde (tal)" [(ngModel)]="project.yarnLength" name="yarnLength" required=""></ion-input>
@@ -93,8 +93,8 @@
   <ion-item>
   <ion-textarea type="text" placeholder="Indtast evt. noter" [(ngModel)]="project.notes" name="notes" required=""></ion-textarea>
 </ion-item>
-    <ion-item>
+   
     <button ion-button type="submit" block>Gem Projekt</button>
-    </ion-item>
+   
   </form>
 </ion-content>
