@@ -25,7 +25,7 @@ export class ProjectcreatePage {
       db.executeSql('INSERT INTO projects VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?)',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe])
         .then(res => {
           console.log(res);
-          this.toast.show('Projekt gemt', '5000', 'center').subscribe(
+          this.toast.show('Projekt oprettet', '5000', 'center').subscribe(
             toast => {
               this.navCtrl.popToRoot();
             }
