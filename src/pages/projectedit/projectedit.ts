@@ -70,7 +70,7 @@ export class ProjecteditPage {
       console.log(res);
           this.toast.show('Projekt opdateret', '5000', 'center').subscribe(
             toast => {
-              this.navCtrl.popToRoot();
+              this.navCtrl.popTo('projectlistPage');
             }
           );
         })

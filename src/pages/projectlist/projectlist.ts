@@ -32,7 +32,7 @@ projects: any = [];
         name: 'yarnkey.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
-        db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength INT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)', {})
+        db.executeSql('CREATE TABLE IF NOT EXISTS projects(rowid INTEGER PRIMARY KEY, name TEXT, description TEXT, status TEXT, yarnProductName TEXT, yarnColorCode TEXT, yarnColor TEXT, yarnLength TEXT, needleSize TEXT, batchNr TEXT, notes TEXT, counter INT, recipe TEXT)', {})
         .then(res => console.log('createDbProjects'))
         .catch(e => console.log(e));
       }
