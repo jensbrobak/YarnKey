@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Visning af {{project.name}}</h2>
+  <h2 class="title">Visning af {{project.name}}</h2>
   <ion-card>
 
       <ion-card-header>
@@ -91,28 +91,34 @@
       
       </ion-card>
 
-    <ion-item>
-      <ion-label><b>Tæller: </b></ion-label>
-    </ion-item>
-      <ion-item>
-        <ion-label>{{project.counter}}</ion-label>
-      </ion-item>
-    
-    <ion-item>
-      <ion-label><b>Noter: </b></ion-label>
-    </ion-item>
-      <ion-item>
-        <ion-label text-wrap>{{project.notes}}</ion-label>
-      </ion-item>
-    
-    <ion-item>
-    <button ion-button color="primary" block large (click)="updateCounter(project.rowid,project.counter)">Tæller</button>
-    </ion-item>
-    <ion-item>
-    <button ion-button color="primary" block large (click)="editProject(project.rowid)">Redigér</button>
-    </ion-item>
-    <ion-item>
-    <button ion-button color="danger" block large (click)="deleteConfirm(project.rowid)">Slet</button>
-    </ion-item>
+      <ion-card>
+          <ion-card-content>
+          <ion-item>
+            <ion-label><b>Tæller: </b></ion-label>
+          </ion-item>
+            <ion-item>
+              <ion-label>{{project.counter}}</ion-label>
+            </ion-item>
+          
+          <ion-item>
+            <ion-label><b>Noter: </b></ion-label>
+          </ion-item>
+            <ion-item>
+              <ion-label text-wrap>{{project.notes}}</ion-label>
+            </ion-item>
+          
+          <ion-item>
+          <button ion-button color="primary" block large outline (click)="updateCounter(project.rowid,project.counter)">Tæller</button>
+          </ion-item>
+          <ion-item>
+          <button ion-button color="primary" block large outline (click)="editProject(project.rowid)">Redigér</button>
+          </ion-item>
+          <ion-item>
+          <button ion-button color="danger" block large outline (click)="deleteConfirm(project.rowid)">Slet</button>
+          </ion-item>
+        </ion-card-content>
+        </ion-card>
+
+
 
 </ion-content>

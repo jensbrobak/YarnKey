@@ -13,20 +13,25 @@
 
 
 <ion-content padding>
-
-    <ion-list>
+    <h2 class="title">Garn Projekter</h2>
+    <ion-card>
+          <ion-card-content>
             <ion-item>
-            <ion-label><b>Filter:</b></ion-label>
-            <ion-select placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
-              <ion-option value="Alle" (ionSelect)="getAllProjects()">Alle</ion-option>
-              <ion-option value="Igangværende" (ionSelect)="getProjectsByInProgress()">Igangværende</ion-option>
-              <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
-           </ion-select>
-          </ion-item>
-          <ion-item *ngIf="projects.length == 0">
-            <p>Du har ikke oprettet et projekt - tryk på "Opret"</p>
-          </ion-item>
-          <ion-item>
+                <ion-label><b>Filter:</b></ion-label>
+                <ion-select placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
+                  <ion-option value="Alle" (ionSelect)="getAllProjects()">Alle</ion-option>
+                  <ion-option value="Igangværende" (ionSelect)="getProjectsByInProgress()">Igangværende</ion-option>
+                  <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
+               </ion-select>
+              </ion-item>
+              <ion-item *ngIf="projects.length == 0">
+                <p>Du har ikke oprettet et projekt - tryk på "Opret"</p>
+              </ion-item>
+        </ion-card-content>
+        </ion-card>
+ 
+
+          
               <ion-card *ngFor="let project of projects; let i=index" (click)="openProject(project.rowid)">
 
                     <ion-card-content>
@@ -39,8 +44,5 @@
                          <ion-item text-right><button ion-button clear>Vis</button></ion-item>
                   </ion-card-content>
                   </ion-card>
-         
-          </ion-item>
-       
-      </ion-list>
+        
     </ion-content>

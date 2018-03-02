@@ -16,11 +16,16 @@
                                <ion-label class="counter">{{project.counter}}</ion-label>
                     </ion-card-content>
                     </ion-card>
-           <ion-item text-center class="button">
-             <button ion-button color="danger" type="submit" large (click)="onDecrement()">-</button>
-            <button ion-button color="secondary" type="submit" large (click)="onIncrement()">+</button>
-           
-      </ion-item>
+                    <ion-card>
+                        <ion-card-content>
+                           <ion-item text-center class="button">
+                               <button ion-button color="danger" type="submit" large outline (click)="onDecrement()">-</button>
+                              <button ion-button color="secondary" type="submit" large class="space" outline (click)="onIncrement()">+</button>
+                             
+                        </ion-item>
+                      </ion-card-content>
+                      </ion-card>
+
 
         <ion-input type="hidden" [(ngModel)]="project.rowid" name="rowid"></ion-input>
 </form>
