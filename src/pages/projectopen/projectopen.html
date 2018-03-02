@@ -94,7 +94,7 @@
       <ion-card>
           <ion-card-content>
           <ion-item>
-            <ion-label><b>Tæller: </b></ion-label>
+            <ion-label><b>Omgangstæller: </b></ion-label>
           </ion-item>
             <ion-item>
               <ion-label>{{project.counter}}</ion-label>
@@ -106,9 +106,9 @@
             <ion-item>
               <ion-label text-wrap>{{project.notes}}</ion-label>
             </ion-item>
-          
+           
           <ion-item>
-          <button ion-button color="primary" block large outline (click)="updateCounter(project.rowid,project.counter)">Tæller</button>
+          <button ion-button color="primary" block large outline (click)="updateCounter(project.rowid,project.counter)">Omgangstæller</button>
           </ion-item>
           <ion-item>
           <button ion-button color="primary" block large outline (click)="editProject(project.rowid)">Redigér</button>
@@ -118,7 +118,5 @@
           </ion-item>
         </ion-card-content>
         </ion-card>
-
-
-
+    
 </ion-content>

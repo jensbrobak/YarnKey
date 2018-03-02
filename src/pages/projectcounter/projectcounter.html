@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Tæller</ion-title>
+    <ion-title>Omgangstæller</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,15 +12,15 @@
   <form (ngSubmit)="updateCounter()">
                 <ion-card>
                       <ion-card-content text-center>
-                        <h1><b>Tæller</b></h1>
+                        <h1><b>Omgangstæller</b></h1>
                                <ion-label class="counter">{{project.counter}}</ion-label>
                     </ion-card-content>
                     </ion-card>
                     <ion-card>
                         <ion-card-content>
-                           <ion-item text-center class="button">
-                               <button ion-button color="danger" type="submit" large outline (click)="onDecrement()">-</button>
-                              <button ion-button color="secondary" type="submit" large class="space" outline (click)="onIncrement()">+</button>
+                           <ion-item text-center>
+                             <button ion-button color="danger" type="submit" large outline (click)="onDecrement()"><ion-icon name="md-remove"></ion-icon></button>
+                            <button ion-button color="secondary" type="submit" large class="space" outline (click)="onIncrement()"><ion-icon name="md-add"></ion-icon></button>
                              
                         </ion-item>
                       </ion-card-content>

@@ -4,9 +4,7 @@
         Garn Projekter
       </ion-title>
       <ion-buttons end>
-        <button ion-button (click)="addProject()">
-          Opret
-        </button>
+        <button ion-button (click)="addProject()">Opret<ion-icon name="add-circle"></ion-icon></button>
       </ion-buttons>
     </ion-navbar>
   </ion-header>
@@ -24,7 +22,7 @@
                   <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
                </ion-select>
               </ion-item>
-              <ion-item *ngIf="projects.length == 0">
+              <ion-item (click)="addProject()" *ngIf="projects.length == 0">
                 <p>Du har ikke oprettet et projekt - tryk på "Opret"</p>
               </ion-item>
         </ion-card-content>
