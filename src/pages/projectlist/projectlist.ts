@@ -15,7 +15,7 @@ export class ProjectlistPage {
 
 projects: any = [];
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     private sqlite: SQLite) {}
 
     ionViewDidLoad() {
@@ -110,10 +110,11 @@ projects: any = [];
         db.executeSql('DELETE FROM projects WHERE rowid=?', [rowid])
         .then(res => {
           console.log(res);
+          console.log('deleteProject');
           this.getAllProjects();
         })
         .catch(e => console.log(e));
-      })  .then(res => console.log('deleteProject'))
+      })
       .catch(e => console.log(e));
     }
   }

@@ -67,11 +67,10 @@ export class ProjecteditPage {
     }).then((db: SQLiteObject) => {
       db.executeSql('UPDATE projects SET name=?, description=?, status=?, yarnProductName=?, yarnColorCode=?, yarnColor=?, yarnLength=?, needleSize=?, batchNr=?, notes=?, counter=?, recipe=? WHERE rowid=?',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe,this.project.rowid])
       .then(res => {   
+        this.navCtrl.pop();
       console.log(res);
-          this.toast.show('Projekt opdateret', '5000', 'center').subscribe(
-            toast => {
-              this.navCtrl.popTo('projectlistPage');
-            }
+          this.toast.show('Projekt opdateret', 'short', 'center').subscribe(
+            toast => {}
           );
         })
         .catch(e => {
@@ -91,5 +90,4 @@ export class ProjecteditPage {
       );
     });
   }
-
 }

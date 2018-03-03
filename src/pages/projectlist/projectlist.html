@@ -28,8 +28,6 @@
         </ion-card-content>
         </ion-card>
  
-
-          
               <ion-card *ngFor="let project of projects; let i=index" (click)="openProject(project.rowid)">
 
                     <ion-card-content>
@@ -39,7 +37,7 @@
                           <p>{{project.description}}</p>
                     </ion-item>
                       
-                         <ion-item text-right><button ion-button clear>Vis</button></ion-item>
+                         <ion-item text-right><button ion-button clear>Vis<ion-icon name="folder-open" padding></ion-icon></button></ion-item>
                   </ion-card-content>
                   </ion-card>
         
