@@ -5,7 +5,6 @@ import { Toast } from '@ionic-native/toast';
 import { AlertController } from 'ionic-angular';
 
 import { ProjecteditPage } from '../projectedit/projectedit';
-import { ProjectlistPage } from '../projectlist/projectlist';
 import { ProjectcounterPage } from '../projectcounter/projectcounter';
 
 @IonicPage()
@@ -109,14 +108,10 @@ export class ProjectopenPage {
       db.executeSql('DELETE FROM projects WHERE rowid=?', [rowid])
       .then(res => {
         console.log(res);
-        this.getProjectList();
+        this.navCtrl.popToRoot();
       })
       .catch(e => console.log(e));
     }).catch(e => console.log(e));
-  }
-
-  getProjectList() {
-    this.navCtrl.push(ProjectlistPage);
   }
 
   updateCounter(rowid, counter) {
