@@ -5,7 +5,6 @@ import { Toast } from '@ionic-native/toast';
 import { AlertController } from 'ionic-angular';
 
 import { ProjecteditPage } from '../projectedit/projectedit';
-import { ProjectlistPage } from '../projectlist/projectlist';
 import { ProjectcounterPage } from '../projectcounter/projectcounter';
 
 @IonicPage()
@@ -113,11 +112,6 @@ export class ProjectopenPage {
       })
       .catch(e => console.log(e));
     }).catch(e => console.log(e));
-  }
-
-  getProjectList() {
-    this.navCtrl.setRoot(ProjectlistPage);
-   // this.navCtrl.push(ProjectlistPage);
   }
 
   updateCounter(rowid, counter) {

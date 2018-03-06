@@ -16,14 +16,14 @@
           <ion-card-content>
             <ion-item>
                 <ion-label><b>Filtre:</b></ion-label>
-                <ion-select placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
+                <ion-select class="card-md" placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
                   <ion-option value="Alle" (ionSelect)="getAllProjects()">Alle</ion-option>
                   <ion-option value="Igangværende" (ionSelect)="getProjectsByInProgress()">Igangværende</ion-option>
                   <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
                </ion-select>
               </ion-item>
               <ion-item (click)="addProject()" *ngIf="projects.length == 0">
-                <p>Du har ikke oprettet et projekt - tryk på "Opret"</p>
+                <p>Du har ikke oprettet et projekt endnu - tryk på "Opret"</p>
               </ion-item>
         </ion-card-content>
         </ion-card>
