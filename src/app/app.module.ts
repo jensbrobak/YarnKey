@@ -14,7 +14,6 @@ import { ProjectlistPage } from '../pages/projectlist/projectlist';
 import { ProjectopenPage } from '../pages/projectopen/projectopen';
 import { ProjectcounterPage } from '../pages/projectcounter/projectcounter';
 import { ProjecteditPage } from '../pages/projectedit/projectedit';
-import { ProjectadsPage } from '../pages/projectads/projectads';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { ProjectadsPage } from '../pages/projectads/projectads';
     ProjectlistPage,
     ProjectopenPage,
     ProjecteditPage,
-    ProjectcounterPage,
-    ProjectadsPage
+    ProjectcounterPage
 
   ],
   imports: [
@@ -40,8 +38,7 @@ import { ProjectadsPage } from '../pages/projectads/projectads';
     ProjectlistPage,
     ProjectopenPage,
     ProjecteditPage,
-    ProjectcounterPage,
-    ProjectadsPage
+    ProjectcounterPage
 
   ],
   providers: [

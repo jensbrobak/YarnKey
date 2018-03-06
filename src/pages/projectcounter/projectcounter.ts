@@ -28,7 +28,7 @@ export class ProjectcounterPage {
   showAdmobInterstitialAds(){
     const bannerConfig: AdMobFreeBannerConfig = {
         id: 'ca-app-pub-5529737002644560/9555898735', 
-        isTesting: false,
+        isTesting: true,
         autoShow: true,
 
       };
