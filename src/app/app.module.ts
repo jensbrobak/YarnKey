@@ -4,6 +4,7 @@ import { Toast } from '@ionic-native/toast';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { AdMobFree } from '@ionic-native/admob-free';
 import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -13,6 +14,7 @@ import { ProjectlistPage } from '../pages/projectlist/projectlist';
 import { ProjectopenPage } from '../pages/projectopen/projectopen';
 import { ProjectcounterPage } from '../pages/projectcounter/projectcounter';
 import { ProjecteditPage } from '../pages/projectedit/projectedit';
+import { ProjectadsPage } from '../pages/projectads/projectads';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { ProjecteditPage } from '../pages/projectedit/projectedit';
     ProjectlistPage,
     ProjectopenPage,
     ProjecteditPage,
-    ProjectcounterPage
+    ProjectcounterPage,
+    ProjectadsPage
 
   ],
   imports: [
@@ -37,7 +40,8 @@ import { ProjecteditPage } from '../pages/projectedit/projectedit';
     ProjectlistPage,
     ProjectopenPage,
     ProjecteditPage,
-    ProjectcounterPage
+    ProjectcounterPage,
+    ProjectadsPage
 
   ],
   providers: [
@@ -45,6 +49,7 @@ import { ProjecteditPage } from '../pages/projectedit/projectedit';
     SplashScreen,
     SQLite,
     Toast,
+    AdMobFree,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

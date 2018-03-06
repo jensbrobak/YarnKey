@@ -18,6 +18,7 @@ projects: any = [];
   constructor(public navCtrl: NavController,
     private sqlite: SQLite) {}
 
+
     ionViewDidLoad() {
       this.getAllProjects();
     }

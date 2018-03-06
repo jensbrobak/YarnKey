@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 @IonicPage()
 @Component({
@@ -12,13 +13,33 @@ export class ProjectcounterPage {
  
   project = { rowid:0, counter:0 };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, private admobFree : AdMobFree) {
     this.getCurrentCounter(navParams.get("rowid"));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectcounterPage');
   }
+
+  ionViewWillLeave() {
+    this.showAdmobInterstitialAds();
+  }
+  
+  showAdmobInterstitialAds(){
+    const bannerConfig: AdMobFreeBannerConfig = {
+        id: 'ca-app-pub-5529737002644560/9555898735', 
+        isTesting: false,
+        autoShow: true,
+
+      };
+      this.admobFree.interstitial.config(bannerConfig);
+
+      this.admobFree.interstitial.prepare()
+      .then(() => {
+          this.admobFree.interstitial.show()
+      })
+      .catch(e => console.log(e));    
+    }  
   
 
   getCurrentCounter(rowid) {

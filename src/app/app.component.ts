@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 import { ProjectlistPage } from '../pages/projectlist/projectlist';
 
@@ -11,12 +12,30 @@ import { ProjectlistPage } from '../pages/projectlist/projectlist';
 export class MyApp {
   rootPage:any = ProjectlistPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private admobFree : AdMobFree) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      this.showAdmobBannerAds();
+      
     });
   }
+
+  showAdmobBannerAds(){
+    const bannerConfig: AdMobFreeBannerConfig = {
+        id: 'ca-app-pub-5529737002644560/5720186383', 
+        isTesting: false,
+        autoShow: true,
+
+      };
+    this.admobFree.banner.config(bannerConfig);
+
+    this.admobFree.banner.prepare()
+    .then(() => {
+
+        this.admobFree.banner.show();
+    })
+    .catch(e => console.log(e));    
+    }
+    
 }
