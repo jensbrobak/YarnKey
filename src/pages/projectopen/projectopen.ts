@@ -109,14 +109,15 @@ export class ProjectopenPage {
       db.executeSql('DELETE FROM projects WHERE rowid=?', [rowid])
       .then(res => {
         console.log(res);
-        this.getProjectList();
+        this.navCtrl.popToRoot();
       })
       .catch(e => console.log(e));
     }).catch(e => console.log(e));
   }
 
   getProjectList() {
-    this.navCtrl.push(ProjectlistPage);
+    this.navCtrl.setRoot(ProjectlistPage);
+   // this.navCtrl.push(ProjectlistPage);
   }
 
   updateCounter(rowid, counter) {
