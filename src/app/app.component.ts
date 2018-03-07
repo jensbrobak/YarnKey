@@ -17,6 +17,7 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       this.showAdmobBannerAds();
+      this.showAdmobInterstitialAds();
       
     });
   }
@@ -38,4 +39,20 @@ export class MyApp {
     .catch(e => console.log(e));    
     }
     
+
+    showAdmobInterstitialAds(){
+      const bannerConfig: AdMobFreeBannerConfig = {
+          id: 'ca-app-pub-5529737002644560/9555898735', 
+          isTesting: true,
+          autoShow: true,
+  
+        };
+        this.admobFree.interstitial.config(bannerConfig);
+  
+        this.admobFree.interstitial.prepare()
+        .then(() => {
+            this.admobFree.interstitial.show();
+        })
+        .catch(e => console.log(e));    
+      } 
 }
