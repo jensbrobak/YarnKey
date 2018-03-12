@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free';
 
 import { ProjectlistPage } from '../pages/projectlist/projectlist';
 
@@ -25,7 +25,7 @@ export class MyApp {
   showAdmobBannerAds(){
     const bannerConfig: AdMobFreeBannerConfig = {
         id: 'ca-app-pub-5529737002644560/4244109727', 
-        isTesting: true,
+        isTesting: false,
         autoShow: true,
 
       };
@@ -41,13 +41,13 @@ export class MyApp {
     
 
     showAdmobInterstitialAds(){
-      const bannerConfig: AdMobFreeBannerConfig = {
+      const interstitialConfig: AdMobFreeInterstitialConfig = {
           id: 'ca-app-pub-5529737002644560/9555898735', 
-          isTesting: true,
+          isTesting: false,
           autoShow: true,
   
         };
-        this.admobFree.interstitial.config(bannerConfig);
+        this.admobFree.interstitial.config(interstitialConfig);
   
         this.admobFree.interstitial.prepare()
         .then(() => {
