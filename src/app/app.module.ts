@@ -14,19 +14,27 @@ import { ProjectlistPage } from '../pages/projectlist/projectlist';
 import { ProjectopenPage } from '../pages/projectopen/projectopen';
 import { ProjectcounterPage } from '../pages/projectcounter/projectcounter';
 import { ProjecteditPage } from '../pages/projectedit/projectedit';
+import { ProjectcounterPageModule } from '../pages/projectcounter/projectcounter.module';
+import { ProjectcreatePageModule } from '../pages/projectcreate/projectcreate.module';
+import { ProjecteditPageModule } from '../pages/projectedit/projectedit.module';
+import { ProjectlistPageModule } from '../pages/projectlist/projectlist.module';
+import { ProjectopenPageModule } from '../pages/projectopen/projectopen.module';
 
 @NgModule({
   declarations: [
     MyApp,
-    ProjectcreatePage,
-    ProjectlistPage,
-    ProjectopenPage,
-    ProjecteditPage,
-    ProjectcounterPage
+    
+    
+    
 
   ],
   imports: [
     BrowserModule,
+    ProjectcounterPageModule,
+    ProjectcreatePageModule,
+    ProjecteditPageModule,
+    ProjectlistPageModule,
+    ProjectopenPageModule,
     IonicModule.forRoot(MyApp, {
     tabsPlacement: 'top',
     backButtonText: 'Tilbage'})

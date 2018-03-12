@@ -9,5 +9,9 @@ import { ProjectopenPage } from './projectopen';
   imports: [
     IonicPageModule.forChild(ProjectopenPage),
   ],
+  
+  exports: [
+    ProjectopenPage,
+  ]
 })
 export class ProjectopenPageModule {}
