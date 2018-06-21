@@ -62,8 +62,8 @@
       "cordova-plugin-admob-free": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

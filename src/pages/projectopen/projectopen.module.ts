@@ -13,5 +13,6 @@ import { ProjectopenPage } from './projectopen';
   exports: [
     ProjectopenPage,
   ]
+
 })
 export class ProjectopenPageModule {}

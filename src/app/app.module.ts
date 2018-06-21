@@ -19,6 +19,7 @@ import { ProjectcreatePageModule } from '../pages/projectcreate/projectcreate.mo
 import { ProjecteditPageModule } from '../pages/projectedit/projectedit.module';
 import { ProjectlistPageModule } from '../pages/projectlist/projectlist.module';
 import { ProjectopenPageModule } from '../pages/projectopen/projectopen.module';
+import { ProjectsProvider } from '../providers/projects/projects';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ProjectopenPageModule } from '../pages/projectopen/projectopen.module';
     SQLite,
     Toast,
     AdMobFree,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ProjectsProvider
   ]
 })
 export class AppModule {}
