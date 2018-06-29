@@ -15,6 +15,10 @@ export class ProjectcounterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectcounterPage');
   }
+
+      updateCounter() {
+        this.projectsService.updateCounter();
+      }
     
       onIncrement() {
 

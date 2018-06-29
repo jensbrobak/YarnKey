@@ -17,9 +17,9 @@
             <ion-item>
                 <ion-label><b>Sortér:</b></ion-label>
                 <ion-select class="card-md" placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
-                  <ion-option value="Alle" (ionSelect)="projectsService.getAllProjects()">Alle</ion-option>
-                  <ion-option value="Igangværende" (ionSelect)="projectsService.getProjectsByInProgress()">Igangværende</ion-option>
-                  <ion-option value="Færdig" (ionSelect)="projectsService.getProjectsByComplete()">Færdig</ion-option>
+                  <ion-option value="Alle" (ionSelect)="getAllProjects()">Alle</ion-option>
+                  <ion-option value="Igangværende" (ionSelect)="getProjectsByInProgress()">Igangværende</ion-option>
+                  <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
                </ion-select>
               </ion-item>
               <ion-item (click)="addProject()" *ngIf="projectsService.projects.length == 0">

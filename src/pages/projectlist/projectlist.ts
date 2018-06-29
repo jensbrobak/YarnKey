@@ -17,12 +17,28 @@ export class ProjectlistPage {
 
 
     ionViewDidLoad() {
-      this.projectsService.getAllProjects();
+      this.getAllProjects();
     }
     
     ionViewWillEnter() {
-      this.projectsService.createDbProjects();
+      this.createDbProjects();
+      this.getAllProjects();
+    }
+
+    getAllProjects() {
       this.projectsService.getAllProjects();
+    }
+
+    createDbProjects() {
+      this.projectsService.createDbProjects();
+    }
+
+    getProjectsByInProgress() {
+      this.projectsService.getProjectsByInProgress();
+    }
+
+    getProjectsByComplete() {
+      this.projectsService.getProjectsByComplete();
     }
     
     addProject() {

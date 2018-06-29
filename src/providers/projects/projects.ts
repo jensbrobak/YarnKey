@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { Toast } from '@ionic-native/toast';
-import { NavController } from 'ionic-angular/umd';
 
 /*
   Generated class for the ProjectsProvider provider.
@@ -15,10 +13,6 @@ export class ProjectsProvider {
   project = { rowid:0, name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"" };
   
   projects: any = [];
-  
-  //private sqlite: SQLite;
-  private toast: Toast;
-  public navCtrl: NavController;
 
   constructor(private sqlite: SQLite) {
     }
@@ -88,28 +82,6 @@ export class ProjectsProvider {
             location: 'default'
           }).then((db: SQLiteObject) => {
             db.executeSql('INSERT INTO projects VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?)',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe])
-              .then(res => {
-                this.navCtrl.popToRoot();
-                console.log(res);
-                this.toast.show('Projekt oprettet', 'short', 'center').subscribe(
-                  toast => {}
-                );
-              })
-              .catch(e => {
-                console.log(e);
-                this.toast.show(e, '5000', 'center').subscribe(
-                  toast => {
-                    console.log(toast);
-                  }
-                );
-              });
-          }).catch(e => {
-            console.log(e);
-            this.toast.show(e, '5000', 'center').subscribe(
-              toast => {
-                console.log(toast);
-              }
-            );
           });
         }
 
@@ -119,28 +91,6 @@ export class ProjectsProvider {
             location: 'default'
           }).then((db: SQLiteObject) => {
             db.executeSql('UPDATE projects SET name=?, description=?, status=?, yarnProductName=?, yarnColorCode=?, yarnColor=?, yarnLength=?, needleSize=?, batchNr=?, notes=?, counter=?, recipe=? WHERE rowid=?',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe,this.project.rowid])
-            .then(res => {   
-              this.navCtrl.pop();
-            console.log(res);
-                this.toast.show('Projekt opdateret', 'short', 'center').subscribe(
-                  toast => {}
-                );
-              })
-              .catch(e => {
-                console.log(e);
-                this.toast.show(e, '5000', 'center').subscribe(
-                  toast => {
-                    console.log(toast);
-                  }
-                );
-              });
-          }).catch(e => {
-            console.log(e);
-            this.toast.show(e, '5000', 'center').subscribe(
-              toast => {
-                console.log(toast);
-              }
-            );
           });
         }
 
@@ -166,22 +116,7 @@ export class ProjectsProvider {
             this.project.counter = res.rows.item(0).counter;
             this.project.recipe = res.rows.item(0).recipe;
           }
-        })
-        .catch(e => {
-          console.log(e);
-          this.toast.show(e, '5000', 'center').subscribe(
-            toast => {
-              console.log(toast);
-            }
-          );
         });
-    }).catch(e => {
-      console.log(e);
-      this.toast.show(e, '5000', 'center').subscribe(
-        toast => {
-          console.log(toast);
-        }
-      );
     });
   }
 
@@ -191,11 +126,6 @@ export class ProjectsProvider {
       location: 'default'
     }).then((db: SQLiteObject) => {
       db.executeSql('DELETE FROM projects WHERE rowid=?', [rowid])
-      .then(res => {
-        console.log(res);
-        this.navCtrl.popToRoot();
-      })
-      .catch(e => console.log(e));
     }).catch(e => console.log(e));
   }
 

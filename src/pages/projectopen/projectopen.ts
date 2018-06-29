@@ -16,15 +16,19 @@ export class ProjectopenPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController, public projectsService: ProjectsProvider) {
-      this.projectsService.getCurrentProject(navParams.get("rowid"));
+      this.getCurrentProject(navParams.get("rowid"));
   }
 
 IonViewDidLoad() {
-  this.projectsService.getCurrentProject(this.projectsService.project.rowid);
+  this.getCurrentProject(this.projectsService.project.rowid);
 }
 
 ionViewWillEnter() {
-  this.projectsService.getCurrentProject(this.projectsService.project.rowid);
+ this.getCurrentProject(this.projectsService.project.rowid); 
+}
+
+getCurrentProject(rowid) {
+  this.projectsService.getCurrentProject(rowid);
 }
 
   deleteConfirm(rowid) {
@@ -41,13 +45,18 @@ ionViewWillEnter() {
         {
           text: 'Ja - slet!',
           handler: () => {
-            this.projectsService.deleteProject(this.projectsService.project.rowid);
+            this.deleteProject(rowid);
           console.log('Agree clicked');
           }
         }
       ]
     });
     confirm.present();
+  }
+
+  deleteProject(rowid) {
+    this.projectsService.deleteProject(rowid);
+    this.navCtrl.popToRoot();
   }
 
   updateCounter(rowid, counter) {
