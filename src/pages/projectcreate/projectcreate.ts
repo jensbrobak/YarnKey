@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { Toast } from '@ionic-native/toast';
+import { ProjectsProvider } from '../../providers/projects/projects';
 
 @IonicPage()
 @Component({
@@ -10,42 +9,8 @@ import { Toast } from '@ionic-native/toast';
 })
 export class ProjectcreatePage {
 
-  project = { name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"" };
-
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private sqlite: SQLite,
-    private toast: Toast) {}
-
-  saveProject() {
-    this.sqlite.create({
-      name: 'yarnkey.db',
-      location: 'default'
-    }).then((db: SQLiteObject) => {
-      db.executeSql('INSERT INTO projects VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?)',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe])
-        .then(res => {
-          this.navCtrl.popToRoot();
-          console.log(res);
-          this.toast.show('Projekt oprettet', 'short', 'center').subscribe(
-            toast => {}
-          );
-        })
-        .catch(e => {
-          console.log(e);
-          this.toast.show(e, '5000', 'center').subscribe(
-            toast => {
-              console.log(toast);
-            }
-          );
-        });
-    }).catch(e => {
-      console.log(e);
-      this.toast.show(e, '5000', 'center').subscribe(
-        toast => {
-          console.log(toast);
-        }
-      );
-    });
-  }
+    public projectsService: ProjectsProvider) {}
 
 }

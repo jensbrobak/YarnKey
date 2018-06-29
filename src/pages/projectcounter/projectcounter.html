@@ -10,10 +10,10 @@
 
 <ion-content padding>
     <h1 class="title">Omgangstæller</h1>
-  <form (ngSubmit)="updateCounter()">
+  <form (ngSubmit)="projectsService.updateCounter()">
                 <ion-card>
                       <ion-card-content text-center>
-                               <ion-label class="counter">{{project.counter}}</ion-label>
+                               <ion-label class="counter">{{projectsService.project.counter}}</ion-label>
                     </ion-card-content>
                     </ion-card>
                     <ion-card>
@@ -26,7 +26,7 @@
                       </ion-card>
 
 
-        <ion-input type="hidden" [(ngModel)]="project.rowid" name="rowid"></ion-input>
+        <ion-input type="hidden" [(ngModel)]="projectsService.project.rowid" name="rowid"></ion-input>
 </form>
 </ion-content>
 

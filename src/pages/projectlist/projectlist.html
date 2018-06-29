@@ -17,24 +17,24 @@
             <ion-item>
                 <ion-label><b>Sortér:</b></ion-label>
                 <ion-select class="card-md" placeholder="Vælg" okText="Ok" cancelText="Annullér" name="Filter" required="" side="right">
-                  <ion-option value="Alle" (ionSelect)="getAllProjects()">Alle</ion-option>
-                  <ion-option value="Igangværende" (ionSelect)="getProjectsByInProgress()">Igangværende</ion-option>
-                  <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
+                  <ion-option value="Alle" (ionSelect)="projectsService.getAllProjects()">Alle</ion-option>
+                  <ion-option value="Igangværende" (ionSelect)="projectsService.getProjectsByInProgress()">Igangværende</ion-option>
+                  <ion-option value="Færdig" (ionSelect)="projectsService.getProjectsByComplete()">Færdig</ion-option>
                </ion-select>
               </ion-item>
-              <ion-item (click)="addProject()" *ngIf="projects.length == 0">
+              <ion-item (click)="addProject()" *ngIf="projectsService.projects.length == 0">
                 <p>Du har ikke oprettet et projekt endnu - tryk på "Opret"</p>
               </ion-item>
         </ion-card-content>
         </ion-card>
  
-              <ion-card *ngFor="let project of projects; let i=index" (click)="openProject(project.rowid)">
+              <ion-card *ngFor="let project of projectsService.projects; let i=index" (click)="openProject(projectsService.project.rowid)">
 
                     <ion-card-content>
-                      <ion-item text-right><h3><b>Status:</b> {{project.status}}</h3></ion-item>
+                      <ion-item text-right><h3><b>Status:</b> {{projectsService.project.status}}</h3></ion-item>
                     <ion-item text-left text-wrap>
-                          <h2><b>{{project.name}}</b></h2> 
-                          <p>{{project.description}}</p>
+                          <h2><b>{{projectsService.project.name}}</b></h2> 
+                          <p>{{projectsService.project.description}}</p>
                     </ion-item>
                       
                          <ion-item text-right><button ion-button clear>Vis<ion-icon name="folder-open" padding></ion-icon></button></ion-item>

@@ -41,7 +41,7 @@ ionViewWillEnter() {
         {
           text: 'Ja - slet!',
           handler: () => {
-            this.projectsService.deleteProject(rowid);
+            this.projectsService.deleteProject(this.projectsService.project.rowid);
           console.log('Agree clicked');
           }
         }

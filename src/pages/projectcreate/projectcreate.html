@@ -8,7 +8,7 @@
 
 <ion-content padding>
   <h2 class="title">Opret Projekt</h2>
-  <form (ngSubmit)="saveProject()">
+  <form (ngSubmit)="projectsService.saveProject()">
     <ion-card>
 
         <ion-card-header>
@@ -20,25 +20,25 @@
               <ion-label><b>Navn:</b></ion-label>
               </ion-item>
               <ion-item>
-                <ion-textarea class="card-md" type="text" placeholder="Indtast projekt navn" [(ngModel)]="project.name" name="name" required="project.name"></ion-textarea>
+                <ion-textarea class="card-md" type="text" placeholder="Indtast projekt navn" [(ngModel)]="projectsService.project.name" name="name" required="projectsService.project.name"></ion-textarea>
             </ion-item>
             <ion-item>
               <ion-label><b>Beskrivelse:</b></ion-label>
               </ion-item>
               <ion-item>
-                <ion-textarea class="card-md" type="text" placeholder="Indtast projekt beskrivelse" [(ngModel)]="project.description" name="description" required=""></ion-textarea>
+                <ion-textarea class="card-md" type="text" placeholder="Indtast projekt beskrivelse" [(ngModel)]="projectsService.project.description" name="description" required=""></ion-textarea>
             </ion-item>
             <ion-item>
             <ion-label><b>Opskrift:</b></ion-label>
             </ion-item>
             <ion-item>
-            <ion-textarea class="card-md" type="text" placeholder="Indtast opskrift reference" [(ngModel)]="project.recipe" name="recipe" required=""></ion-textarea>
+            <ion-textarea class="card-md" type="text" placeholder="Indtast opskrift reference" [(ngModel)]="projectsService.project.recipe" name="recipe" required=""></ion-textarea>
           </ion-item>
           <ion-item>
               <ion-label><b>Nål/Pind størrelse:</b></ion-label>
              </ion-item>
              <ion-item>
-              <ion-textarea class="card-md" type="text" placeholder="Indtast størrelse på nål/pind" [(ngModel)]="project.needleSize" name="needleSize" required=""></ion-textarea>
+              <ion-textarea class="card-md" type="text" placeholder="Indtast størrelse på nål/pind" [(ngModel)]="projectsService.project.needleSize" name="needleSize" required=""></ion-textarea>
             </ion-item>
         </ion-card-content>
       
@@ -54,31 +54,31 @@
                   <ion-label><b>Navn:</b></ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-textarea class="card-md" type="text" placeholder="Indtast garn navn" [(ngModel)]="project.yarnProductName" name="yarnProductName" required=""></ion-textarea>
+                    <ion-textarea class="card-md" type="text" placeholder="Indtast garn navn" [(ngModel)]="projectsService.project.yarnProductName" name="yarnProductName" required=""></ion-textarea>
                 </ion-item>
                 <ion-item>
                     <ion-label><b>Farve:</b></ion-label>
                     </ion-item>
                     <ion-item>
-                      <ion-textarea class="card-md" type="text" placeholder="Indtast garn farve" [(ngModel)]="project.yarnColor" name="yarnColor" required=""></ion-textarea>
+                      <ion-textarea class="card-md" type="text" placeholder="Indtast garn farve" [(ngModel)]="projectsService.project.yarnColor" name="yarnColor" required=""></ion-textarea>
                   </ion-item>
                 <ion-item>
                   <ion-label><b>Farvekode:</b></ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-textarea class="card-md" type="text" placeholder="Indtast garn farvekode" [(ngModel)]="project.yarnColorCode" name="yarnColorCode" required=""></ion-textarea>
+                    <ion-textarea class="card-md" type="text" placeholder="Indtast garn farvekode" [(ngModel)]="projectsService.project.yarnColorCode" name="yarnColorCode" required=""></ion-textarea>
                 </ion-item>
                 <ion-item>
                     <ion-label><b>Partinummer:</b></ion-label>
                     </ion-item>
                     <ion-item>
-                      <ion-textarea class="card-md" type="text" placeholder="Indtast garn parti/batch -nummer" [(ngModel)]="project.batchNr" name="batchNr" required=""></ion-textarea>
+                      <ion-textarea class="card-md" type="text" placeholder="Indtast garn parti/batch -nummer" [(ngModel)]="projectsService.project.batchNr" name="batchNr" required=""></ion-textarea>
                   </ion-item>
                 <ion-item>
                   <ion-label><b>Løbelængde:</b></ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-textarea class="card-md" type="text" placeholder="Indtast garn løbelængde" [(ngModel)]="project.yarnLength" name="yarnLength" required=""></ion-textarea>
+                    <ion-textarea class="card-md" type="text" placeholder="Indtast garn løbelængde" [(ngModel)]="projectsService.project.yarnLength" name="yarnLength" required=""></ion-textarea>
                 </ion-item>
          
             </ion-card-content>
@@ -91,7 +91,7 @@
                 <ion-label><b>Noter:</b></ion-label>
                 </ion-item>
                 <ion-item>
-                <ion-textarea class="card-md" type="text" placeholder="Indtast evt. noter" [(ngModel)]="project.notes" name="notes" required=""></ion-textarea>
+                <ion-textarea class="card-md" type="text" placeholder="Indtast evt. noter" [(ngModel)]="projectsService.project.notes" name="notes" required=""></ion-textarea>
               </ion-item>
                  <ion-item>
                   <button ion-button type="submit" outline block large>Opret Projekt</button>
