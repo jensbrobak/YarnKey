@@ -13,7 +13,9 @@ export class ProjectcreatePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public toast: Toast,
-    public projectsService: ProjectsProvider) {}
+    public projectsService: ProjectsProvider) {
+      this.projectsService.clearProjectFields();
+    }
 
 saveProject() {
     this.projectsService.saveProject();

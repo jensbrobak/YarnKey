@@ -156,5 +156,21 @@ export class ProjectsProvider {
           );
         }
       )}
+
+      clearProjectFields() {
+        this.project.rowid = 0;
+        this.project.name = "";
+        this.project.description = "";
+        this.project.status = "Igangværende";
+        this.project.yarnProductName = "";
+        this.project.yarnColorCode = "";
+        this.project.yarnColor = "";
+        this.project.yarnLength = "";
+        this.project.needleSize = "";
+        this.project.batchNr = "";
+        this.project.notes = "";
+        this.project.counter = 0;
+        this.project.recipe = "";
+      }
 }
 

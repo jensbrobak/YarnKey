@@ -13,15 +13,15 @@ import { ProjectsProvider } from '../../providers/projects/projects';
 export class ProjectlistPage {
 
   constructor(public navCtrl: NavController,
-    public projectsService: ProjectsProvider) {}
-
+    public projectsService: ProjectsProvider) {
+      this.createDbProjects();
+    }
 
     ionViewDidLoad() {
       this.getAllProjects();
     }
     
     ionViewWillEnter() {
-      this.createDbProjects();
       this.getAllProjects();
     }
 

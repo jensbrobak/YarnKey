@@ -28,13 +28,13 @@
         </ion-card-content>
         </ion-card>
  
-              <ion-card *ngFor="let project of projectsService.projects; let i=index" (click)="openProject(projectsService.project.rowid)">
+              <ion-card *ngFor="let project of projectsService.projects; let i=index" (click)="openProject(project.rowid)">
 
                     <ion-card-content>
-                      <ion-item text-right><h3><b>Status:</b> {{projectsService.project.status}}</h3></ion-item>
+                      <ion-item text-right><h3><b>Status:</b> {{project.status}}</h3></ion-item>
                     <ion-item text-left text-wrap>
-                          <h2><b>{{projectsService.project.name}}</b></h2> 
-                          <p>{{projectsService.project.description}}</p>
+                          <h2><b>{{project.name}}</b></h2> 
+                          <p>{{project.description}}</p>
                     </ion-item>
                       
                          <ion-item text-right><button ion-button clear>Vis<ion-icon name="folder-open" padding></ion-icon></button></ion-item>
