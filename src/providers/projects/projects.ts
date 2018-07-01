@@ -82,7 +82,7 @@ export class ProjectsProvider {
             location: 'default'
           }).then((db: SQLiteObject) => {
             db.executeSql('INSERT INTO projects VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?)',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe])
-          });
+          }).catch(e => console.log(e));
         }
 
         updateProject() {
@@ -91,7 +91,7 @@ export class ProjectsProvider {
             location: 'default'
           }).then((db: SQLiteObject) => {
             db.executeSql('UPDATE projects SET name=?, description=?, status=?, yarnProductName=?, yarnColorCode=?, yarnColor=?, yarnLength=?, needleSize=?, batchNr=?, notes=?, counter=?, recipe=? WHERE rowid=?',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe,this.project.rowid])
-          });
+          }).catch(e => console.log(e));
         }
 
   getCurrentProject(rowid) {
@@ -116,7 +116,7 @@ export class ProjectsProvider {
             this.project.counter = res.rows.item(0).counter;
             this.project.recipe = res.rows.item(0).recipe;
           }
-        });
+        }).catch(e => console.log(e));
     });
   }
 
@@ -140,7 +140,7 @@ export class ProjectsProvider {
             this.project.rowid = res.rows.item(0).rowid;
             this.project.counter = res.rows.item(0).counter;
           }
-        })
+        }).catch(e => console.log(e));
       }
     )}
 
