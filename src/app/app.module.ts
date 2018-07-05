@@ -20,13 +20,21 @@ import { ProjecteditPageModule } from '../pages/projectedit/projectedit.module';
 import { ProjectlistPageModule } from '../pages/projectlist/projectlist.module';
 import { ProjectopenPageModule } from '../pages/projectopen/projectopen.module';
 import { ProjectsProvider } from '../providers/projects/projects';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+ 
+export const firebaseConfig = {
+  apiKey: "AIzaSyBWtexs_zbO5Zna-KXMNZVVTAeZ4J4gWwM",
+  authDomain: "garnnoter.firebaseapp.com",
+  databaseURL: "https://garnnoter.firebaseio.com",
+  projectId: "garnnoter",
+  storageBucket: "garnnoter.appspot.com",
+  messagingSenderId: "445601800494"
+};
 
 @NgModule({
   declarations: [
     MyApp,
-    
-    
-    
 
   ],
   imports: [
@@ -38,7 +46,9 @@ import { ProjectsProvider } from '../providers/projects/projects';
     ProjectopenPageModule,
     IonicModule.forRoot(MyApp, {
     tabsPlacement: 'top',
-    backButtonText: 'Tilbage'})
+    backButtonText: 'Tilbage'}),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
     ],
   bootstrap: [IonicApp],
   entryComponents: [
