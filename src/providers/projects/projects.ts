@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { Project } from '../../models/project.interface';
 
 /*
   Generated class for the ProjectsProvider provider.
@@ -11,17 +12,17 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ProjectsProvider {
 
-  project = { rowid:"", name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"" };
+ // project = { rowid:"", name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"" };
 
-  projectsList: AngularFireList<any>;
-  projects: Observable<any[]>;
+ project : Project; 
+ 
+ projectList: Observable<any[]>;
 
-  constructor(private afDatabase: AngularFireDatabase) {
+  constructor(private afStore: AngularFirestore) {
     }
 
     createDbProjects() {
-      this.projectsList = this.afDatabase.list('/projects');
-      this.projects = this.projectsList.valueChanges();
+      return this.afStore.collection(`projectList`);
     }
 
     // createDbProjects() {
@@ -33,7 +34,7 @@ export class ProjectsProvider {
     //   )}
 
     getAllProjects() {
-      this.projectsList = this.afDatabase.list('/projects');
+      return this.afStore.collection(`projectList`);
     }
     
     getProjectsByInProgress() {
@@ -64,51 +65,56 @@ export class ProjectsProvider {
       //   )
     }
 
-        saveProject() {
+        saveProject(project) {
           //this.sqlite.create(this.dbConfig).then((db: SQLiteObject) => {
            // db.executeSql('INSERT INTO projects VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?)',[])
          // }).catch(e => console.log(e));
 
-          const newProjectRef = this.projectsList.push({});
+          const rowid = this.afStore.createId();
  
-          newProjectRef.set({
-            rowid: newProjectRef.key,
-            name: this.project.name,
-            description: this.project.description,
-            status: this.project.status,
-            yarnProductName: this.project.yarnProductName,
-            yarnColorCode: this.project.yarnColorCode,
-            yarnColor: this.project.yarnColor,
-            yarnLength: this.project.yarnLength,
-            needleSize: this.project.needleSize,
-            batchNr: this.project.batchNr,
-            notes: this.project.notes,
-            counter: this.project.counter,
-            recipe: this.project.recipe
-        })
-          }
+          this.afStore.doc(`projectList/${rowid}`).set({
+
+            rowid: rowid,
+            name: project.name,
+            description: project.description,
+            status: "Igangværende",
+            yarnProductName: project.yarnProductName,
+            yarnColorCode: project.yarnColorCode,
+            yarnColor: project.yarnColor,
+            yarnLength: project.yarnLength,
+            needleSize: project.needleSize,
+            batchNr: project.batchNr,
+            notes: project.notes,
+            counter: project.counter,
+            recipe: project.recipe
+      });
+        }
+          
     
 
-        updateProject() {
+        updateProject(project) {
           // this.sqlite.create(this.dbConfig).then((db: SQLiteObject) => {
            // db.executeSql('UPDATE projects SET name=?, description=?, status=?, yarnProductName=?, yarnColorCode=?, yarnColor=?, yarnLength=?, needleSize=?, batchNr=?, notes=?, counter=?, recipe=? WHERE rowid=?',[this.project.name,this.project.description,this.project.status,this.project.yarnProductName,this.project.yarnColorCode,this.project.yarnColor,this.project.yarnLength,this.project.needleSize,this.project.batchNr,this.project.notes,this.project.counter,this.project.recipe,this.project.rowid])
          // }).catch(e => console.log(e));
-         this.projectsList.update(this.project.rowid, {
+       //this.projectList.update(this.project.rowid, {
 
-          name: this.project.name,
-          description: this.project.description,
-          status: this.project.status,
-          yarnProductName: this.project.yarnProductName,
-          yarnColorCode: this.project.yarnColorCode,
-          yarnColor: this.project.yarnColor,
-          yarnLength: this.project.yarnLength,
-          needleSize: this.project.needleSize,
-          batchNr: this.project.batchNr,
-          notes: this.project.notes,
-          counter: this.project.counter,
-          recipe: this.project.recipe 
+          this.afStore.doc(`projectList/${project.rowid}`).update({
+
+            //rowid: this.project.rowid,
+            name: project.name,
+            description: project.description,
+            status: project.status,
+            yarnProductName: project.yarnProductName,
+            yarnColorCode: project.yarnColorCode,
+            yarnColor: project.yarnColor,
+            yarnLength: project.yarnLength,
+            needleSize: project.needleSize,
+            batchNr: project.batchNr,
+            notes: project.notes,
+            counter: project.counter,
+            recipe: project.recipe
+      });
         
-        });
         }
 
   getCurrentProject(rowid) {
@@ -132,10 +138,43 @@ export class ProjectsProvider {
     //       }
     //     }).catch(e => console.log(e));
     // });
+
+
+
+    //  const personRef: firebase.database.Reference = firebase.database().ref(`/person1/`);
+  
+  //personRef.on('value', personSnapshot => {
+ //   myPerson = personSnapshot.val();
+
+
+    //const projectRes: this.afStore.collection
+
+            var name = this.afStore.collection(`projectList`).doc(rowid).collection('name');
+            
+            this.project.description = this.afStore.collection(`projectList`).doc(rowid).collection('description').toString();
+
+
+            //                   doc.rowid = this.project.rowid;
+            // doc.name = this.project.name;
+            // doc.description = this.project.description;
+            // doc.status = this.project.status;
+            // doc.yarnProductName = this.project.yarnProductName;
+            // doc.yarnColorCode = this.project.yarnColorCode;
+            // doc.yarnColor = this.project.yarnColor;
+            // doc.yarnLength = this.project.yarnLength;
+            // doc.needleSize = this.project.needleSize;
+            // doc.batchNr = this.project.batchNr;
+            // doc.notes = this.project.notes;
+            // doc.counter = this.project.counter;
+            // doc.recipe = this.project.recipe;
+   
+
   }
 
+    
+
   deleteProject(rowid) {
-    this.projectsList.remove(rowid);
+   // this.projectList.remove(rowid);
   }
 
   getCurrentCounter(rowid) {
@@ -151,11 +190,11 @@ export class ProjectsProvider {
   }
 
   updateCounter() {
-    this.projectsList.update(this.project.rowid, {
+   // this.projectsList.update(this.project.rowid, {
 
-      counter: this.project.counter
+      //counter: this.project.counter
    
-    });
+   // });
   }
 
       clearProjectFields() {

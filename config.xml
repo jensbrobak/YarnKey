@@ -20,6 +20,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
+        <allow-navigation href="about:*" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -84,6 +85,6 @@
     <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <plugin name="cordova-plugin-admob-free" spec="^0.14.0" />
-    <engine name="android" spec="7.0.0" />
+    <engine name="android" spec="~7.0.0" />
     <engine name="ios" spec="~4.5.4" />
 </widget>

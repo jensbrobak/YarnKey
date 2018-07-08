@@ -1,13 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Visning af {{projectsService.project.name}}</ion-title>
+    <ion-title>Visning af {{project.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <h2 class="title">Visning af {{projectsService.project.name}}</h2>
+  <h2 class="title">Visning af {{project.name}}</h2>
   <ion-card>
 
       <ion-card-header>
@@ -19,28 +19,28 @@
         <ion-label><b>Navn: </b></ion-label>
       </ion-item>
         <ion-item>
-          <ion-label text-wrap>{{projectsService.project.name}}</ion-label>
+          <ion-label text-wrap>{{project.name}}</ion-label>
         </ion-item>
       
       <ion-item>
         <ion-label><b>Beskrivelse: </b></ion-label>
       </ion-item>
        <ion-item>
-         <ion-label text-wrap>{{projectsService.project.description}}</ion-label>
+         <ion-label text-wrap>{{project.description}}</ion-label>
         </ion-item>
       
       <ion-item>
           <ion-label><b>Opskrift: </b></ion-label>
         </ion-item>
           <ion-item>
-            <ion-label text-wrap>{{projectsService.project.recipe}}</ion-label>
+            <ion-label text-wrap>{{project.recipe}}</ion-label>
           </ion-item>
         
       <ion-item>
           <ion-label><b>Nål/Pind størrelse: </b></ion-label>
         </ion-item> 
           <ion-item>
-            <ion-label text-wrap>{{projectsService.project.needleSize}}</ion-label>
+            <ion-label text-wrap>{{project.needleSize}}</ion-label>
           </ion-item>
         
               
@@ -58,32 +58,32 @@
           <ion-label><b>Navn: </b></ion-label>
         </ion-item>
         <ion-item>  
-            <ion-label text-wrap>{{projectsService.project.yarnProductName}}</ion-label>
+            <ion-label text-wrap>{{project.yarnProductName}}</ion-label>
             </ion-item>
         <ion-item>
           <ion-label><b>Farve: </b></ion-label>
         </ion-item>
         <ion-item>
-            <ion-label text-wrap>{{projectsService.project.yarnColor}}</ion-label>
+            <ion-label text-wrap>{{project.yarnColor}}</ion-label>
           </ion-item>
         <ion-item>
           <ion-label><b>Farvekode: </b></ion-label>
         </ion-item>
         <ion-item>
-          <ion-label text-wrap>{{projectsService.project.yarnColorCode}}</ion-label>
+          <ion-label text-wrap>{{project.yarnColorCode}}</ion-label>
         </ion-item>
         <ion-item>
             <ion-label><b>Partinummer: </b></ion-label>
           </ion-item>
             <ion-item>
-              <ion-label text-wrap>{{projectsService.project.batchNr}}</ion-label>
+              <ion-label text-wrap>{{project.batchNr}}</ion-label>
             </ion-item>
           
         <ion-item>
           <ion-label><b>Løbelængde: </b></ion-label>
         </ion-item>
           <ion-item>
-            <ion-label text-wrap>{{projectsService.project.yarnLength}}</ion-label>
+            <ion-label text-wrap>{{project.yarnLength}}</ion-label>
           </ion-item>
         
      
@@ -97,21 +97,21 @@
             <ion-label><b>Omgangstæller: </b></ion-label>
           </ion-item>
             <ion-item>
-              <ion-label>{{projectsService.project.counter}}</ion-label>
+              <ion-label>{{project.counter}}</ion-label>
             </ion-item>
           
           <ion-item>
             <ion-label><b>Noter: </b></ion-label>
           </ion-item>
             <ion-item>
-              <ion-label text-wrap>{{projectsService.project.notes}}</ion-label>
+              <ion-label text-wrap>{{project.notes}}</ion-label>
             </ion-item>
            
           <ion-item>
           <button ion-button color="primary" block large outline (click)="updateCounter(projectsService.project.rowid,projectsService.project.counter)">Omgangstæller</button>
           </ion-item>
           <ion-item>
-          <button ion-button color="primary" block large outline (click)="editProject(projectsService.project.rowid)">Redigér</button>
+          <button ion-button color="primary" block large outline (click)="editProject(project)">Redigér</button>
           </ion-item>
           <ion-item>
           <button ion-button color="danger" block large outline (click)="deleteConfirm(projectsService.project.rowid)">Slet</button>

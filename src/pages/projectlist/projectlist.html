@@ -22,13 +22,13 @@
                   <ion-option value="Færdig" (ionSelect)="getProjectsByComplete()">Færdig</ion-option>
                </ion-select>
               </ion-item>
-              <ion-item (click)="addProject()" *ngIf="projectsService.projectsList.query.endAt('0')">
+              <ion-item (click)="addProject()" *ngIf="projectsService.projectList == null">
                 <p>Du har ikke oprettet et projekt endnu - tryk på "Opret"</p>
               </ion-item>
         </ion-card-content>
         </ion-card>
  
-              <ion-card *ngFor="let project of projectsService.projects | async" (click)="openProject(project.rowid)">
+              <ion-card *ngFor="let project of projectsService.projectList | async" (click)="openProject(project)">
 
                     <ion-card-content>
                       <ion-item text-right><h3><b>Status:</b> {{project.status}}</h3></ion-item>

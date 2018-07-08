@@ -4,6 +4,7 @@ import { ProjectcreatePage } from '../projectcreate/projectcreate';
 import { ProjecteditPage } from '../projectedit/projectedit';
 import { ProjectopenPage } from '../projectopen/projectopen';
 import { ProjectsProvider } from '../../providers/projects/projects';
+import { Project } from '../../models/project.interface';
 
 @IonicPage()
 @Component({
@@ -18,11 +19,11 @@ export class ProjectlistPage {
     }
 
     ionViewDidLoad() {
-      this.getAllProjects();
+      this.projectsService.projectList = this.projectsService.getAllProjects().valueChanges();
     }
     
     ionViewWillEnter() {
-      this.getAllProjects();
+      this.projectsService.projectList = this.projectsService.getAllProjects().valueChanges();
     }
 
     getAllProjects() {
@@ -45,15 +46,15 @@ export class ProjectlistPage {
       this.navCtrl.push(ProjectcreatePage);
     }
     
-    openProject(rowid) {
+    openProject(project : Project) {
       this.navCtrl.push(ProjectopenPage, {
-        rowid:rowid
+        project:project
       });
     }
 
-    editProject(rowid) {
+    editProject(project : Project) {
       this.navCtrl.push(ProjecteditPage, {
-        rowid:rowid
+        project:project
       });
     }
   }

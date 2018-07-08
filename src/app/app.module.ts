@@ -1,4 +1,3 @@
-import { SQLite } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
 
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -21,7 +20,7 @@ import { ProjectlistPageModule } from '../pages/projectlist/projectlist.module';
 import { ProjectopenPageModule } from '../pages/projectopen/projectopen.module';
 import { ProjectsProvider } from '../providers/projects/projects';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
  
 export const firebaseConfig = {
   apiKey: "AIzaSyBWtexs_zbO5Zna-KXMNZVVTAeZ4J4gWwM",
@@ -48,7 +47,7 @@ export const firebaseConfig = {
     tabsPlacement: 'top',
     backButtonText: 'Tilbage'}),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFirestoreModule
     ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,7 +62,6 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    SQLite,
     Toast,
     AdMobFree,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

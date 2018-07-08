@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Toast } from '@ionic-native/toast';
 import { ProjectsProvider } from '../../providers/projects/projects';
+import { Project } from '../../models/project.interface';
 
 @IonicPage()
 @Component({
@@ -10,15 +11,17 @@ import { ProjectsProvider } from '../../providers/projects/projects';
 })
 export class ProjecteditPage {
 
+  public project : Project;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public toast: Toast,
     public projectsService: ProjectsProvider) {
-      this.projectsService.getCurrentProject(navParams.get("rowid"));
+      this.project = navParams.get("project");
   }
 
   updateProject() {
-    this.projectsService.updateProject(); 
+    this.projectsService.updateProject(this.project); 
     this.navCtrl.pop();
     this.toast.show('Projekt opdateret', 'short', 'center').subscribe(
           toast => {}

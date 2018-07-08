@@ -5,6 +5,7 @@ import { AlertController } from 'ionic-angular';
 import { ProjecteditPage } from '../projectedit/projectedit';
 import { ProjectcounterPage } from '../projectcounter/projectcounter';
 import { ProjectsProvider } from '../../providers/projects/projects';
+import { Project } from '../../models/project.interface';
 
 @IonicPage()
 @Component({
@@ -13,10 +14,12 @@ import { ProjectsProvider } from '../../providers/projects/projects';
 })
 export class ProjectopenPage {
 
+  public project: Project;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController, public projectsService: ProjectsProvider) {
-      this.getCurrentProject(navParams.get("rowid"));
+      this.project = navParams.get("project");
   }
 
 getCurrentProject(rowid) {
@@ -57,9 +60,9 @@ getCurrentProject(rowid) {
       counter:counter
     });
   }
-    editProject(rowid) {
+    editProject(project) {
       this.navCtrl.push(ProjecteditPage, {
-        rowid:rowid
+        project:project
       });
     }
 
