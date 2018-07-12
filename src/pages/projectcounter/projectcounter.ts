@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProjectsProvider } from '../../providers/projects/projects';
+import { Project } from '../../models/project.interface';
 @IonicPage()
 @Component({
   selector: 'page-projectcounter',
@@ -8,23 +9,25 @@ import { ProjectsProvider } from '../../providers/projects/projects';
 })
 export class ProjectcounterPage {
 
+  public project: Project;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public projectsService: ProjectsProvider) {
-    this.projectsService.getCurrentCounter(navParams.get("rowid"));
+    this.project = navParams.get("project");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectcounterPage');
   }
 
-      updateCounter() {
-        this.projectsService.updateCounter();
+      updateCounter(project) {
+        this.projectsService.updateCounter(this.project);
       }
     
       onIncrement() {
 
-        if(this.projectsService.project.counter >= 0) {
-          this.projectsService.project.counter++
-          this.projectsService.updateCounter()
+        if(this.project.counter >= 0) {
+          this.project.counter++
+          this.updateCounter(this.project);
         }  
         
         
@@ -32,9 +35,9 @@ export class ProjectcounterPage {
         
       onDecrement() {
           
-        if(this.projectsService.project.counter > 0) {
-          this.projectsService.project.counter--
-          this.projectsService.updateCounter()
+        if(this.project.counter > 0) {
+          this.project.counter--
+          this.updateCounter(this.project);
         }  
 
         

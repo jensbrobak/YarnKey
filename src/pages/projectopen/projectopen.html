@@ -108,13 +108,13 @@
             </ion-item>
            
           <ion-item>
-          <button ion-button color="primary" block large outline (click)="updateCounter(projectsService.project.rowid,projectsService.project.counter)">Omgangstæller</button>
+          <button ion-button color="primary" block large outline (click)="updateCounter(project)">Omgangstæller</button>
           </ion-item>
           <ion-item>
           <button ion-button color="primary" block large outline (click)="editProject(project)">Redigér</button>
           </ion-item>
           <ion-item>
-          <button ion-button color="danger" block large outline (click)="deleteConfirm(projectsService.project.rowid)">Slet</button>
+          <button ion-button color="danger" block large outline (click)="deleteConfirm(project)">Slet</button>
           </ion-item>
         </ion-card-content>
         </ion-card>

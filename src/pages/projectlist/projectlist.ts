@@ -15,7 +15,6 @@ export class ProjectlistPage {
 
   constructor(public navCtrl: NavController,
     public projectsService: ProjectsProvider) {
-      this.createDbProjects();
     }
 
     ionViewDidLoad() {
@@ -27,19 +26,15 @@ export class ProjectlistPage {
     }
 
     getAllProjects() {
-      this.projectsService.getAllProjects();
-    }
-
-    createDbProjects() {
-      this.projectsService.createDbProjects();
+      this.projectsService.projectList = this.projectsService.getAllProjects().valueChanges();
     }
 
     getProjectsByInProgress() {
-      this.projectsService.getProjectsByInProgress();
+      this.projectsService.projectList = this.projectsService.getProjectsByInProgress().valueChanges();
     }
 
     getProjectsByComplete() {
-      this.projectsService.getProjectsByComplete();
+      this.projectsService.projectList = this.projectsService.getProjectsByComplete().valueChanges();
     }
     
     addProject() {

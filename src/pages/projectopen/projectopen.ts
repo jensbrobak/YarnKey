@@ -22,11 +22,7 @@ export class ProjectopenPage {
       this.project = navParams.get("project");
   }
 
-getCurrentProject(rowid) {
-  this.projectsService.getCurrentProject(rowid);
-}
-
-  deleteConfirm(rowid) {
+  deleteConfirm() {
     let confirm = this.alertCtrl.create({
       title: 'Slet projekt?',
       message: 'Er du sikker på, at du vil slette dette projekt? - dette kan ikke gøres om!',
@@ -40,7 +36,7 @@ getCurrentProject(rowid) {
         {
           text: 'Ja - slet!',
           handler: () => {
-            this.deleteProject(rowid);
+            this.deleteProject();
           console.log('Agree clicked');
           }
         }
@@ -49,15 +45,14 @@ getCurrentProject(rowid) {
     confirm.present();
   }
 
-  deleteProject(rowid) {
-    this.projectsService.deleteProject(rowid);
+  deleteProject() {
+    this.projectsService.deleteProject(this.project);
     this.navCtrl.popToRoot();
   }
 
-  updateCounter(rowid, counter) {
+  updateCounter(project) {
     this.navCtrl.push(ProjectcounterPage, {
-      rowid:rowid,
-      counter:counter
+     project:project
     });
   }
     editProject(project) {
