@@ -13,14 +13,19 @@ import { ProjectlistPage } from '../pages/projectlist/projectlist';
 import { ProjectopenPage } from '../pages/projectopen/projectopen';
 import { ProjectcounterPage } from '../pages/projectcounter/projectcounter';
 import { ProjecteditPage } from '../pages/projectedit/projectedit';
+import { ProjectpictureuploadPage } from '../pages/projectpictureupload/projectpictureupload';
 import { ProjectcounterPageModule } from '../pages/projectcounter/projectcounter.module';
 import { ProjectcreatePageModule } from '../pages/projectcreate/projectcreate.module';
 import { ProjecteditPageModule } from '../pages/projectedit/projectedit.module';
 import { ProjectlistPageModule } from '../pages/projectlist/projectlist.module';
 import { ProjectopenPageModule } from '../pages/projectopen/projectopen.module';
+import { ProjectpictureuploadPageModule } from '../pages/projectpictureupload/projectpictureupload.module';
 import { ProjectsProvider } from '../providers/projects/projects';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { Camera } from '@ionic-native/camera';
+
  
 export const firebaseConfig = {
   apiKey: "AIzaSyBWtexs_zbO5Zna-KXMNZVVTAeZ4J4gWwM",
@@ -43,11 +48,13 @@ export const firebaseConfig = {
     ProjecteditPageModule,
     ProjectlistPageModule,
     ProjectopenPageModule,
+    ProjectpictureuploadPageModule,
     IonicModule.forRoot(MyApp, {
     tabsPlacement: 'top',
     backButtonText: 'Tilbage'}),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule
     ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -56,7 +63,8 @@ export const firebaseConfig = {
     ProjectlistPage,
     ProjectopenPage,
     ProjecteditPage,
-    ProjectcounterPage
+    ProjectcounterPage,
+    ProjectpictureuploadPage
 
   ],
   providers: [
@@ -64,6 +72,7 @@ export const firebaseConfig = {
     SplashScreen,
     Toast,
     AdMobFree,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProjectsProvider
   ]

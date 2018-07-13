@@ -13,5 +13,6 @@ export interface Project {
     notes: string;
     counter: number;
     recipe: string;
+    picture: string;
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { Project } from '../../models/project.interface';
 
@@ -13,10 +14,12 @@ import { Project } from '../../models/project.interface';
 export class ProjectsProvider {
 
  project : Project; 
+
+ getDownloadURL: Observable<any[]>;  
  
  projectList: Observable<any[]>;
 
-  constructor(private afStore: AngularFirestore) {
+  constructor(private afStore: AngularFirestore, public storage: AngularFireStorage) {
     }
 
     getAllProjects() {
@@ -29,10 +32,44 @@ export class ProjectsProvider {
     ref.where('status', '==', 'Igangværende'));
   }
 
-      getProjectsByComplete() {
+    getProjectsByComplete() {
 
     return this.afStore.collection(`projectList`, ref =>
     ref.where('status', '==', 'Færdig'));
+    }
+
+    getProjectPictureByRowId(project) {
+
+      var starsRef = this.storage.ref(project.picture).child('project.picture');
+    
+      starsRef.getDownloadURL().then(function(url) {
+        var test = url;
+
+        return document.querySelector('img').src = test;
+      }).catch(function(error) {
+      
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case 'storage/object_not_found':
+            // File doesn't exist
+            break;
+      
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+      
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+      
+          
+      
+          case 'storage/unknown':
+            // Unknown error occurred, inspect the server response
+            break;
+        }
+      });
     }
 
         saveProject(project) {
@@ -53,7 +90,8 @@ export class ProjectsProvider {
             batchNr: project.batchNr,
             notes: project.notes,
             counter: project.counter,
-            recipe: project.recipe
+            recipe: project.recipe,
+            picture: project.picture
       });
         }
 
@@ -88,6 +126,20 @@ export class ProjectsProvider {
     counter: project.counter
 
    });
+}
+
+updateProjectPicture(project) {
+  //let storageRef = this.afStore.storage().ref();
+  // Create a timestamp as filename
+
+  this.afStore.doc(`projectList/${project.rowid}`).update({
+
+    picture: project.picture
+
+  // Create a reference to 'images/todays-date.jpg'
+ // const imageRef = storageRef.child(`images/${filename}.jpg`);
+});
+
 }
 
 }

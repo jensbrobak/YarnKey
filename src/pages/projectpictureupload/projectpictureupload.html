@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Upload et projekt billede</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h2 class="title">Upload et projekt billede</h2>
+  <ion-card>
+
+      <ion-card-header>
+        <h1><b>Upload projekt billede</b></h1>
+      </ion-card-header>
+    
+      <ion-card-content>          
+          <ion-item>
+            <p>Vis billede:</p>
+            <img *ngIf="projectPictureUrl" [src]="projectPictureUrl">
+        </ion-item>
+        <ion-item>
+            <button ion-button color="primary" block large outline (click)="uploadHandler()">Upload billedet</button>
+        </ion-item>
+        <ion-item>
+            <ng-container *ngIf="progress | async as percent">
+
+                <progress [value]="percent" max="100"></progress>
+              
+              </ng-container>
+        </ion-item>
+        </ion-card-content>
+        </ion-card>
+    
+</ion-content>

@@ -6,6 +6,7 @@ import { ProjecteditPage } from '../projectedit/projectedit';
 import { ProjectcounterPage } from '../projectcounter/projectcounter';
 import { ProjectsProvider } from '../../providers/projects/projects';
 import { Project } from '../../models/project.interface';
+import { ProjectpictureuploadPage } from '../projectpictureupload/projectpictureupload';
 
 @IonicPage()
 @Component({
@@ -20,6 +21,12 @@ export class ProjectopenPage {
     public navParams: NavParams,
     public alertCtrl: AlertController, public projectsService: ProjectsProvider) {
       this.project = navParams.get("project");
+  }
+
+  uploadProjectPicture(project) {
+    this.navCtrl.push(ProjectpictureuploadPage, {
+      project:project
+     });
   }
 
   deleteConfirm() {

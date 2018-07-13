@@ -36,6 +36,10 @@ export class ProjectlistPage {
     getProjectsByComplete() {
       this.projectsService.projectList = this.projectsService.getProjectsByComplete().valueChanges();
     }
+
+    getProjectPictureByRowId(project : Project) {
+      this.projectsService.getProjectPictureByRowId(project);
+    }
     
     addProject() {
       this.navCtrl.push(ProjectcreatePage);
