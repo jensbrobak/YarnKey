@@ -14,7 +14,7 @@ import { Project } from '../../models/project.interface';
 export class ProjectlistPage {
 
   constructor(public navCtrl: NavController,
-    public projectsService: ProjectsProvider) {
+    public projectsService: ProjectsProvider) {   
     }
 
     ionViewDidLoad() {
@@ -37,8 +37,8 @@ export class ProjectlistPage {
       this.projectsService.projectList = this.projectsService.getProjectsByComplete().valueChanges();
     }
 
-    getProjectPictureByRowId(project : Project) {
-      this.projectsService.getProjectPictureByRowId(project);
+    getProjectPictureByRowId(project) {
+      this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(project);
     }
     
     addProject() {

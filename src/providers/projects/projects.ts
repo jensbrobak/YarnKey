@@ -15,7 +15,7 @@ export class ProjectsProvider {
 
  project : Project; 
 
- getDownloadURL: Observable<any[]>;  
+ projectPictureUrl: Observable<any[]>;
  
  projectList: Observable<any[]>;
 
@@ -39,37 +39,10 @@ export class ProjectsProvider {
     }
 
     getProjectPictureByRowId(project) {
-
-      var starsRef = this.storage.ref(project.picture).child('project.picture');
     
-      starsRef.getDownloadURL().then(function(url) {
-        var test = url;
+      const ref = this.storage.ref(project.picture);
+      return ref.getDownloadURL();
 
-        return document.querySelector('img').src = test;
-      }).catch(function(error) {
-      
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case 'storage/object_not_found':
-            // File doesn't exist
-            break;
-      
-          case 'storage/unauthorized':
-            // User doesn't have permission to access the object
-            break;
-      
-          case 'storage/canceled':
-            // User canceled the upload
-            break;
-      
-          
-      
-          case 'storage/unknown':
-            // Unknown error occurred, inspect the server response
-            break;
-        }
-      });
     }
 
         saveProject(project) {

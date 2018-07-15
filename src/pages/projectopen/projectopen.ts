@@ -23,6 +23,18 @@ export class ProjectopenPage {
       this.project = navParams.get("project");
   }
 
+  ionViewDidLoad() {
+    if(this.project.picture != "") {
+    this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
+    }
+  }
+  
+  ionViewWillEnter() {
+    if(this.project.picture != "") {
+    this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
+    }
+  }
+
   uploadProjectPicture(project) {
     this.navCtrl.push(ProjectpictureuploadPage, {
       project:project

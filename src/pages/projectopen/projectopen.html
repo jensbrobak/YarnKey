@@ -15,6 +15,9 @@
       </ion-card-header>
     
       <ion-card-content>
+      <ion-item>
+          <p><img *ngIf="project.picture" [src]="projectsService.projectPictureUrl | async"></p>
+      </ion-item>
          <ion-item>
         <ion-label><b>Navn: </b></ion-label>
       </ion-item>
