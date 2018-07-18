@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-title *ngIf="auth.currentUser">current user is {{auth.currentUser}}</ion-title>
+        <button ion-button icon-right (click)="loginWithFacebook()">
+      Login with
+      <ion-icon name="logo-facebook"></ion-icon>
+    </button>
+</ion-content>

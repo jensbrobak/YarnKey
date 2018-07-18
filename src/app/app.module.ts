@@ -13,6 +13,7 @@ import { ProjectlistPage } from '../pages/projectlist/projectlist';
 import { ProjectopenPage } from '../pages/projectopen/projectopen';
 import { ProjectcounterPage } from '../pages/projectcounter/projectcounter';
 import { ProjecteditPage } from '../pages/projectedit/projectedit';
+import { LoginPage } from '../pages/login/login';
 import { ProjectpictureuploadPage } from '../pages/projectpictureupload/projectpictureupload';
 import { ProjectcounterPageModule } from '../pages/projectcounter/projectcounter.module';
 import { ProjectcreatePageModule } from '../pages/projectcreate/projectcreate.module';
@@ -20,13 +21,16 @@ import { ProjecteditPageModule } from '../pages/projectedit/projectedit.module';
 import { ProjectlistPageModule } from '../pages/projectlist/projectlist.module';
 import { ProjectopenPageModule } from '../pages/projectopen/projectopen.module';
 import { ProjectpictureuploadPageModule } from '../pages/projectpictureupload/projectpictureupload.module';
+import { LoginPageModule } from '../pages/login/login.module';
 import { ProjectsProvider } from '../providers/projects/projects';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Camera } from '@ionic-native/camera';
+import { AuthProvider } from '../providers/auth/auth';
+import { Facebook } from '@ionic-native/facebook'; //Added Facebook
 
- 
 export const firebaseConfig = {
   apiKey: "AIzaSyBWtexs_zbO5Zna-KXMNZVVTAeZ4J4gWwM",
   authDomain: "garnnoter.firebaseapp.com",
@@ -49,12 +53,14 @@ export const firebaseConfig = {
     ProjectlistPageModule,
     ProjectopenPageModule,
     ProjectpictureuploadPageModule,
+    LoginPageModule,
     IonicModule.forRoot(MyApp, {
     tabsPlacement: 'top',
     backButtonText: 'Tilbage'}),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,            
+    AngularFireAuthModule
     ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,6 +70,7 @@ export const firebaseConfig = {
     ProjectopenPage,
     ProjecteditPage,
     ProjectcounterPage,
+    LoginPage,
     ProjectpictureuploadPage
 
   ],
@@ -74,7 +81,9 @@ export const firebaseConfig = {
     AdMobFree,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProjectsProvider
+    ProjectsProvider,
+    AuthProvider,
+    Facebook
   ]
 })
 export class AppModule {}
