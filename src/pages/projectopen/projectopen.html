@@ -109,9 +109,12 @@
             <ion-item>
               <ion-label text-wrap>{{project.notes}}</ion-label>
             </ion-item>
-          <ion-item>
+          <ion-item *ngIf="!project.picture">
           <button ion-button color="primary" block large outline (click)="uploadProjectPicture(project)">Upload projekt billede</button>
           </ion-item>
+          <ion-item *ngIf="project.picture">
+            <button ion-button color="primary" block large outline (click)="uploadProjectPicture(project)">Skift billede</button>
+            </ion-item>
           <ion-item>
           <button ion-button color="primary" block large outline (click)="updateCounter(project)">Omgangstæller</button>
           </ion-item>

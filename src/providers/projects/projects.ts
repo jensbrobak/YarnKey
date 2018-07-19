@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { Project } from '../../models/project.interface';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /*
   Generated class for the ProjectsProvider provider.
@@ -19,37 +20,33 @@ export class ProjectsProvider {
  
  projectList: Observable<any[]>;
 
-  constructor(private afStore: AngularFirestore, public storage: AngularFireStorage) {
+  constructor(private afStore: AngularFirestore, public storage: AngularFireStorage, private auth: AuthProvider) {
     }
 
     getAllProjects() {
-      return this.afStore.collection(`projectList`);
+      
+      return this.afStore.collection('projectList').doc(this.auth.currentUser).collection(this.auth.currentUser);
     }
     
     getProjectsByInProgress() {
 
-    return this.afStore.collection(`projectList`, ref =>
+    return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
     ref.where('status', '==', 'Igangværende'));
+    
   }
 
     getProjectsByComplete() {
 
-    return this.afStore.collection(`projectList`, ref =>
+    return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
     ref.where('status', '==', 'Færdig'));
-    }
-
-    getProjectPictureByRowId(project) {
-    
-      const ref = this.storage.ref(project.picture);
-      return ref.getDownloadURL();
 
     }
 
         saveProject(project) {
 
           const rowid = this.afStore.createId();
- 
-          this.afStore.doc(`projectList/${rowid}`).set({
+
+          this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(rowid).set({
 
             rowid: rowid,
             name: project.name,
@@ -70,7 +67,7 @@ export class ProjectsProvider {
 
         updateProject(project) {
 
-          this.afStore.doc(`projectList/${project.rowid}`).update({
+          this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
 
             name: project.name,
             description: project.description,
@@ -89,30 +86,43 @@ export class ProjectsProvider {
         }
 
   deleteProject(project) {
-   this.afStore.doc(`projectList/${project.rowid}`).delete();
+    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).delete();
+    this.deleteProjectPictureByRowId(project);
   }
 
   updateCounter(project) {
 
-   this.afStore.doc(`projectList/${project.rowid}`).update({
+    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
 
     counter: project.counter
 
    });
 }
 
-updateProjectPicture(project) {
-  //let storageRef = this.afStore.storage().ref();
-  // Create a timestamp as filename
+uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
+  return this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
+}
 
-  this.afStore.doc(`projectList/${project.rowid}`).update({
+
+getProjectPictureByRowId(project) {
+    
+  const ref = this.storage.ref(project.picture);
+  return ref.getDownloadURL();
+
+}
+
+updateProjectPicture(project) {
+
+  this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
 
     picture: project.picture
 
-  // Create a reference to 'images/todays-date.jpg'
- // const imageRef = storageRef.child(`images/${filename}.jpg`);
 });
 
+}
+
+deleteProjectPictureByRowId(project) {
+  this.storage.ref(project.picture).delete();
 }
 
 }

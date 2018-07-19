@@ -21,7 +21,7 @@ export class ProjectcreatePage {
 
 saveProject() {
     this.projectsService.saveProject(this.project);
-    this.navCtrl.popToRoot();
+    this.navCtrl.pop();
     this.toast.show('Projekt oprettet', 'short', 'center').subscribe(
       toast => {}
     );

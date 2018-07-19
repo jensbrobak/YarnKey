@@ -25,7 +25,9 @@
         <ion-item>
             <ng-container *ngIf="progress | async as percent">
 
-                <progress [value]="percent" max="100"></progress>
+                <progress [value]="percent" max="100">
+                  Færdig!
+                </progress>
               
               </ng-container>
         </ion-item>

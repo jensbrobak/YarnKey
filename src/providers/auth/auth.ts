@@ -14,7 +14,7 @@ import * as firebase from 'firebase/app'; //Changed firebase/app
 @Injectable()
 export class AuthProvider {
 
-constructor(private af: AngularFireAuth, private fb: Facebook, private platform: Platform) { //Add reference to native firebase SDK
+constructor(private af: AngularFireAuth, private fb: Facebook, private platform: Platform) {
   }
   
 loginWithFacebook() {

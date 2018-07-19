@@ -6,9 +6,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-title *ngIf="auth.currentUser">current user is {{auth.currentUser}}</ion-title>
-        <button ion-button icon-right (click)="loginWithFacebook()">
-      Login with
+    <ion-title *ngIf="auth.currentUser">Du er logget ind som: {{auth.currentUser}}</ion-title>
+        <button center ion-button icon-right (click)="loginWithFacebook()">
+      Login med
       <ion-icon name="logo-facebook"></ion-icon>
     </button>
+    <button *ngIf="auth.currentUser" ion-button (click)="logout()">
+      Logud
+    </button>
+
 </ion-content>

@@ -66,7 +66,7 @@ export class ProjectopenPage {
 
   deleteProject() {
     this.projectsService.deleteProject(this.project);
-    this.navCtrl.popToRoot();
+    this.navCtrl.pop();
   }
 
   updateCounter(project) {

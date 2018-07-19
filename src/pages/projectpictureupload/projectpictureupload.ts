@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { ProjectsProvider } from '../../providers/projects/projects';
+import { AuthProvider } from '../../providers/auth/auth';
 import { Project } from '../../models/project.interface';
 
 /**
@@ -26,13 +27,13 @@ export class ProjectpictureuploadPage {
 
   progress: any;  // Observable 0 to 100
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public projectsService: ProjectsProvider, public camera: Camera, public storage: AngularFireStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public projectsService: ProjectsProvider, public auth: AuthProvider, public camera: Camera, public storage: AngularFireStorage) {
     this.project = navParams.get("project");
   }
 
 async takeProjectPicture() {
   const options: CameraOptions = {
-    quality: 100,
+    quality: 50,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
@@ -42,13 +43,15 @@ async takeProjectPicture() {
   }
 
   createUploadTask(file: string): void {
-
-    const filePath = `${this.project.rowid}/projectPicture_${ new Date().getTime() }.jpg`;
+    if(this.project.picture != "") {
+    this.projectsService.deleteProjectPictureByRowId(this.project);
+    }
+    const filePath = `${this.auth.currentUser}/${this.project.rowid}/projectPicture_${ new Date().getTime() }.jpg`;
     this.project.picture = filePath;
     this.projectsService.updateProjectPicture(this.project);
-
     this.projectPictureUrl = 'data:image/jpg;base64,' + file;
-    this.task = this.storage.ref(filePath).putString(this.projectPictureUrl, 'data_url');
+    
+    this.task = this.projectsService.uploadProjectPicture(filePath, this.projectPictureUrl);
 
     this.progress = this.task.percentageChanges();
 }

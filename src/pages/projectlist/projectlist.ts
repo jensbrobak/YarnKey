@@ -14,7 +14,7 @@ import { Project } from '../../models/project.interface';
 export class ProjectlistPage {
 
   constructor(public navCtrl: NavController,
-    public projectsService: ProjectsProvider) {   
+    public projectsService: ProjectsProvider) {  
     }
 
     ionViewDidLoad() {
