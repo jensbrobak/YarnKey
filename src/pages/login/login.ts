@@ -10,7 +10,6 @@ import { ProjectlistPage } from '../projectlist/projectlist';
 export class LoginPage {
 
   constructor(private navCtrl: NavController, private auth: AuthProvider) {
-
   }
   
   ionViewDidLoad() {

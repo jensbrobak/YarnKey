@@ -1,18 +1,38 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Login
+        Login
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-title *ngIf="auth.currentUser">Du er logget ind som: {{auth.currentUser}}</ion-title>
-        <button center ion-button icon-right (click)="loginWithFacebook()">
+    <h2 class="title">Login</h2>
+    <ion-card *ngIf="auth.currentUser">
+        <h2 class="title" text-wrap>
+            <ion-card-content>
+                <ion-item>
+                    <p>Du er logget ind som: <b>{{auth.currentUser}}</b></p>
+                </ion-item>
+              </ion-card-content>
+            </h2>
+              </ion-card>
+              <ion-card>
+                <ion-card-content>
+    <ion-item center>  
+    <button center ion-button icon-right (click)="loginWithFacebook()">
       Login med
       <ion-icon name="logo-facebook"></ion-icon>
     </button>
-    <button *ngIf="auth.currentUser" ion-button (click)="logout()">
+  </ion-item> 
+  </ion-card-content>
+</ion-card>
+  <ion-card-content>
+<ion-card *ngIf="auth.currentUser">
+  <ion-item center>
+    <button center ion-button (click)="logout()">
       Logud
     </button>
-
+  </ion-item> 
+</ion-card>
+</ion-card-content>
 </ion-content>

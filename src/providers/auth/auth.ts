@@ -22,7 +22,7 @@ return Observable.create(observer => {
 if (this.platform.is('cordova')) {
 return this.fb.login(['email', 'public_profile']).then(res => {
 const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-this.af.auth.signInWithCredential(facebookCredential).then(()=> {
+this.af.auth.signInAndRetrieveDataWithCredential(facebookCredential).then(()=> {
 observer.next();
 }).catch(error => {
 //console.log(error);
