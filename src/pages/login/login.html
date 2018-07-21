@@ -21,16 +21,20 @@
           
                
                         <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+                               <ion-item>
+                                <ion-label><b>E-mail: </b></ion-label>
+                              </ion-item>
                             <ion-row>
                                 <ion-item>
-                                    <ion-label for="email"></ion-label>
-                                    <ion-input class="card-md" type="email" value="" placeholder="Email" formControlName="email"></ion-input>
+                                    <ion-input class="card-md" type="email" value="" placeholder="Indtast din e-mail" formControlName="email"></ion-input>
                                 </ion-item>
                             </ion-row>
+                               <ion-item>
+                                <ion-label><b>Password: </b></ion-label>
+                              </ion-item>
                             <ion-row>
                                 <ion-item>
-                                    <ion-label for="password"></ion-label>
-                                    <ion-input class="card-md" type="password" placeholder="Password" formControlName="password"></ion-input>
+                                    <ion-input class="card-md" type="password" placeholder="Indtast dit password" formControlName="password"></ion-input>
                                 </ion-item>
                             </ion-row>
                         </form>
