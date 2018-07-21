@@ -3,7 +3,6 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free';
-
 import { LoginPage } from '../pages/login/login';
 
 @Component({
@@ -18,7 +17,6 @@ export class MyApp {
       splashScreen.hide();
      // this.showAdmobBannerAds();
      // this.showAdmobInterstitialAds();
-      
     });
   }
 

@@ -16,6 +16,18 @@ export class AuthProvider {
 
 constructor(private af: AngularFireAuth, private fb: Facebook, private platform: Platform) {
   }
+
+  loginWithEmail(credentials) {
+    return Observable.create(observer => {
+      this.af.auth.signInWithEmailAndPassword(credentials.email, credentials.password
+      ).then((authData) => {
+        console.log(authData);
+        observer.next(authData);
+      }).catch((error) => {
+        observer.error(error);
+      });
+    });
+  }
   
 loginWithFacebook() {
 return Observable.create(observer => {
@@ -25,7 +37,7 @@ const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.aut
 this.af.auth.signInAndRetrieveDataWithCredential(facebookCredential).then(()=> {
 observer.next();
 }).catch(error => {
-//console.log(error);
+console.log(error);
 observer.error(error);
 });
 });
@@ -33,19 +45,42 @@ observer.error(error);
 return this.af.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(() => {
 observer.next();
 }).catch(error => {
-//console.log(error);
+console.log(error);
 observer.error(error);
 });
 }
 });
 }
 
-  logout() {
-    this.af.auth.signOut();
-  }
+registerUser(credentials: any) {
+  return Observable.create(observer => {
+    this.af.auth.createUserWithEmailAndPassword(credentials.email, credentials.password).then(authData => {
+      observer.next(authData);
+    }).catch(error => {
+      console.log(error);
+      observer.error(error);
+    });
+  });
+}
+
+resetPassword(emailAddress:string){
+  return Observable.create(observer => {
+    this.af.auth.sendPasswordResetEmail(emailAddress).then(function(success) {
+        console.log('email sent', success);
+        observer.next(success);
+      }, function(error) {
+        console.log('error sending email',error);
+        observer.error(error);
+      });
+   });
+}
 
   get currentUser():string{
     return this.af.auth.currentUser?this.af.auth.currentUser.email:null;
   } 
+
+  logout() {
+    this.af.auth.signOut();
+  }
 
 }

@@ -25,13 +25,13 @@ export class ProjectopenPage {
 
   ionViewDidLoad() {
     if(this.project.picture != "") {
-    this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
+    //this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
     }
   }
   
   ionViewWillEnter() {
     if(this.project.picture != "") {
-    this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
+   // this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
     }
   }
 

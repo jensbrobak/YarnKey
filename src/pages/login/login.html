@@ -18,6 +18,31 @@
               </ion-card>
               <ion-card>
                 <ion-card-content>
+          
+               
+                        <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+                            <ion-row>
+                                <ion-item>
+                                    <ion-label for="email"></ion-label>
+                                    <ion-input class="card-md" type="email" value="" placeholder="Email" formControlName="email"></ion-input>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row>
+                                <ion-item>
+                                    <ion-label for="password"></ion-label>
+                                    <ion-input class="card-md" type="password" placeholder="Password" formControlName="password"></ion-input>
+                                </ion-item>
+                            </ion-row>
+                        </form>
+                        <button (click)="login()" ion-button block>Log in</button>
+                  
+                          <button [navPush]="signupPage" ion-button block>Opret Bruger</button>
+          
+                          <button [navPush]="resetPasswordPage" ion-button block>Nulstil password</button>
+                      </ion-card-content>
+                    </ion-card> 
+                  <ion-card>
+                    <ion-card-content>
     <ion-item center>  
     <button center ion-button icon-right (click)="loginWithFacebook()">
       Login med
@@ -26,13 +51,13 @@
   </ion-item> 
   </ion-card-content>
 </ion-card>
-  <ion-card-content>
 <ion-card *ngIf="auth.currentUser">
+  <ion-card-content>
   <ion-item center>
     <button center ion-button (click)="logout()">
       Logud
     </button>
   </ion-item> 
-</ion-card>
 </ion-card-content>
+</ion-card>
 </ion-content>

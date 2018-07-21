@@ -15,12 +15,12 @@
       </ion-card-header>
     
       <ion-card-content>          
-          <ion-item>
+          <ion-item *ngIf="projectPictureUrl">
             <p>Vis billede:</p>
-            <img *ngIf="projectPictureUrl" [src]="projectPictureUrl">
+            <img [src]="projectPictureUrl">
         </ion-item>
         <ion-item>
-            <button ion-button color="primary" block large outline (click)="uploadHandler()">Upload billedet</button>
+            <button ion-button color="primary" block large outline (click)="uploadHandler()">Tag og upload et billede</button>
         </ion-item>
         <ion-item>
             <ng-container *ngIf="progress | async as percent">

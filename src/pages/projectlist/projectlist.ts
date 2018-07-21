@@ -37,8 +37,8 @@ export class ProjectlistPage {
       this.projectsService.projectList = this.projectsService.getProjectsByComplete().valueChanges();
     }
 
-    getProjectPictureByRowId(project) {
-      this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(project);
+    getProjectPictureByRowId(project : Project) {
+      this.projectsService.getProjectPictureByRowId(project);
     }
     
     addProject() {

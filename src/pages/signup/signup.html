@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+        Opret Bruger
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <h2 class="title">Opret Bruger</h2>
+    <ion-card>
+            <ion-card-content>
+              <form [formGroup]="signupForm" (ngSubmit)="submit()" novalidate>
+                <ion-row>
+                  <ion-item>
+                      <ion-label for="email"></ion-label>
+                      <ion-input class="card-md" type="email" value="" placeholder="Email" formControlName="email"></ion-input>
+                  </ion-item>
+                </ion-row>
+                <ion-row>
+                  <ion-item>
+                      <ion-label for="password"></ion-label>
+                      <ion-input class="card-md" type="password" placeholder="Password" formControlName="password"></ion-input>
+                  </ion-item>
+                </ion-row>
+                <ion-row>
+                    <button ion-button type="submit" block>Opret Bruger</button>
+                </ion-row>
+            </form>
+              </ion-card-content>
+              </ion-card>
+        
+               
+</ion-content>

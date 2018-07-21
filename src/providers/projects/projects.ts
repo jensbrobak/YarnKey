@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import { Project } from '../../models/project.interface';
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -107,7 +108,7 @@ uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
 getProjectPictureByRowId(project) {
     
   const ref = this.storage.ref(project.picture);
-  return ref.getDownloadURL();
+  return fromPromise(ref.getDownloadURL());
 
 }
 
