@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content padding>
     <h2 class="title">Login</h2>
-    <ion-card *ngIf="auth.currentUser">
+    <ion-card *ngIf="loginCheck()">
         <h2 class="title" text-wrap>
             <ion-card-content>
                 <ion-item>
@@ -38,17 +38,17 @@
                                 </ion-item>
                             </ion-row>
                         </form>
-                        <button (click)="login()" ion-button block>Log in</button>
+                        <button ion-button color="primary" block large outline (click)="login()">Log in</button>
                   
-                          <button [navPush]="signupPage" ion-button block>Opret Bruger</button>
+                          <button ion-button color="primary" block large outline [navPush]="signupPage">Opret Bruger</button>
           
-                          <button [navPush]="resetPasswordPage" ion-button block>Nulstil password</button>
+                          <button ion-button color="primary" block large outline [navPush]="resetPasswordPage">Nulstil password</button>
                       </ion-card-content>
                     </ion-card> 
                   <ion-card>
                     <ion-card-content>
     <ion-item center>  
-    <button center ion-button icon-right (click)="loginWithFacebook()">
+    <button center ion-button color="primary" block large outline icon-right (click)="loginWithFacebook()">
       Login med
       <ion-icon name="logo-facebook"></ion-icon>
     </button>
@@ -58,7 +58,7 @@
 <ion-card *ngIf="auth.currentUser">
   <ion-card-content>
   <ion-item center>
-    <button center ion-button (click)="logout()">
+    <button center ion-button color="primary" block large outline (click)="logout()">
       Logud
     </button>
   </ion-item> 

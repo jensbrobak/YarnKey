@@ -31,16 +31,13 @@ export class LoginPage {
   }
   
   ionViewDidLoad() {
-    if (this.auth.currentUser) {
-      this.openProjectList();
-    }
+this.loginCheck();
   }
   
   ionViewWillEnter() {
-    if (this.auth.currentUser) {
-      this.openProjectList();
+this.loginCheck();
     }
-  }
+
 
   loginWithFacebook(): void {
 this.auth.loginWithFacebook().subscribe((success) => {
@@ -67,12 +64,18 @@ login(): void {
   }
 }
 
+openProjectList() {
+  this.navCtrl.setRoot(ProjectlistPage);
+}
+
+loginCheck() {
+  if (this.auth.currentUser) {
+    this.openProjectList();
+  }
+}
+
     logout(): void {
       this.auth.logout();
       
-    }
-
-    openProjectList() {
-      this.navCtrl.setRoot(ProjectlistPage);
     }
 }

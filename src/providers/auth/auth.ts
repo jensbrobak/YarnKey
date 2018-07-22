@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from "rxjs/Observable";
 import { Platform } from 'ionic-angular';
-import { Facebook } from '@ionic-native/facebook'; //Added Facebook
-import * as firebase from 'firebase/app'; //Changed firebase/app
+import { Facebook } from '@ionic-native/facebook'; 
+import * as firebase from 'firebase/app'; 
 
 /*
   Generated class for the AuthProvider provider.
