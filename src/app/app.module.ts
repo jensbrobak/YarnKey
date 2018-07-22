@@ -1,11 +1,8 @@
 import { Toast } from '@ionic-native/toast';
-
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { AdMobFree } from '@ionic-native/admob-free';
 import { MyApp } from './app.component';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ProjectcreatePage } from '../pages/projectcreate/projectcreate';
@@ -86,7 +83,6 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     Toast,
-    AdMobFree,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProjectsProvider,

@@ -25,7 +25,7 @@ export class ProjectpictureuploadPage {
 
   task: AngularFireUploadTask;
 
-  progress: any;  // Observable 0 to 100
+  progress: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public projectsService: ProjectsProvider, public auth: AuthProvider, public camera: Camera, public storage: AngularFireStorage) {
     this.project = navParams.get("project");
