@@ -5,6 +5,7 @@ import { ProjecteditPage } from '../projectedit/projectedit';
 import { ProjectopenPage } from '../projectopen/projectopen';
 import { ProjectsProvider } from '../../providers/projects/projects';
 import { Project } from '../../models/project.interface';
+import { SettingsPage } from '../settings/settings';
 
 @IonicPage()
 @Component({
@@ -36,7 +37,21 @@ export class ProjectlistPage {
     getProjectsByComplete() {
       this.projectsService.projectList = this.projectsService.getProjectsByComplete().valueChanges();
     }
+
+    getProjectsByFavorite() {
+      this.projectsService.projectList = this.projectsService.getProjectsByFavorite().valueChanges();
+    }
     
+    setFavoriteTrue(project) {
+      project.favorite = true 
+      this.projectsService.updateFavorite(project);
+    }
+
+    setFavoriteFalse(project) {
+      project.favorite = false
+      this.projectsService.updateFavorite(project);
+    }
+
     addProject() {
       this.navCtrl.push(ProjectcreatePage);
     }
@@ -51,5 +66,9 @@ export class ProjectlistPage {
       this.navCtrl.push(ProjecteditPage, {
         project:project
       });
+    }
+
+    settings() {
+      this.navCtrl.push(SettingsPage);
     }
   }

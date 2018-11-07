@@ -31,6 +31,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Camera } from '@ionic-native/camera';
 import { AuthProvider } from '../providers/auth/auth';
 import { Facebook } from '@ionic-native/facebook'; 
+import { SettingsPage } from '../pages/settings/settings';
+import { SettingsPageModule } from '../pages/settings/settings.module';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBWtexs_zbO5Zna-KXMNZVVTAeZ4J4gWwM",
@@ -57,6 +59,7 @@ export const firebaseConfig = {
     LoginPageModule,
     SignupPageModule,
     ResetPasswordPageModule,
+    SettingsPageModule,
     IonicModule.forRoot(MyApp, {
     tabsPlacement: 'top',
     backButtonText: 'Tilbage'}),
@@ -76,7 +79,8 @@ export const firebaseConfig = {
     LoginPage,
     ProjectpictureuploadPage,
     SignupPage,
-    ResetPasswordPage 
+    ResetPasswordPage,
+    SettingsPage
 
   ],
   providers: [

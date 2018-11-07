@@ -42,6 +42,14 @@ export class ProjectsProvider {
 
     }
 
+    getProjectsByFavorite() {
+
+      return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
+      ref.where('favorite', '==', true));
+  
+      }
+  
+
         saveProject(project) {
 
           const rowid = this.afStore.createId();
@@ -52,6 +60,7 @@ export class ProjectsProvider {
             name: project.name,
             description: project.description,
             status: "Igangværende",
+            favorite: false,
             yarnProductName: project.yarnProductName,
             yarnColorCode: project.yarnColorCode,
             yarnColor: project.yarnColor,
@@ -87,7 +96,9 @@ export class ProjectsProvider {
 
   deleteProject(project) {
     this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).delete();
+    if(project.picture) {
     this.deleteProjectPictureByRowId(project);
+    }
   }
 
   updateCounter(project) {
@@ -98,6 +109,16 @@ export class ProjectsProvider {
 
    });
 }
+
+  updateFavorite(project) {
+
+    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
+
+      favorite: project.favorite
+  
+     });
+
+  }
 
 uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
   return this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');

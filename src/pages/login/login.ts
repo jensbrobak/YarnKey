@@ -20,7 +20,7 @@ export class LoginPage {
   signupPage = SignupPage; 
   resetPasswordPage = ResetPasswordPage;
 
-  constructor(private navCtrl: NavController, private fb: FormBuilder, private auth: AuthProvider) {
+  constructor(public navCtrl: NavController, public fb: FormBuilder, public auth: AuthProvider) {
     this.loginForm = this.fb.group({  
             'email': ['', Validators.compose([Validators.required, Validators.pattern(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)])],
             'password': ['', Validators.compose([Validators.required, Validators.minLength(1)])]
@@ -29,15 +29,10 @@ export class LoginPage {
     this.email = this.loginForm.controls['email'];     
     this.password = this.loginForm.controls['password'];
   }
-  
-  ionViewDidLoad() {
-this.loginCheck();
-  }
-  
-  ionViewWillEnter() {
-this.loginCheck();
-    }
 
+  ionViewCanEnter() {
+    this.loginCheck();
+  }
 
   loginWithFacebook(): void {
 this.auth.loginWithFacebook().subscribe((success) => {
@@ -74,8 +69,4 @@ loginCheck() {
   }
 }
 
-    logout(): void {
-      this.auth.logout();
-      
-    }
 }

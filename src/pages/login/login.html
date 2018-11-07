@@ -38,7 +38,7 @@
                                 </ion-item>
                             </ion-row>
                         </form>
-                        <button ion-button color="primary" block large outline (click)="login()">Log in</button>
+                        <button ion-button color="primary" block large outline (click)="login()">Log ind</button>
                   
                           <button ion-button color="primary" block large outline [navPush]="signupPage">Opret Bruger</button>
           
@@ -49,19 +49,10 @@
                     <ion-card-content>
     <ion-item center>  
     <button center ion-button color="primary" block large outline icon-right (click)="loginWithFacebook()">
-      Login med
+      Log ind med
       <ion-icon name="logo-facebook"></ion-icon>
     </button>
   </ion-item> 
   </ion-card-content>
-</ion-card>
-<ion-card *ngIf="auth.currentUser">
-  <ion-card-content>
-  <ion-item center>
-    <button center ion-button color="primary" block large outline (click)="logout()">
-      Logud
-    </button>
-  </ion-item> 
-</ion-card-content>
 </ion-card>
 </ion-content>
