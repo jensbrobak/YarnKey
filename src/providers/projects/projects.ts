@@ -20,12 +20,14 @@ export class ProjectsProvider {
  
  projectList: Observable<any[]>;
 
+ projectListShare: Observable<any[]>;
+
   constructor(private afStore: AngularFirestore, public storage: AngularFireStorage, private auth: AuthProvider) {
     }
 
     getAllProjects() {
       
-      return this.afStore.collection('projectList').doc(this.auth.currentUser).collection(this.auth.currentUser);
+    return this.afStore.collection('projectList').doc(this.auth.currentUser).collection(this.auth.currentUser);
     }
     
     getProjectsByInProgress() {
@@ -33,7 +35,7 @@ export class ProjectsProvider {
     return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
     ref.where('status', '==', 'Igangværende'));
     
-  }
+    }
 
     getProjectsByComplete() {
 
@@ -44,11 +46,16 @@ export class ProjectsProvider {
 
     getProjectsByFavorite() {
 
-      return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
-      ref.where('favorite', '==', true));
+    return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
+    ref.where('favorite', '==', true));
   
-      }
-  
+    }
+
+    getProjectsByShare(project) {
+
+    return this.afStore.collection(`projectList`).doc(project.share).collection(project.share, ref =>
+    ref.where('share', '==', project.share));
+    }
 
         saveProject(project) {
 
@@ -70,7 +77,9 @@ export class ProjectsProvider {
             notes: project.notes,
             counter: project.counter,
             recipe: project.recipe,
-            picture: project.picture
+            picture: project.picture,
+            owner: this.auth.currentUser,
+            share: null
       });
         }
 
@@ -89,7 +98,7 @@ export class ProjectsProvider {
             batchNr: project.batchNr,
             notes: project.notes,
             counter: project.counter,
-            recipe: project.recipe
+            recipe: project.recipe,
       });
         
         }
@@ -120,6 +129,16 @@ export class ProjectsProvider {
 
   }
 
+  updateShare(project) {
+
+    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
+
+      share: project.share
+  
+     });
+
+  }
+
 uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
   return this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
 }
@@ -143,7 +162,9 @@ updateProjectPicture(project) {
 }
 
 deleteProjectPictureByRowId(project) {
+  if(project.owner == this.auth.currentUser) {
   this.storage.ref(project.picture).delete();
+  }
 }
 
 }

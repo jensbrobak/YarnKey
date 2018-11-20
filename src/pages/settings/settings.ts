@@ -27,7 +27,7 @@ export class SettingsPage {
   logout() {
     let confirm = this.alertCtrl.create({
       title: 'Log af?',
-      message: 'Er du sikker på, at du vil logge af Garnnoter Pro?',
+      message: 'Er du sikker på, at du vil logge bruger '+ this.auth.currentUser +' af Garnnoter Pro?',
       buttons: [
         {
           text: 'Nej',

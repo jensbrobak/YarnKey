@@ -41,6 +41,10 @@ export class ProjectlistPage {
     getProjectsByFavorite() {
       this.projectsService.projectList = this.projectsService.getProjectsByFavorite().valueChanges();
     }
+
+    getProjectsByShare(project) {
+      this.projectsService.projectListShare = this.projectsService.getProjectsByShare(project).valueChanges();
+    }
     
     setFavoriteTrue(project) {
       project.favorite = true 

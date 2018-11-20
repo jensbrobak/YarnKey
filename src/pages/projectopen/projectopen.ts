@@ -6,6 +6,7 @@ import { ProjectcounterPage } from '../projectcounter/projectcounter';
 import { ProjectsProvider } from '../../providers/projects/projects';
 import { Project } from '../../models/project.interface';
 import { ProjectpictureuploadPage } from '../projectpictureupload/projectpictureupload';
+import { ProjectsharePage } from '../projectshare/projectshare';
 
 @IonicPage()
 @Component({
@@ -36,6 +37,12 @@ export class ProjectopenPage {
 
   uploadProjectPicture(project) {
     this.navCtrl.push(ProjectpictureuploadPage, {
+      project:project
+     });
+  }
+
+  shareProject(project) {
+    this.navCtrl.push(ProjectsharePage, {
       project:project
      });
   }

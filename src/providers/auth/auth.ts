@@ -79,6 +79,18 @@ resetPassword(emailAddress:string){
     return this.af.auth.currentUser?this.af.auth.currentUser.email:null;
   } 
 
+  userCheck(emailAddress) {
+    return Observable.create(observer => {
+      this.af.auth.fetchProvidersForEmail(emailAddress).then(function(success) {
+          console.log('email found', success);
+          observer.next(success);
+        }, function(error) {
+          console.log('email dosent exist',error);
+          observer.error(error);
+        });
+     });
+  }
+
   logout() {
     this.af.auth.signOut();
   }

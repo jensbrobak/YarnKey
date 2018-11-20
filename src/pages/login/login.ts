@@ -34,6 +34,14 @@ export class LoginPage {
     this.loginCheck();
   }
 
+  ionViewWillEnter() {
+    this.loginCheck();
+  }
+
+  ionViewDidEnter() {
+    this.loginCheck();
+  }
+
   loginWithFacebook(): void {
 this.auth.loginWithFacebook().subscribe((success) => {
 this.openProjectList();

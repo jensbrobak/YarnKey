@@ -46,5 +46,20 @@
                   <ion-item text-left *ngIf="!project.favorite"><button ion-button clear large (click)="setFavoriteTrue(project)"><ion-icon name="star-outline" padding></ion-icon></button></ion-item>
                   <ion-item text-left *ngIf="project.favorite"><button ion-button clear large (click)="setFavoriteFalse(project)"><ion-icon name="star" padding></ion-icon></button></ion-item>
                   </ion-card>
+
+                  <ion-card *ngFor="let project of projectsService.projectListShare | async">
+
+                        <ion-card-content (click)="openProject(project)">
+                          <ion-item text-right><h3><b>Status:</b> {{project.status}}</h3></ion-item>
+                        <ion-item text-left text-wrap>
+                              <h2><b>{{project.name}}</b></h2> 
+                              <p>{{project.description}}</p>
+                        </ion-item>
+                             <ion-item text-right><button ion-button clear>Vis<ion-icon name="folder-open" padding></ion-icon></button></ion-item>
+                      </ion-card-content>
+                      <ion-item text-left *ngIf="!project.favorite"><button ion-button clear large (click)="setFavoriteTrue(project)"><ion-icon name="star-outline" padding></ion-icon></button></ion-item>
+                      <ion-item text-left *ngIf="project.favorite"><button ion-button clear large (click)="setFavoriteFalse(project)"><ion-icon name="star" padding></ion-icon></button></ion-item>
+                      <ion-item text-right *ngIf="project.share">Delt med: {{project.share}}</ion-item>
+                      </ion-card>
         
     </ion-content>

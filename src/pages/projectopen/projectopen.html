@@ -121,7 +121,13 @@
           <ion-item>
           <button ion-button color="primary" block large outline (click)="editProject(project)">Redigér</button>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="!project.share">
+              <button ion-button color="primary" block large outline (click)="shareProject(project)">Del projekt</button>
+              </ion-item>
+              <ion-item *ngIf="project.share">
+                <button ion-button color="primary" block large outline (click)="shareProject(project)">Delt med: {{ project.share }}</button>
+                </ion-item>
+          <ion-item *ngIf="project.owner">
           <button ion-button color="danger" block large outline (click)="deleteConfirm(project)">Slet</button>
           </ion-item>
         </ion-card-content>

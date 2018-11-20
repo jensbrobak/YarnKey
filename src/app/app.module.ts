@@ -33,6 +33,8 @@ import { AuthProvider } from '../providers/auth/auth';
 import { Facebook } from '@ionic-native/facebook'; 
 import { SettingsPage } from '../pages/settings/settings';
 import { SettingsPageModule } from '../pages/settings/settings.module';
+import { ProjectsharePageModule } from '../pages/projectshare/projectshare.module';
+import { ProjectsharePage } from '../pages/projectshare/projectshare';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBWtexs_zbO5Zna-KXMNZVVTAeZ4J4gWwM",
@@ -56,6 +58,7 @@ export const firebaseConfig = {
     ProjectlistPageModule,
     ProjectopenPageModule,
     ProjectpictureuploadPageModule,
+    ProjectsharePageModule,
     LoginPageModule,
     SignupPageModule,
     ResetPasswordPageModule,
@@ -78,6 +81,7 @@ export const firebaseConfig = {
     ProjectcounterPage,
     LoginPage,
     ProjectpictureuploadPage,
+    ProjectsharePage,
     SignupPage,
     ResetPasswordPage,
     SettingsPage

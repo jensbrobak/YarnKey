@@ -14,5 +14,7 @@ export interface Project {
     counter: number;
     recipe: string;
     picture: string;
+    owner: string;
+    share: string;
 
 }

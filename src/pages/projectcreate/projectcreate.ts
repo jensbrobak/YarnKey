@@ -16,7 +16,7 @@ export class ProjectcreatePage {
   constructor(public navCtrl: NavController,
     public toast: Toast,
     public projectsService: ProjectsProvider) {
-    this.project = { rowid:"", name:"", description:"", status:"Igangværende",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"", picture:"" } as Project;
+    this.project = { rowid:"", name:"", description:"", status:"",  yarnProductName:"",  yarnColorCode:"", yarnColor:"",  yarnLength:"",  needleSize:"",  batchNr:"", notes:"", counter:0, recipe:"", picture:"" } as Project;
     }
 
 saveProject() {
