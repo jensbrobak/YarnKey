@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { ProjectcreatePage } from '../projectcreate/projectcreate';
-import { ProjecteditPage } from '../projectedit/projectedit';
 import { ProjectopenPage } from '../projectopen/projectopen';
 import { ProjectsProvider } from '../../providers/projects/projects';
 import { Project } from '../../models/project.interface';
 import { SettingsPage } from '../settings/settings';
+import { ProjectsharePage } from '../projectshare/projectshare';
 
 @IonicPage()
 @Component({
@@ -42,8 +42,8 @@ export class ProjectlistPage {
       this.projectsService.projectList = this.projectsService.getProjectsByFavorite().valueChanges();
     }
 
-    getProjectsByShare(project) {
-      this.projectsService.projectListShare = this.projectsService.getProjectsByShare(project).valueChanges();
+    getProjectsByShare() {
+      this.projectsService.projectList = this.projectsService.getProjectsByShare().valueChanges();
     }
     
     setFavoriteTrue(project) {
@@ -66,8 +66,8 @@ export class ProjectlistPage {
       });
     }
 
-    editProject(project : Project) {
-      this.navCtrl.push(ProjecteditPage, {
+    setProjectShare(project : Project) {
+      this.navCtrl.push(ProjectsharePage, {
         project:project
       });
     }

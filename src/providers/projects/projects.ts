@@ -16,52 +16,60 @@ export class ProjectsProvider {
 
  project : Project; 
 
+ db : string;
+
  projectPictureUrl: Observable<any[]>;
  
  projectList: Observable<any[]>;
 
- projectListShare: Observable<any[]>;
-
   constructor(private afStore: AngularFirestore, public storage: AngularFireStorage, private auth: AuthProvider) {
+
+      this.db = 'projects';
     }
 
     getAllProjects() {
       
-    return this.afStore.collection('projectList').doc(this.auth.currentUser).collection(this.auth.currentUser);
+    return this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser)
+    
+    .where('share', '==', this.auth.currentUser));
+
     }
     
     getProjectsByInProgress() {
 
-    return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
-    ref.where('status', '==', 'Igangværende'));
+    return this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser)
+    
+    .where('status', '==', 'Igangværende'));
     
     }
 
     getProjectsByComplete() {
 
-    return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
-    ref.where('status', '==', 'Færdig'));
+    return this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser)
+    
+    .where('status', '==', 'Færdig'));
 
     }
 
     getProjectsByFavorite() {
 
-    return this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser, ref =>
-    ref.where('favorite', '==', true));
+    return this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser)
+    
+    .where('favorite', '==', true));
   
     }
 
-    getProjectsByShare(project) {
+    getProjectsByShare() {
 
-    return this.afStore.collection(`projectList`).doc(project.share).collection(project.share, ref =>
-    ref.where('share', '==', project.share));
+    return this.afStore.collection(this.db, ref => ref.where('share', '==', this.auth.currentUser));
+    
     }
 
         saveProject(project) {
 
           const rowid = this.afStore.createId();
 
-          this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(rowid).set({
+          this.afStore.collection(this.db).doc(rowid).set({
 
             rowid: rowid,
             name: project.name,
@@ -85,7 +93,7 @@ export class ProjectsProvider {
 
         updateProject(project) {
 
-          this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
+          this.afStore.collection(this.db).doc(project.rowid).update({
 
             name: project.name,
             description: project.description,
@@ -104,15 +112,17 @@ export class ProjectsProvider {
         }
 
   deleteProject(project) {
-    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).delete();
+    if(project.owner == this.auth.currentUser) {
+    this.afStore.collection(this.db).doc(project.rowid).delete();
     if(project.picture) {
     this.deleteProjectPictureByRowId(project);
     }
   }
+  }
 
   updateCounter(project) {
 
-    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
+    this.afStore.collection(this.db).doc(project.rowid).update({
 
     counter: project.counter
 
@@ -121,7 +131,7 @@ export class ProjectsProvider {
 
   updateFavorite(project) {
 
-    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
+    this.afStore.collection(this.db).doc(project.rowid).update({
 
       favorite: project.favorite
   
@@ -131,7 +141,7 @@ export class ProjectsProvider {
 
   updateShare(project) {
 
-    this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
+    this.afStore.collection(this.db).doc(project.rowid).update({
 
       share: project.share
   
@@ -153,7 +163,7 @@ getProjectPictureByRowId(project) {
 
 updateProjectPicture(project) {
 
-  this.afStore.collection(`projectList`).doc(this.auth.currentUser).collection(this.auth.currentUser).doc(project.rowid).update({
+  this.afStore.collection(this.db).doc(project.rowid).update({
 
     picture: project.picture
 
@@ -162,9 +172,7 @@ updateProjectPicture(project) {
 }
 
 deleteProjectPictureByRowId(project) {
-  if(project.owner == this.auth.currentUser) {
   this.storage.ref(project.picture).delete();
-  }
 }
 
 }
