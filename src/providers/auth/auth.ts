@@ -81,7 +81,7 @@ resetPassword(emailAddress:string){
 
   userCheck(emailAddress) {
     return Observable.create(observer => {
-      this.af.auth.fetchProvidersForEmail(emailAddress).then(function(success) {
+      this.af.auth.fetchSignInMethodsForEmail(emailAddress).then(function(success) {
           console.log('email found', success);
           observer.next(success);
         }, function(error) {

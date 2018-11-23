@@ -7,6 +7,7 @@ import { ProjectsProvider } from '../../providers/projects/projects';
 import { Project } from '../../models/project.interface';
 import { ProjectpictureuploadPage } from '../projectpictureupload/projectpictureupload';
 import { ProjectsharePage } from '../projectshare/projectshare';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class ProjectopenPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public alertCtrl: AlertController, public projectsService: ProjectsProvider) {
+    public alertCtrl: AlertController, public projectsService: ProjectsProvider, public auth: AuthProvider) {
       this.project = navParams.get("project");
   }
 

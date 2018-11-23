@@ -6,6 +6,7 @@ import { ProjectsProvider } from '../../providers/projects/projects';
 import { Project } from '../../models/project.interface';
 import { SettingsPage } from '../settings/settings';
 import { ProjectsharePage } from '../projectshare/projectshare';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ import { ProjectsharePage } from '../projectshare/projectshare';
 export class ProjectlistPage {
 
   constructor(public navCtrl: NavController,
-    public projectsService: ProjectsProvider) {  
+    public projectsService: ProjectsProvider, public auth: AuthProvider) {  
     }
 
     ionViewDidLoad() {

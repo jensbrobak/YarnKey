@@ -16,5 +16,6 @@ export interface Project {
     picture: string;
     owner: string;
     share: string;
+    shareStatus: boolean;
 
 }

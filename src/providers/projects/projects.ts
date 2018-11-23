@@ -25,14 +25,13 @@ export class ProjectsProvider {
   constructor(private afStore: AngularFirestore, public storage: AngularFireStorage, private auth: AuthProvider) {
 
       this.db = 'projects';
+
     }
 
     getAllProjects() {
       
-    return this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser)
+    return this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser));
     
-    .where('share', '==', this.auth.currentUser));
-
     }
     
     getProjectsByInProgress() {
@@ -65,57 +64,63 @@ export class ProjectsProvider {
     
     }
 
-        saveProject(project) {
+    saveProject(project) {
 
-          const rowid = this.afStore.createId();
+      const rowid = this.afStore.createId();
 
-          this.afStore.collection(this.db).doc(rowid).set({
+      this.afStore.collection(this.db).doc(rowid).set({
 
-            rowid: rowid,
-            name: project.name,
-            description: project.description,
-            status: "Igangværende",
-            favorite: false,
-            yarnProductName: project.yarnProductName,
-            yarnColorCode: project.yarnColorCode,
-            yarnColor: project.yarnColor,
-            yarnLength: project.yarnLength,
-            needleSize: project.needleSize,
-            batchNr: project.batchNr,
-            notes: project.notes,
-            counter: project.counter,
-            recipe: project.recipe,
-            picture: project.picture,
-            owner: this.auth.currentUser,
-            share: null
-      });
-        }
+        rowid: rowid,
+        name: project.name,
+        description: project.description,
+        status: "Igangværende",
+        favorite: false,
+        yarnProductName: project.yarnProductName,
+        yarnColorCode: project.yarnColorCode,
+        yarnColor: project.yarnColor,
+        yarnLength: project.yarnLength,
+        needleSize: project.needleSize,
+        batchNr: project.batchNr,
+        notes: project.notes,
+        counter: project.counter,
+        recipe: project.recipe,
+        picture: project.picture,
+        owner: this.auth.currentUser,
+        share: null,
+        shareStatus: false
+  });
+    }
 
-        updateProject(project) {
+    updateProject(project) {
 
-          this.afStore.collection(this.db).doc(project.rowid).update({
+      this.afStore.collection(this.db).doc(project.rowid).update({
 
-            name: project.name,
-            description: project.description,
-            status: project.status,
-            yarnProductName: project.yarnProductName,
-            yarnColorCode: project.yarnColorCode,
-            yarnColor: project.yarnColor,
-            yarnLength: project.yarnLength,
-            needleSize: project.needleSize,
-            batchNr: project.batchNr,
-            notes: project.notes,
-            counter: project.counter,
-            recipe: project.recipe,
-      });
-        
-        }
+        name: project.name,
+        description: project.description,
+        status: project.status,
+        yarnProductName: project.yarnProductName,
+        yarnColorCode: project.yarnColorCode,
+        yarnColor: project.yarnColor,
+        yarnLength: project.yarnLength,
+        needleSize: project.needleSize,
+        batchNr: project.batchNr,
+        notes: project.notes,
+        counter: project.counter,
+        recipe: project.recipe,
+  });
+    
+    }
 
   deleteProject(project) {
+
     if(project.owner == this.auth.currentUser) {
+
     this.afStore.collection(this.db).doc(project.rowid).delete();
+
     if(project.picture) {
+
     this.deleteProjectPictureByRowId(project);
+
     }
   }
   }
@@ -143,13 +148,15 @@ export class ProjectsProvider {
 
     this.afStore.collection(this.db).doc(project.rowid).update({
 
-      share: project.share
+      share: project.share,
+      shareStatus: project.shareStatus
   
      });
 
   }
 
 uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
+
   return this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
 }
 
@@ -157,6 +164,7 @@ uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
 getProjectPictureByRowId(project) {
     
   const ref = this.storage.ref(project.picture);
+
   return ref.getDownloadURL();
 
 }
@@ -172,6 +180,7 @@ updateProjectPicture(project) {
 }
 
 deleteProjectPictureByRowId(project) {
+
   this.storage.ref(project.picture).delete();
 }
 

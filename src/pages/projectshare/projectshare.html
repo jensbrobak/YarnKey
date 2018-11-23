@@ -7,8 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title *ngIf="project.share">Delt med: {{ project.share }}</ion-title>
-    <ion-title *ngIf="!project.share">Del projekt</ion-title>
+    <ion-title *ngIf="project.shareStatus && project.owner == auth.currentUser">Delt med: {{ project.share }}</ion-title>
+    <ion-title *ngIf="project.shareStatus && project.owner != auth.currentUser">Delt af: {{ project.owner }}</ion-title>
+    <ion-title *ngIf="!project.shareStatus">Del projekt</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,14 +19,23 @@
     <h2 class="title">Deling</h2>
     <ion-card>
           <ion-card-content>
-          <ion-item>
-            <ion-label><b>Del med:</b></ion-label>
-            </ion-item>
+              <ion-item *ngIf="!project.shareStatus">
+                <ion-label><b>Del med:</b></ion-label>
+                </ion-item>
+                <ion-item *ngIf="project.shareStatus">
+                  <ion-label><b>Delt med:</b></ion-label>
+                  </ion-item>
             <ion-item>
             <ion-input class="card-md" type="text" placeholder="Indtast e-mail på bruger som du vil dele projektet med" [(ngModel)]="project.share" name="share" required=""></ion-input>
           </ion-item>
-             <ion-item>
+             <ion-item *ngIf="!project.shareStatus">
               <button ion-button type="submit" outline block large (click)="updateShare(project)">Del projekt</button>
+            </ion-item>
+            <ion-item *ngIf="project.shareStatus && project.owner == auth.currentUser">
+              <button ion-button type="submit" outline block large (click)="removeShare(project)">Stop projektdeling med: {{ project.share }}</button>
+            </ion-item>
+            <ion-item *ngIf="project.shareStatus && project.owner != auth.currentUser">
+              <button ion-button type="submit" outline block large (click)="removeShare(project)">Stop projektdeling fra: {{ project.owner }}</button>
             </ion-item>
         </ion-card-content>
         </ion-card>

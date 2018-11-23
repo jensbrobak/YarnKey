@@ -46,7 +46,8 @@
                   </ion-card-content>
                   <ion-item text-left *ngIf="!project.favorite"><button ion-button clear large (click)="setFavoriteTrue(project)"><ion-icon name="star-outline" padding></ion-icon></button></ion-item>
                   <ion-item text-left *ngIf="project.favorite"><button ion-button clear large (click)="setFavoriteFalse(project)"><ion-icon name="star" padding></ion-icon></button></ion-item>
-                  <ion-item text-right *ngIf="project.share"><button ion-button clear (click)="setProjectShare(project)">Delt med {{ project.share }}<ion-icon name="ios-share-outline" padding></ion-icon></button></ion-item>
+                  <ion-item text-right *ngIf="project.shareStatus && project.owner == auth.currentUser"><button ion-button clear (click)="setProjectShare(project)">Delt med {{ project.share }}<ion-icon name="ios-share-outline" padding></ion-icon></button></ion-item>
+                  <ion-item text-right *ngIf="project.shareStatus && project.owner != auth.currentUser"><button ion-button clear (click)="setProjectShare(project)">Delt af {{ project.owner }}<ion-icon name="ios-share-outline" padding></ion-icon></button></ion-item>
                   </ion-card>
         
     </ion-content>
