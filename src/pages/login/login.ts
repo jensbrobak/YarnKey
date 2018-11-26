@@ -30,18 +30,6 @@ export class LoginPage {
     this.password = this.loginForm.controls['password'];
   }
 
-  ionViewCanEnter() {
-    this.loginCheck();
-  }
-
-  ionViewWillEnter() {
-    this.loginCheck();
-  }
-
-  ionViewDidEnter() {
-    this.loginCheck();
-  }
-
   loginWithFacebook(): void {
 this.auth.loginWithFacebook().subscribe((success) => {
 this.openProjectList();

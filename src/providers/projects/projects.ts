@@ -31,7 +31,7 @@ export class ProjectsProvider {
     getAllProjects() {
       
     return this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser));
-    
+
     }
     
     getProjectsByInProgress() {
@@ -82,9 +82,10 @@ export class ProjectsProvider {
         needleSize: project.needleSize,
         batchNr: project.batchNr,
         notes: project.notes,
-        counter: project.counter,
+        counterOwner: 0,
+        counterShare: 0,
         recipe: project.recipe,
-        picture: project.picture,
+        picture: "",
         owner: this.auth.currentUser,
         share: null,
         shareStatus: false
@@ -105,7 +106,6 @@ export class ProjectsProvider {
         needleSize: project.needleSize,
         batchNr: project.batchNr,
         notes: project.notes,
-        counter: project.counter,
         recipe: project.recipe,
   });
     
@@ -124,15 +124,27 @@ export class ProjectsProvider {
     }
   }
   }
+  
+   updateCounter(project) {
 
-  updateCounter(project) {
-
+    if(project.owner == this.auth.currentUser) {
+    
     this.afStore.collection(this.db).doc(project.rowid).update({
-
-    counter: project.counter
+    
+    counterOwner: project.counterOwner
 
    });
-}
+
+  } else {
+
+    this.afStore.collection(this.db).doc(project.rowid).update({
+    
+    counterShare: project.counterShare
+
+   });
+
+  }
+  }
 
   updateFavorite(project) {
 
@@ -149,7 +161,7 @@ export class ProjectsProvider {
     this.afStore.collection(this.db).doc(project.rowid).update({
 
       share: project.share,
-      shareStatus: project.shareStatus
+      shareStatus: project.shareStatus,
   
      });
 
@@ -158,6 +170,7 @@ export class ProjectsProvider {
 uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
 
   return this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
+  
 }
 
 

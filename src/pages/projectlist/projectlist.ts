@@ -7,6 +7,8 @@ import { Project } from '../../models/project.interface';
 import { SettingsPage } from '../settings/settings';
 import { ProjectsharePage } from '../projectshare/projectshare';
 import { AuthProvider } from '../../providers/auth/auth';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { map } from 'rxjs/operators';
 
 @IonicPage()
 @Component({
@@ -16,19 +18,17 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class ProjectlistPage {
 
   constructor(public navCtrl: NavController,
-    public projectsService: ProjectsProvider, public auth: AuthProvider) {  
-    }
-
-    ionViewDidLoad() {
-      this.projectsService.projectList = this.projectsService.getAllProjects().valueChanges();
-    }
-    
-    ionViewWillEnter() {
-      this.projectsService.projectList = this.projectsService.getAllProjects().valueChanges();
+    public projectsService: ProjectsProvider, public auth: AuthProvider) {
+      this.getAllProjects();  
     }
 
     getAllProjects() {
-      this.projectsService.projectList = this.projectsService.getAllProjects().valueChanges();
+      const allProjects = this.projectsService.getAllProjects().valueChanges();
+      const shareProjects = this.projectsService.getProjectsByShare().valueChanges();
+
+      this.projectsService.projectList = combineLatest<any[]>(allProjects, shareProjects).pipe(
+        map(arr => arr.reduce((acc, cur) => acc.concat(cur) ) ),
+      )
     }
 
     getProjectsByInProgress() {

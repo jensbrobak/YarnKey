@@ -11,7 +11,8 @@ export interface Project {
     needleSize: string;
     batchNr: string;
     notes: string;
-    counter: number;
+    counterOwner: number;
+    counterShare: number;
     recipe: string;
     picture: string;
     owner: string;

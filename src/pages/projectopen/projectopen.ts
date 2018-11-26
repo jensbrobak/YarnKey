@@ -20,20 +20,25 @@ export class ProjectopenPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public alertCtrl: AlertController, public projectsService: ProjectsProvider, public auth: AuthProvider) {
+    public alertCtrl: AlertController, 
+    public projectsService: ProjectsProvider, 
+    public auth: AuthProvider) 
+    {
       this.project = navParams.get("project");
-  }
+    }
+
+    getProjectPicture() {
+      if(this.project.picture != "") {
+        this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
+        }
+    }
 
   ionViewDidLoad() {
-    if(this.project.picture != "") {
-    this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
-    }
+    this.getProjectPicture();
   }
   
   ionViewWillEnter() {
-    if(this.project.picture != "") {
-    this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
-    }
+    this.getProjectPicture();
   }
 
   uploadProjectPicture(project) {

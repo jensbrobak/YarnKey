@@ -13,7 +13,8 @@
   <form (ngSubmit)="updateCounter()">
                 <ion-card>
                       <ion-card-content text-center>
-                               <ion-label class="counter">{{project.counter}}</ion-label>
+                               <ion-label *ngIf="project.owner == this.auth.currentUser" class="counter">{{project.counterOwner}}</ion-label>
+                                <ion-label *ngIf="project.owner != this.auth.currentUser" class="counter">{{project.counterShare}}</ion-label>
                     </ion-card-content>
                     </ion-card>
                     <ion-card>

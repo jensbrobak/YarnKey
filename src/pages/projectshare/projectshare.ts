@@ -34,37 +34,32 @@ export class ProjectsharePage {
   }
 
   updateShare(project) {
-      this.auth.userCheck(project.share).subscribe((success) => {
+    
 
-        if(project.share == project.owner) {
-          this.toast.show('Du kan ikke dele projektet med dig selv!', 'short', 'center').subscribe(
-            toast => {}
-            ); 
-
-        } else {
-
+        // if(project.share == project.owner) {
+        //   this.toast.show('Du kan ikke dele projektet med dig selv!', 'short', 'center').subscribe(
+        //     toast => {}
+        //     ); 
+        //   } else { 
+        
+        if(this.auth.userCheck(project.share)) {
         project.shareStatus = true; 
         this.projectsService.updateShare(project);
         this.navCtrl.pop();
         this.toast.show('Projekt delt med bruger '+ project.share +' ', 'short', 'center').subscribe(
           toast => {}
           );
-        console.log(success);
-
-        }}, err => {
-
+        } else {
           this.toast.show('Bruger '+ project.share +' eksistere ikke! ', 'short', 'center').subscribe(
             toast => {}
             );
-        console.log(err);
-
-        });
+          }
   }
 
   removeShare(project) {
     let confirm = this.alertCtrl.create({
-      title: 'Stop projektdeling?',
-      message: 'Er du sikker på, at du vil stoppe projektdeling med '+ project.share +'?',
+      title: 'Stop projektdelingen?',
+      message: 'Er du sikker på, at du vil stoppe projektdelingen med '+ project.share +'?',
       buttons: [
         {
           text: 'Nej - bevar projektdelingen',
@@ -79,7 +74,7 @@ export class ProjectsharePage {
             project.shareStatus = false;
             this.projectsService.updateShare(project);
             this.navCtrl.pop();
-            this.toast.show('Projektdeling stoppet', 'short', 'center').subscribe(
+            this.toast.show('Projektdelingen med '+ project.share +' stoppet!', 'short', 'center').subscribe(
               toast => {}
               );
           console.log('Agree clicked');
