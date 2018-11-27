@@ -35,10 +35,10 @@
               <button ion-button type="submit" outline block large (click)="updateShare(project)">Del projekt</button>
             </ion-item>
             <ion-item *ngIf="project.shareStatus && project.owner == auth.currentUser">
-              <button ion-button type="submit" outline block large (click)="removeShare(project)">Stop projektdeling med: {{ project.share }}</button>
+              <button ion-button type="submit" outline block large (click)="removeShare(project)">Stop projektdelingen med: {{ project.share }}</button>
             </ion-item>
             <ion-item *ngIf="project.shareStatus && project.owner != auth.currentUser">
-              <button ion-button type="submit" outline block large (click)="removeShare(project)">Stop projektdeling fra: {{ project.owner }}</button>
+              <button ion-button type="submit" outline block large (click)="removeShare(project)">Stop projektdelingen fra: {{ project.owner }}</button>
             </ion-item>
         </ion-card-content>
         </ion-card>

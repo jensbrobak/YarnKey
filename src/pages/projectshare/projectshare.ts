@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Toast } from '@ionic-native/toast';
 import { Project } from '../../models/project.interface';
 import { ProjectsProvider } from '../../providers/projects/projects';
+import { UsersProvider } from '../../providers/users/users';
 import { AuthProvider } from '../../providers/auth/auth';
 
 /**
@@ -26,6 +27,7 @@ export class ProjectsharePage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public projectsService: ProjectsProvider, 
+    public usersService: UsersProvider,
     public auth: AuthProvider, 
     public toast: Toast,
     public alertCtrl: AlertController) {
@@ -34,26 +36,35 @@ export class ProjectsharePage {
   }
 
   updateShare(project) {
-    
 
-        // if(project.share == project.owner) {
-        //   this.toast.show('Du kan ikke dele projektet med dig selv!', 'short', 'center').subscribe(
-        //     toast => {}
-        //     ); 
-        //   } else { 
+        if(project.share == project.owner) {
+
+          this.toast.show('Du kan ikke dele projektet med dig selv!', 'short', 'center').subscribe(
+            toast => {}
+            ); 
+
+          } else {
+
+          }
         
-        if(this.auth.userCheck(project.share)) {
+        this.usersService.userCheck(project.share);
+
+        if(this.usersService.userExists) {
+          
         project.shareStatus = true; 
         this.projectsService.updateShare(project);
         this.navCtrl.pop();
         this.toast.show('Projekt delt med bruger '+ project.share +' ', 'short', 'center').subscribe(
           toast => {}
           );
+
         } else {
+        
           this.toast.show('Bruger '+ project.share +' eksistere ikke! ', 'short', 'center').subscribe(
             toast => {}
             );
-          }
+      }
+
   }
 
   removeShare(project) {
@@ -62,19 +73,19 @@ export class ProjectsharePage {
       message: 'Er du sikker på, at du vil stoppe projektdelingen med '+ project.share +'?',
       buttons: [
         {
-          text: 'Nej - bevar projektdelingen',
+          text: 'Nej - bevar projektdeling',
           handler: () => {
             console.log('Disagree clicked');
           }
         },
         {
-          text: 'Ja - stop projektdelingen!',
+          text: 'Ja - stop projektdeling!',
           handler: () => {
             project.share = null;
             project.shareStatus = false;
             this.projectsService.updateShare(project);
             this.navCtrl.pop();
-            this.toast.show('Projektdelingen med '+ project.share +' stoppet!', 'short', 'center').subscribe(
+            this.toast.show('Projektdeling stoppet!', 'short', 'center').subscribe(
               toast => {}
               );
           console.log('Agree clicked');

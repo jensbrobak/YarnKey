@@ -35,6 +35,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { SettingsPageModule } from '../pages/settings/settings.module';
 import { ProjectsharePageModule } from '../pages/projectshare/projectshare.module';
 import { ProjectsharePage } from '../pages/projectshare/projectshare';
+import { UsersProvider } from '../providers/users/users';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBWtexs_zbO5Zna-KXMNZVVTAeZ4J4gWwM",
@@ -95,6 +96,7 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProjectsProvider,
     AuthProvider,
+    UsersProvider,
     Facebook
   ]
 })

@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { ProjectlistPage } from '../pages/projectlist/projectlist';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,13 +12,19 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class MyApp {
   rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private af: AngularFireAuth) {
+  constructor(
+    platform: Platform, 
+    statusBar: StatusBar, 
+    splashScreen: SplashScreen, 
+    private auth: AuthProvider) 
+    {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });
 
-    this.af.authState.subscribe(user => {
+    // auto-login - tjekker hvorvidt en session eksistere
+    this.auth.connection.authState.subscribe(user => {
 
       if (user) {
         this.rootPage = ProjectlistPage;

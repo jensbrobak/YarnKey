@@ -20,7 +20,7 @@
             <ng-container *ngIf="progress | async as percent">
 
                 <progress [value]="percent" max="100"></progress>
-              <p>Billedet er blevet tilføjet!</p>
+                <p *ngIf="percent == 100">Billedet er blevet tilføjet!</p>
               </ng-container>
         </ion-item>
         </ion-card-content>
