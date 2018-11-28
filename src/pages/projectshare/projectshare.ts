@@ -46,11 +46,11 @@ export class ProjectsharePage {
           } else {
 
           }
-        
-        this.usersService.userCheck(project.share);
+
+          this.usersService.userCheck(project.share);
 
         if(this.usersService.userExists) {
-          
+
         project.shareStatus = true; 
         this.projectsService.updateShare(project);
         this.navCtrl.pop();
@@ -63,7 +63,7 @@ export class ProjectsharePage {
           this.toast.show('Bruger '+ project.share +' eksistere ikke! ', 'short', 'center').subscribe(
             toast => {}
             );
-      }
+        }
 
   }
 

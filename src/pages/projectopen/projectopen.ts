@@ -27,20 +27,6 @@ export class ProjectopenPage {
       this.project = navParams.get("project");
     }
 
-    getProjectPicture() {
-      if(this.project.picture != "") {
-        this.projectsService.projectPictureUrl = this.projectsService.getProjectPictureByRowId(this.project);
-        }
-    }
-
-  ionViewDidLoad() {
-    this.getProjectPicture();
-  }
-  
-  ionViewWillEnter() {
-    this.getProjectPicture();
-  }
-
   uploadProjectPicture(project) {
     this.navCtrl.push(ProjectpictureuploadPage, {
       project:project

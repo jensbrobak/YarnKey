@@ -39,6 +39,9 @@
 
                     <ion-card-content (click)="openProject(project)">
                       <ion-item text-right><h3><b>Status:</b> {{project.status}}</h3></ion-item>
+                      <ion-item>
+                        <p><img *ngIf="project.picture" [src]="project.picture"></p>
+                    </ion-item>
                     <ion-item text-left text-wrap>
                           <h2><b>{{project.name}}</b></h2> 
                           <p>{{project.description}}</p>

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireUploadTask } from 'angularfire2/storage';
 import { ProjectsProvider } from '../../providers/projects/projects';
-import { AuthProvider } from '../../providers/auth/auth';
 import { Project } from '../../models/project.interface';
 
 /**
@@ -27,7 +26,12 @@ export class ProjectpictureuploadPage {
 
   progress: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public projectsService: ProjectsProvider, public auth: AuthProvider, public camera: Camera, public storage: AngularFireStorage) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public projectsService: ProjectsProvider, 
+    public camera: Camera)
+  {
     this.project = navParams.get("project");
   }
 
@@ -46,12 +50,11 @@ async takeProjectPicture() {
     if(this.project.picture != "") {
     this.projectsService.deleteProjectPictureByRowId(this.project);
     }
-    const filePath = `${this.auth.currentUser}/${this.project.rowid}/projectPicture_${ new Date().getTime() }.jpg`;
+    const filePath = `${this.project.rowid}/projectPicture_${ new Date().getTime() }.jpg`;
     this.project.picture = filePath;
-    this.projectsService.updateProjectPicture(this.project);
     this.projectPictureUrl = 'data:image/jpg;base64,' + file;
     
-    this.task = this.projectsService.uploadProjectPicture(filePath, this.projectPictureUrl);
+    this.task = this.projectsService.uploadProjectPicture(this.project, filePath, this.projectPictureUrl);
 
     this.progress = this.task.percentageChanges();
 }

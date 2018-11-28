@@ -167,19 +167,23 @@ export class ProjectsProvider {
 
   }
 
-uploadProjectPicture(filePath, projectPictureUrl) : AngularFireUploadTask {
+uploadProjectPicture(project, filePath, projectPictureUrl) : AngularFireUploadTask {
 
-  return this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
-  
-}
+const task = this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
 
-
-getProjectPictureByRowId(project) {
+//Efter billedet er blevet uploadet til Firebase Storage
+task.then((uploadSnapshot: firebase.storage.UploadTaskSnapshot) => {
     
-  const ref = this.storage.ref(project.picture);
+  //Hentes den komplette URL til billedet
+  uploadSnapshot.ref.getDownloadURL().then((downloadURL) => {
 
-  return ref.getDownloadURL();
+      //URL'en til billedet bliver således gemt i Firestore
+      project.picture = downloadURL;
+      this.updateProjectPicture(project)
+  }
+)})
 
+  return task;
 }
 
 updateProjectPicture(project) {
@@ -194,7 +198,9 @@ updateProjectPicture(project) {
 
 deleteProjectPictureByRowId(project) {
 
-  this.storage.ref(project.picture).delete();
+  // Sletter projekt billedet ud fra den komplette URL
+  this.storage.storage.refFromURL(project.picture).delete();
+
 }
 
 }

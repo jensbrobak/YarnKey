@@ -16,7 +16,7 @@
     
       <ion-card-content>
       <ion-item>
-          <p><img *ngIf="project.picture" [src]="projectsService.projectPictureUrl | async"></p>
+          <p><img *ngIf="project.picture" [src]="project.picture"></p>
       </ion-item>
          <ion-item>
         <ion-label><b>Navn: </b></ion-label>
@@ -99,8 +99,8 @@
           </ion-item>
             <ion-item>
               <ion-label *ngIf="!project.shareStatus">{{project.counterOwner}}</ion-label>
-              <ion-label *ngIf="project.shareStatus == true && project.owner == auth.currentUser"><b>{{project.owner}}</b> : {{project.counterOwner}} <p>({{project.share}} : {{project.counterShare}})</p></ion-label>
-              <ion-label *ngIf="project.shareStatus == true && project.owner != auth.currentUser"><b>{{project.share}}</b> : {{project.counterShare}} <p>({{project.owner}} : {{project.counterOwner}})</p></ion-label>
+              <ion-label *ngIf="project.shareStatus == true && project.owner == auth.currentUser"><b>Dig</b> : {{project.counterOwner}} <p>({{project.share}} : {{project.counterShare}})</p></ion-label>
+              <ion-label *ngIf="project.shareStatus == true && project.owner != auth.currentUser"><b>Dig</b> : {{project.counterShare}} <p>({{project.owner}} : {{project.counterOwner}})</p></ion-label>
             </ion-item>
           
           <ion-item>

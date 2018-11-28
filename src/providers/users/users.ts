@@ -48,6 +48,8 @@ userCheck(emailAddress) {
       this.userExists = false;
       console.log(users.length, this.userExists, 'Email match NOT found');
   
-  }})};
+  }});
+  
+}
 
 }
