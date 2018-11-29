@@ -15,7 +15,8 @@
         <ion-item>
           <ion-item text-wrap>Du er logget ind som:</ion-item>
           <ion-item text-wrap><b>{{auth.currentUser}}</b></ion-item>
-          <button ion-button color="danger" block large outline (click)="logout()">Log af</button>
+          <button ion-button block large outline (click)="logout()">Log af</button>
+          <button ion-button color="danger" block outline (click)="deleteUser()">Slet bruger</button>
         </ion-item>
       </ion-card-content>
     </ion-card>

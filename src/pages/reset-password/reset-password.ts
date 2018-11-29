@@ -40,7 +40,7 @@ export class ResetPasswordPage {
           {
             alert(registerError.message);
           }
-      });
+      }).unsubscribe();
     }
   }
 }

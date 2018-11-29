@@ -48,7 +48,7 @@ export class SignupPage {
             alert(registerError.message);
           }
           this.error = registerError;
-        });
+        }).unsubscribe();
     }
   } 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { ProjectsProvider } from '../projects/projects';
 
 /*
   Generated class for the UsersProvider provider.
@@ -14,7 +15,7 @@ export class UsersProvider {
   
   userExists: boolean;
 
-  constructor(private afStore: AngularFirestore) {
+  constructor(private afStore: AngularFirestore, private projectsService: ProjectsProvider) {
 
     this.db = 'users';
 
@@ -37,19 +38,34 @@ export class UsersProvider {
 
 userCheck(emailAddress) {
 
-  this.afStore.collection(this.db, (ref) => ref.where('email', '==', emailAddress).limit(1)).valueChanges().subscribe(users => { 
+  return this.afStore.collection(this.db, (ref) => ref.where('email', '==', emailAddress).limit(1)).valueChanges().subscribe(users => { 
     
     if(users.length == 1) {
 
       this.userExists = true;
       console.log(users.length, this.userExists ,'Email match found for user');
-  } else {
+      
+    } else {
 
       this.userExists = false;
       console.log(users.length, this.userExists, 'Email match NOT found');
   
-  }});
+    }});
   
+}
+
+deleteUser(uid) {
+
+  this.afStore.collection(this.db).doc(uid).delete().then(function() {
+
+    this.projectsService.deleteAllProjectsFromUser();
+
+  }).catch(function(error) {
+
+    console.log('error deleting projects',error);
+
+  });
+
 }
 
 }

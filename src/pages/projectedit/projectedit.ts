@@ -25,6 +25,6 @@ export class ProjecteditPage {
     this.navCtrl.pop();
     this.toast.show('Projekt opdateret', 'short', 'center').subscribe(
           toast => {}
-        );
+        ).unsubscribe();
   }
 }

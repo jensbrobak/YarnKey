@@ -167,41 +167,50 @@ export class ProjectsProvider {
 
   }
 
-uploadProjectPicture(project, filePath, projectPictureUrl) : AngularFireUploadTask {
+  uploadProjectPicture(project, filePath, projectPictureUrl) : AngularFireUploadTask {
 
-const task = this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
+  const task = this.storage.ref(filePath).putString(projectPictureUrl, 'data_url');
 
-//Efter billedet er blevet uploadet til Firebase Storage
-task.then((uploadSnapshot: firebase.storage.UploadTaskSnapshot) => {
-    
-  //Hentes den komplette URL til billedet
-  uploadSnapshot.ref.getDownloadURL().then((downloadURL) => {
+  //Efter billedet er blevet uploadet til Firebase Storage
+  task.then((uploadSnapshot: firebase.storage.UploadTaskSnapshot) => {
+      
+    //Hentes den komplette URL til billedet
+    uploadSnapshot.ref.getDownloadURL().then((downloadURL) => {
 
-      //URL'en til billedet bliver således gemt i Firestore
-      project.picture = downloadURL;
-      this.updateProjectPicture(project)
+        //URL'en til billedet bliver således gemt i Firestore
+        project.picture = downloadURL;
+        this.updateProjectPicture(project)
+    }
+  )})
+
+    return task;
   }
-)})
 
-  return task;
-}
+  updateProjectPicture(project) {
 
-updateProjectPicture(project) {
+    this.afStore.collection(this.db).doc(project.rowid).update({
 
-  this.afStore.collection(this.db).doc(project.rowid).update({
+      picture: project.picture
 
-    picture: project.picture
+  });
 
-});
+  }
 
-}
+  deleteProjectPictureByRowId(project) {
 
-deleteProjectPictureByRowId(project) {
+    // Sletter projekt billedet ud fra den komplette URL
+    this.storage.storage.refFromURL(project.picture).delete();
 
-  // Sletter projekt billedet ud fra den komplette URL
-  this.storage.storage.refFromURL(project.picture).delete();
+  }
 
-}
+  deleteAllProjectsFromUser() {
+
+    this.afStore.collection(this.db), ref => ref.where('owner', '==', this.auth.currentUser).get().then(
+
+      ref => this.deleteProject(ref.rowid)
+
+      );
+    }
 
 }
 

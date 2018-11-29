@@ -48,4 +48,28 @@ export class SettingsPage {
     confirm.present();
   }
 
+  deleteUser() {
+    let confirm = this.alertCtrl.create({
+      title: 'Log af?',
+      message: 'Er du sikker på, at du vil slette din brugerkonto '+ this.auth.currentUser +'? - dette kan ikke gøres om!',
+      buttons: [
+        {
+          text: 'Nej - bevar min konto',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Ja - slet min bruger!',
+          handler: () => {
+            this.auth.deleteUserFromAuth();
+            this.navCtrl.setRoot(LoginPage);
+          console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 }

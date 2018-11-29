@@ -36,7 +36,7 @@ this.openProjectList();
 console.log(success);
 }, err => {
 console.log(err);
-});
+}).unsubscribe();
 }
 
 login(): void { 
@@ -51,7 +51,7 @@ login(): void {
       {
         alert('Bruger findes ikke!');
       }
-    });
+    }).unsubscribe();
   }
 }
 

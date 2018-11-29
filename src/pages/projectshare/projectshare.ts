@@ -37,33 +37,50 @@ export class ProjectsharePage {
 
   updateShare(project) {
 
+    this.usersService.userCheck(project.share);
+
         if(project.share == project.owner) {
 
           this.toast.show('Du kan ikke dele projektet med dig selv!', 'short', 'center').subscribe(
             toast => {}
-            ); 
+            ).unsubscribe(); 
+
+            this.project.share = "";
+            
+          } else {
+
+            if(this.usersService.userExists) {
+
+              console.log('bruger eksistere', project.share, this.usersService.userExists);
+            project.shareStatus = true; 
+            this.projectsService.updateShare(project);
+            this.navCtrl.pop();
+            this.toast.show('Projekt delt med bruger '+ project.share +' ', 'short', 'center').subscribe(
+              toast => {}
+              ).unsubscribe();
+  
+          } if(project.share == null) {
+
+            this.toast.show('Du skal indtaste en e-mail på bruger!', 'short', 'center').subscribe(
+              toast => {}
+              ).unsubscribe();
+    
+              this.project.share = "";
 
           } else {
 
+            console.log('bruger eksistere ikke', project.share, this.usersService.userExists);
+            this.toast.show('Bruger '+ project.share +' eksistere ikke! ', 'short', 'center').subscribe(
+              toast => {}
+              ).unsubscribe();
+    
+              this.project.share = "";
+
           }
 
-          this.usersService.userCheck(project.share);
+          }
 
-        if(this.usersService.userExists) {
-
-        project.shareStatus = true; 
-        this.projectsService.updateShare(project);
-        this.navCtrl.pop();
-        this.toast.show('Projekt delt med bruger '+ project.share +' ', 'short', 'center').subscribe(
-          toast => {}
-          );
-
-        } else {
-        
-          this.toast.show('Bruger '+ project.share +' eksistere ikke! ', 'short', 'center').subscribe(
-            toast => {}
-            );
-        }
+          this.usersService.userCheck(project.share).unsubscribe();
 
   }
 
@@ -87,7 +104,7 @@ export class ProjectsharePage {
             this.navCtrl.pop();
             this.toast.show('Projektdeling stoppet!', 'short', 'center').subscribe(
               toast => {}
-              );
+              ).unsubscribe();
           console.log('Agree clicked');
           }
         }
