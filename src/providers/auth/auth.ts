@@ -95,18 +95,19 @@ resetPassword(emailAddress:string){
   }
 
   deleteUserFromAuth() {
-    var user = firebase.auth().currentUser;
 
-    user.delete().then(function() {
+    const user = this.currentUser;
 
-      this.usersService.deleteUser(this.af.auth.currentUser.uid);
+    firebase.auth().currentUser.delete().then(function(success) {
+
+      console.log('success on deleting '+ user +' auth user account',success);
 
     }).catch(function(error) {
 
-      console.log('error deleting account',error);
+      console.log('error on deleting '+ user +' auth user account',error);
 
     });
-      }
+    } 
 
   logout() {
     this.af.auth.signOut();

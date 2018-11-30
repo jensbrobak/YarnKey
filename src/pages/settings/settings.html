@@ -16,11 +16,16 @@
           <ion-item text-wrap>Du er logget ind som:</ion-item>
           <ion-item text-wrap><b>{{auth.currentUser}}</b></ion-item>
           <button ion-button block large outline (click)="logout()">Log af</button>
-          <button ion-button color="danger" block outline (click)="deleteUser()">Slet bruger</button>
         </ion-item>
       </ion-card-content>
     </ion-card>
+    <ion-card>
+      <ion-card-content>
+      <ion-item>
+        <button ion-button color="danger" block outline (click)="deleteUser()">Slet bruger</button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
     <p class="title" text-center>V.1.0</p>
     
-      
   </ion-content>

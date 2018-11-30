@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login';
+import { UsersProvider } from '../../providers/users/users';
+import { ProjectsProvider } from '../../providers/projects/projects';
 
 /**
  * Generated class for the SettingsPage page.
@@ -17,7 +19,13 @@ import { LoginPage } from '../login/login';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public auth: AuthProvider, 
+    public usersService: UsersProvider,
+    public projectsService: ProjectsProvider,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -62,8 +70,30 @@ export class SettingsPage {
         {
           text: 'Ja - slet min bruger!',
           handler: () => {
+
+            // this.auth.loginWithFacebook().subscribe((success) => {
+            //   this.openProjectList();
+            //   console.log(success);
+            //   }, err => {
+            //   console.log(err);
+            //   }).unsubscribe();
+
+            // Sletter alle brugerens projekter
+            this.projectsService.deleteAllProjectsFromUser().subscribe((success) => {
+              console.log(success);
+            }, err => {
+              console.log(err);
+            }).unsubscribe();
+
+            // Sletter bruger konto
+            this.usersService.deleteUser(this.auth.connection.auth.currentUser.uid);
+
+            // Sletter auth konto
             this.auth.deleteUserFromAuth();
+
+            // Returnere til root page
             this.navCtrl.setRoot(LoginPage);
+
           console.log('Agree clicked');
           }
         }

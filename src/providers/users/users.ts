@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { ProjectsProvider } from '../projects/projects';
+import { User } from '../../models/user.interface';
+import { map } from 'rxjs/operators';
 
 /*
   Generated class for the UsersProvider provider.
@@ -12,10 +13,12 @@ import { ProjectsProvider } from '../projects/projects';
 export class UsersProvider {
 
   db : string;
+
+  user : User; 
   
   userExists: boolean;
 
-  constructor(private afStore: AngularFirestore, private projectsService: ProjectsProvider) {
+  constructor(private afStore: AngularFirestore) {
 
     this.db = 'users';
 
@@ -23,9 +26,9 @@ export class UsersProvider {
 
   collectUserInfo(uid, emailAddress) {
 
-    this.userCheck(emailAddress);
+    // this.userCheck(emailAddress);
 
-    if(!this.userExists) {
+    if(this.userCheck(emailAddress).email != null) {
   
     this.afStore.collection(this.db).doc(uid).set({
   
@@ -36,33 +39,41 @@ export class UsersProvider {
     }
   }
 
-userCheck(emailAddress) {
+userCheck(emailAddress): User {
 
-  return this.afStore.collection(this.db, (ref) => ref.where('email', '==', emailAddress).limit(1)).valueChanges().subscribe(users => { 
-    
-    if(users.length == 1) {
+  this.afStore.collection(this.db, (ref) => ref.where('email', '==', emailAddress)).snapshotChanges().pipe(
+    map(
+        changes => { 
+          
+          return changes.map(a => {
+            
+            if(a.payload.doc.exists) {
 
-      this.userExists = true;
-      console.log(users.length, this.userExists ,'Email match found for user');
-      
-    } else {
+            return this.user = a.payload.doc.data() as User;
 
-      this.userExists = false;
-      console.log(users.length, this.userExists, 'Email match NOT found');
-  
-    }});
+            } else {
+
+            return this.user = null;
+
+            }
+
+      });
+      }
+    )).subscribe();
+
+    return this.user;
   
 }
 
 deleteUser(uid) {
 
-  this.afStore.collection(this.db).doc(uid).delete().then(function() {
+  this.afStore.collection(this.db).doc(uid).delete().then(function(success) {
 
-    this.projectsService.deleteAllProjectsFromUser();
+    console.log('success on deleting '+ uid +' user account',success);
 
   }).catch(function(error) {
 
-    console.log('error deleting projects',error);
+    console.log('error on deleting '+ uid +' user account',error);
 
   });
 

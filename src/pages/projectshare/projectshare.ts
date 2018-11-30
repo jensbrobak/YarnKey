@@ -37,8 +37,6 @@ export class ProjectsharePage {
 
   updateShare(project) {
 
-    this.usersService.userCheck(project.share);
-
         if(project.share == project.owner) {
 
           this.toast.show('Du kan ikke dele projektet med dig selv!', 'short', 'center').subscribe(
@@ -49,17 +47,21 @@ export class ProjectsharePage {
             
           } else {
 
-            if(this.usersService.userExists) {
+            if(this.usersService.userCheck(project.share)) {
 
-              console.log('bruger eksistere', project.share, this.usersService.userExists);
+              console.log('bruger eksistere', project.share, this.usersService.userCheck(project.share));
             project.shareStatus = true; 
             this.projectsService.updateShare(project);
             this.navCtrl.pop();
             this.toast.show('Projekt delt med bruger '+ project.share +' ', 'short', 'center').subscribe(
               toast => {}
               ).unsubscribe();
-  
-          } if(project.share == null) {
+
+          } else {
+
+          }
+          
+          if(project.share == null) {
 
             this.toast.show('Du skal indtaste en e-mail på bruger!', 'short', 'center').subscribe(
               toast => {}
@@ -79,8 +81,6 @@ export class ProjectsharePage {
           }
 
           }
-
-          this.usersService.userCheck(project.share).unsubscribe();
 
   }
 

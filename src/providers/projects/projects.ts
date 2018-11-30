@@ -204,13 +204,31 @@ export class ProjectsProvider {
   }
 
   deleteAllProjectsFromUser() {
+    
+return Observable.create(observer => { 
+  this.afStore.collection(this.db, ref => ref.where('owner', '==', this.auth.currentUser)).ref.get().then((querySnapshot) => { 
+   querySnapshot.forEach((project) => {
+    observer.next(querySnapshot);
+  if(project.exists) {
 
-    this.afStore.collection(this.db), ref => ref.where('owner', '==', this.auth.currentUser).get().then(
+      this.project = project.data() as Project;
 
-      ref => this.deleteProject(ref.rowid)
+      this.deleteProject(this.project);
 
-      );
-    }
+      console.log(''+ this.auth.currentUser +'s project '+ this.project.rowid +' has been deleted');
 
+  } else {
+
+      
+  }
+
+   })
+}).catch(error => {
+    
+  console.log(''+ this.auth.currentUser + ' has no projects to be deleted');
+
+});})
+
+}
 }
 
