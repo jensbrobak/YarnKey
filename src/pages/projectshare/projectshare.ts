@@ -22,6 +22,8 @@ export class ProjectsharePage {
 
   public project : Project;
 
+  public searchUser : string;
+
   constructor(
 
     public navCtrl: NavController, 
@@ -37,51 +39,51 @@ export class ProjectsharePage {
 
   updateShare(project) {
 
-        if(project.share == project.owner) {
+        if(project.share == "") {
+
+          console.log('du skal indtaste en email', project.share);
+
+          this.toast.show('Du skal indtaste en e-mail på bruger!', 'short', 'center').subscribe(
+            toast => {}
+            );
+
+            this.project.share = "";
+
+          } else if(project.share == project.owner) {
 
           this.toast.show('Du kan ikke dele projektet med dig selv!', 'short', 'center').subscribe(
             toast => {}
-            ).unsubscribe(); 
+            );
+            console.log('du kan ikke dele projekt med dig selv', project.share);
 
             this.project.share = "";
             
           } else {
 
-            if(this.usersService.userCheck(project.share)) {
+            this.usersService.userCheck(project.share);
+            
+            if(this.usersService.user) {
 
-              console.log('bruger eksistere', project.share, this.usersService.userCheck(project.share));
+            console.log('bruger eksistere', project.share, this.usersService.user);
             project.shareStatus = true; 
             this.projectsService.updateShare(project);
+            this.usersService.user = null;
             this.navCtrl.pop();
             this.toast.show('Projekt delt med bruger '+ project.share +' ', 'short', 'center').subscribe(
               toast => {}
-              ).unsubscribe();
-
-          } else {
-
+              );
+  
+            } else {
+  
+              console.log('bruger eksistere ikke', project.share, this.usersService.user);
+              this.toast.show('Bruger '+ project.share +' eksistere ikke! ', 'short', 'center').subscribe(
+                toast => {}
+                );
+      
+                this.project.share = "";
+  
+            }
           }
-          
-          if(project.share == null) {
-
-            this.toast.show('Du skal indtaste en e-mail på bruger!', 'short', 'center').subscribe(
-              toast => {}
-              ).unsubscribe();
-    
-              this.project.share = "";
-
-          } else {
-
-            console.log('bruger eksistere ikke', project.share, this.usersService.userExists);
-            this.toast.show('Bruger '+ project.share +' eksistere ikke! ', 'short', 'center').subscribe(
-              toast => {}
-              ).unsubscribe();
-    
-              this.project.share = "";
-
-          }
-
-          }
-
   }
 
   removeShare(project) {
@@ -98,13 +100,13 @@ export class ProjectsharePage {
         {
           text: 'Ja - stop projektdeling!',
           handler: () => {
-            project.share = null;
+            project.share = "";
             project.shareStatus = false;
             this.projectsService.updateShare(project);
             this.navCtrl.pop();
             this.toast.show('Projektdeling stoppet!', 'short', 'center').subscribe(
               toast => {}
-              ).unsubscribe();
+              );
           console.log('Agree clicked');
           }
         }

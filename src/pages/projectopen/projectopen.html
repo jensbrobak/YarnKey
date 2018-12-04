@@ -109,12 +109,18 @@
             <ion-item>
               <ion-label text-wrap>{{project.notes}}</ion-label>
             </ion-item>
-          <ion-item *ngIf="!project.picture">
+          <ion-item *ngIf="!project.picture && project.owner == auth.currentUser">
           <button ion-button color="primary" block large outline (click)="uploadProjectPicture(project)">Tilføj billede</button>
           </ion-item>
-          <ion-item *ngIf="project.picture">
+          <ion-item *ngIf="project.picture && project.owner == auth.currentUser">
             <button ion-button color="primary" block large outline (click)="uploadProjectPicture(project)">Skift billede</button>
             </ion-item>
+            <ion-item *ngIf="!project.picture && project.owner != auth.currentUser">
+              <button ion-button disabled color="primary" block large outline (click)="uploadProjectPicture(project)">Tilføj billede</button>
+              </ion-item>
+              <ion-item *ngIf="project.picture && project.owner != auth.currentUser">
+                <button ion-button disabled color="primary" block large outline (click)="uploadProjectPicture(project)">Skift billede</button>
+                </ion-item>
           <ion-item>
           <button ion-button color="primary" block large outline (click)="updateCounter(project)">Omgangstæller</button>
           </ion-item>
@@ -130,6 +136,9 @@
                 <ion-item *ngIf="project.shareStatus && project.owner != auth.currentUser">
                   <button ion-button color="primary" block large outline (click)="shareProject(project)">Delt af: {{ project.owner }}</button>
                   </ion-item>
+                  <ion-item *ngIf="project.owner != auth.currentUser">
+                    <button ion-button color="primary" block large outline (click)="copyProject()">Kopier projekt</button>
+                    </ion-item>
           <ion-item *ngIf="project.owner == auth.currentUser">
           <button ion-button color="danger" block large outline (click)="deleteConfirm(project)">Slet</button>
           </ion-item>

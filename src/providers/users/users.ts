@@ -14,9 +14,7 @@ export class UsersProvider {
 
   db : string;
 
-  user : User; 
-  
-  userExists: boolean;
+  user : User;
 
   constructor(private afStore: AngularFirestore) {
 
@@ -26,9 +24,9 @@ export class UsersProvider {
 
   collectUserInfo(uid, emailAddress) {
 
-    // this.userCheck(emailAddress);
+    this.userCheck(emailAddress);
 
-    if(this.userCheck(emailAddress).email != null) {
+    if(!this.user) {
   
     this.afStore.collection(this.db).doc(uid).set({
   
@@ -45,15 +43,15 @@ userCheck(emailAddress): User {
     map(
         changes => { 
           
-          return changes.map(a => {
+          changes.map(a => {
             
             if(a.payload.doc.exists) {
 
-            return this.user = a.payload.doc.data() as User;
+            this.user = a.payload.doc.data() as User;
 
             } else {
 
-            return this.user = null;
+            this.user = null;
 
             }
 

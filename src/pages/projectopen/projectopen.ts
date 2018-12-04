@@ -8,6 +8,7 @@ import { Project } from '../../models/project.interface';
 import { ProjectpictureuploadPage } from '../projectpictureupload/projectpictureupload';
 import { ProjectsharePage } from '../projectshare/projectshare';
 import { AuthProvider } from '../../providers/auth/auth';
+import { Toast } from '@ionic-native/toast';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ export class ProjectopenPage {
     public navParams: NavParams,
     public alertCtrl: AlertController, 
     public projectsService: ProjectsProvider, 
-    public auth: AuthProvider) 
+    public auth: AuthProvider,
+    public toast: Toast) 
     {
       this.project = navParams.get("project");
     }
@@ -37,6 +39,34 @@ export class ProjectopenPage {
     this.navCtrl.push(ProjectsharePage, {
       project:project
      });
+  }
+
+  copyProject() {
+    let confirm = this.alertCtrl.create({
+      title: 'Kopier dette projekt?',
+      message: 'Er du sikker på, at du vil kopiere dette projekt?',
+      buttons: [
+        {
+          text: 'Nej - lad være',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Ja!',
+          handler: () => {
+            this.projectsService.copyProject(this.project);
+            this.navCtrl.pop();
+            this.toast.show('Oprettet en kopi af projektet', 'short', 'center').subscribe(
+              toast => {}
+              );
+
+          console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   deleteConfirm() {

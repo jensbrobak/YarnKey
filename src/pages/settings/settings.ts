@@ -71,13 +71,6 @@ export class SettingsPage {
           text: 'Ja - slet min bruger!',
           handler: () => {
 
-            // this.auth.loginWithFacebook().subscribe((success) => {
-            //   this.openProjectList();
-            //   console.log(success);
-            //   }, err => {
-            //   console.log(err);
-            //   }).unsubscribe();
-
             // Sletter alle brugerens projekter
             this.projectsService.deleteAllProjectsFromUser().subscribe((success) => {
               console.log(success);

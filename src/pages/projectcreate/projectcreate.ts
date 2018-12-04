@@ -24,7 +24,7 @@ saveProject() {
     this.navCtrl.pop();
     this.toast.show('Projekt oprettet', 'short', 'center').subscribe(
       toast => {}
-    ).unsubscribe();
+    );
 }
 
 

@@ -17,8 +17,6 @@ export class ProjectsProvider {
  project : Project; 
 
  db : string;
-
- projectPictureUrl: Observable<any[]>;
  
  projectList: Observable<any[]>;
 
@@ -94,20 +92,37 @@ export class ProjectsProvider {
 
     updateProject(project) {
 
-      this.afStore.collection(this.db).doc(project.rowid).update({
+    var projectDocRef = this.afStore.collection(this.db).doc(project.rowid);
 
-        name: project.name,
-        description: project.description,
-        status: project.status,
-        yarnProductName: project.yarnProductName,
-        yarnColorCode: project.yarnColorCode,
-        yarnColor: project.yarnColor,
-        yarnLength: project.yarnLength,
-        needleSize: project.needleSize,
-        batchNr: project.batchNr,
-        notes: project.notes,
-        recipe: project.recipe,
-  });
+    return this.afStore.firestore.runTransaction(function(transaction) {
+
+        // Hvis der opstår eventuelle samtidighedsproblematikker afvikles koden x-antal gange
+        return transaction.get(projectDocRef.ref).then(function(projectDoc) {
+            if (!projectDoc.exists) {
+                throw "Projekt dokumentet eksistere ikke!";
+            }
+
+            transaction.update(projectDocRef.ref, {         
+              
+              name: project.name,
+              description: project.description,
+              status: project.status,
+              yarnProductName: project.yarnProductName,
+              yarnColorCode: project.yarnColorCode,
+              yarnColor: project.yarnColor,
+              yarnLength: project.yarnLength,
+              needleSize: project.needleSize,
+              batchNr: project.batchNr,
+              notes: project.notes,
+              recipe: project.recipe, 
+            
+            });
+        });
+    }).then(function() {
+        console.log("Transaktionen er successfuldt blevet gennemført!");
+    }).catch(function(error) {
+        console.log("Transaktion er ikke blevet gennemført grundet: ", error);
+    });
     
     }
 
@@ -196,10 +211,41 @@ export class ProjectsProvider {
 
   }
 
+  copyProject(project) {
+
+    const rowid = this.afStore.createId();
+
+    this.afStore.collection(this.db).doc(rowid).set({
+
+      rowid: rowid,
+      name: "Kopi af:" + project.name,
+      description: project.description,
+      status: project.status,
+      favorite: project.favorite,
+      yarnProductName: project.yarnProductName,
+      yarnColorCode: project.yarnColorCode,
+      yarnColor: project.yarnColor,
+      yarnLength: project.yarnLength,
+      needleSize: project.needleSize,
+      batchNr: project.batchNr,
+      notes: project.notes,
+      counterOwner: project.counterShare,
+      counterShare: 0,
+      recipe: project.recipe,
+      picture: "",
+      owner: this.auth.currentUser,
+      share: null,
+      shareStatus: false
+  });
+  }
+
   deleteProjectPictureByRowId(project) {
+
+    if(project.owner == this.auth.currentUser) {
 
     // Sletter projekt billedet ud fra den komplette URL
     this.storage.storage.refFromURL(project.picture).delete();
+    }
 
   }
 
