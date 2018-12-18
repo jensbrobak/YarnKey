@@ -6,7 +6,6 @@ import { SignupPage } from '../signup/signup';
 import { ResetPasswordPage } from '../reset-password/reset-password';
 import { ProjectlistPage } from '../projectlist/projectlist';
 
-
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -57,12 +56,6 @@ login(): void {
 
 openProjectList() {
   this.navCtrl.setRoot(ProjectlistPage);
-}
-
-loginCheck() {
-  if (this.auth.currentUser) {
-    this.openProjectList();
-  }
 }
 
 }
