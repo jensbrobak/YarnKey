@@ -44,7 +44,6 @@ return this.fb.login(['email', 'public_profile']).then(res => {
 const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
 this.af.auth.signInAndRetrieveDataWithCredential(facebookCredential).then(()=> {
 observer.next();
-this.usersService.collectUserInfo(this.af.auth.currentUser.uid, this.af.auth.currentUser.email);
 }).catch(error => {
 console.log(error);
 observer.error(error);
